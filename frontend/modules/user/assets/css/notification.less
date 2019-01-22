@@ -1,0 +1,88 @@
+out: notification.css, compress: true
+@import 'assets';
+
+#notificationWallTitle{
+  border-bottom: 1px solid @baseContraste;
+  padding-bottom: 3px;
+  margin-bottom: 10px !important;
+  width: 600px;
+  @media (max-width: @std-screen){
+    width: 90%;
+  }
+  margin: auto;
+}
+
+#notificationWall{
+  overflow: auto;
+  margin: auto;
+  color: white;
+  width: 100%;
+  &.notifications-full{
+    background: darken(fade(@baseContraste, 95%), 10%);
+  }
+
+
+  li{
+    &.unreaded{
+      background: fade(@menuContraste, 95%);
+    }
+    padding: 10px;
+    border-bottom: 1px solid @claroPrincipal;
+    .sender-thumb{
+      width: 10%;
+      img{ width: 100%; }
+      display: inline-block;
+      vertical-align: middle;
+      padding-right: 0 !important;
+    }
+
+    .notifi-message{
+      width: 88%;
+      display: inline-block;
+      vertical-align: middle;
+      a{
+        text-decoration: none !important;
+        color: darken(@fondoSemiBlanco, 40%) !important;
+        &:hover{
+          color: @basePrincipal !important;
+        }
+      }
+      .paragraph{
+        width: 90%;
+        display: inline-block;
+        vertical-align: middle;
+        span{  font-weight: bold; }
+      }
+      .notifi-action{
+        width: 5%;
+        display: inline-block;
+      }
+    }
+
+    .notifi-time{
+      margin-top: 2px;
+      display: block;
+      font-size: 12px;
+      color: darken(@fondoSemiBlanco, 40%) !important;
+    }
+  }
+
+  @media screen and (max-width: @small-screen){
+    li{
+      .sender-thumb{
+        width: 25%;
+      }
+      .notifi-message{
+        width: 70%;
+      }
+    }
+  }
+}
+
+
+#noNotificationsBox{
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: @baseContraste;
+}

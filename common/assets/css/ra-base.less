@@ -1,0 +1,246 @@
+out: ra-base.css, compress: true
+@import 'variables';
+@import 'paths';
+
+
+html{
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+html,
+body,
+#leftPanel,
+#rightPanel,
+#centralPanel,
+.full-height{
+  min-height: 100% !important;
+  height: 100%;
+}
+
+
+.ra-container{
+  overflow: auto;
+  height: 100%;
+}
+
+.clickeable{
+  cursor: pointer;
+}
+
+.ra-hidden{  display:none !important; }
+
+.ra-block{  display: block; }
+
+.ra-inline {display: inline-block;}
+
+.ra-error{  color: red; }
+
+.ra-success{  color: green; }
+
+.ra-clear{  clear: both; }
+
+.ra-error-well{
+  color: red;
+  background: pink;
+}
+
+.ra-success-well{
+  color: green;
+  background: @basePrincipal;
+}
+ul{  margin:0 !important; }
+
+a{
+  color: @basePrincipal;
+  cursor: pointer;
+  &:hover{
+    color: @basePrincipal !important;
+    text-decoration: underline;
+  }
+}
+
+.ra-btn{
+  background: white;
+  color: @baseContraste ;
+  border: 1px solid @claroBase;
+  margin: 5px;
+  &:hover,
+  &.active{
+    background: @baseContraste ;
+    color: @claroBase;
+    border: 1px solid @claroBase;
+  }
+}
+.ra-std-btn{
+    padding:8px 10px;
+    font-size:13px;
+}
+
+.ra-big-btn{
+  padding: 12px 14px;
+  font-size: 15px;
+}
+
+.ra-small-btn{
+  padding: 6px 8px;
+  font-size: 11px;
+}
+
+.ra-table{
+  table-layout: fixed;
+  width: 100%;
+  th{
+    text-align: left;
+    padding: 10px 0;
+    font-size: 15px;
+
+    &:last-child,
+    &.centered{ text-align: center; }
+  }
+  td{
+    text-align: left;
+    padding: 9px 0 8px 5px;
+    font-size: 13px;
+    vertical-align: middle;
+
+    &.left{ text-align : left !important; }
+
+    &.time,
+    &.actions,
+    &:first-child,
+    &.centered{  text-align: center; }
+    .action{
+      //opacity: 0;
+      //display: inline-block;
+      display: none;
+    }
+  }
+  tr:hover td .action{
+      //opacity: 1;
+      display: inline-block;
+      .table-action:hover{
+        color: @baseMusical;
+      }
+  }
+}
+
+div.centered{
+  text-align: center;
+}
+
+.action{
+  cursor: pointer;
+}
+
+.ra-loader-xs{
+  width: 50px;
+}
+
+.ra-panel-tab{
+  a, a:hover{
+    color: @baseContraste !important;
+    border-bottom: 4px solid transparent !important;
+  }
+  &.active{
+    a{
+      border-bottom: 4px solid @menuContraste !important;
+      border-top: 1px solid white !important;
+      border-left: 1px solid white !important;
+      border-right: 1px solid white !important;
+
+    };
+  }
+}
+
+#myModal{
+  &.ra-mdl-success{
+    background: rgba(17, 43, 38, 0.67);
+  }
+  &.ra-mdl-danger{
+    background: rgba(215, 44, 44, 0.37);
+  }
+  z-index: 3000 !important;
+}
+
+.clearfix{
+  clear: both;
+}
+
+.title,
+.subtitle,
+.paragraph{
+  font-family: "Open Sans", sans-serif;
+}
+
+.subtitle{
+  color: @segundoContraste;
+}
+
+.main-title{
+  font-size: 40px;
+  border-bottom: 1px solid @claroBase;
+  color: @segundoContraste;
+}
+
+.main-subtitle{
+  font-size: 25px;
+  border-bottom: 1px solid @claroBase;
+  color: @segundoContraste;
+  margin-bottom: 10px;
+}
+.secondary-title{ font-size: 20px; }
+
+.third-title{  font-size: 15px; }
+
+.strong{ font-weight: bold; }
+.underline{ text-decoration: underline; }
+.italic { font-style: italic; }
+
+.tab-container{
+  .tab-pane >div{
+    float: none;
+    margin: 15px auto 0;
+  }
+
+  > ul li{
+    &.active > a{
+      border-top: 1px solid transparent;
+    }
+    > a{
+       color: @baseContraste;
+       padding: 10px 22px;
+       &:hover{
+         color: @baseMusical;
+         background: @baseContraste
+       }
+    }
+  }
+}
+
+.scrolleable{
+  overflow: auto;
+}
+
+.bigMessage{
+  .centerXY();
+  font-size: 40px;
+  color: @baseContraste;
+  &.ra-dark{
+    color: @menuContraste;
+  }
+}
+
+
+.horizontal-separator{
+  width: 100%;
+  display: block;
+  height: 2px;
+  background: black;
+  border-bottom: 1px solid @claroPrincipal;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.ra-progress{
+  cursor: progress;
+}

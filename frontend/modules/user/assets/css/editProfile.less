@@ -1,0 +1,72 @@
+out: editProfile.css, compress: true
+@import 'assets';
+
+
+#editProfile{
+  .tab-pane >div{
+    float: none;
+    margin: 15px auto 0;
+  }
+
+  ul li{
+    &.active > a{
+      border-top: 1px solid transparent;
+    }
+    > a{
+       color: @baseContraste;
+       padding: 10px 22px;
+       &:hover{
+         color: @basePrincipal;
+         background: @baseContraste
+       }
+    }
+  }
+
+}
+
+
+#personalInfoPanel{
+  img{ width: 100%; }
+}
+
+#socialInfoPanel{
+  textarea{ resize: vertical; }
+}
+
+#visibilityInfoPanel{
+  .edit-opt{
+    border-bottom: 1px solid @claroBase;
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+  .form-group > label {
+    @media (max-width: @small-screen){
+      max-width: 100%;
+      font-size: 12px;
+    }
+  }
+
+  .visibility-option{
+    display: inline-block;
+    float: right;
+    label{
+      margin: 0 20px;
+      input{
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  #statusDesc{
+    div{
+      float: right;
+      margin: 0 4px;
+    }
+  }
+}
+
+.edit-profile-area{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}

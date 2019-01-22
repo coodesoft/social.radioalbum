@@ -1,0 +1,33 @@
+<?php
+namespace admin\models;
+
+use Yii;
+use yii\base\Model;
+use yii\web\UploadedFile;
+
+use common\util\Response;
+use common\util\Flags;
+
+class UpdateChannelForm extends Model{
+
+  public $image;
+
+  public $id;
+
+  public $description;
+
+  public function rules(){
+      return [
+          ['description', 'string', 'skipOnEmpty' => true],
+          [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, ico, jpeg'],
+      ];
+  }
+
+  public function attributeLabels(){
+      return [
+          'image' => \Yii::t('app', 'albumArt'),
+          'description' => \Yii::t('app', 'description'),
+      ];
+  }
+
+}

@@ -1,0 +1,212 @@
+out: k_player.css, compress: true
+//@import '../../assets';
+@import '/opt/lampp/htdocs/radioalbum/site/frontend/modules/musicPanel/components/musicMain/css/assets.less';
+#wp_wrapper{
+  background-size: 153% !important;
+  background-position-x: 100% !important;
+  position: relative;
+}
+
+//****** ALBUM SELECTOR STYLES *******//
+
+#album_wrapper{
+  display: block;
+  height: 46%;
+  top: 50%;
+  position: relative;
+}
+#album-prev,
+#album-next{
+  display: block;
+  position: absolute;
+  height: 27%;
+  width: 10%;
+  top: 29%;
+  background-size: 1260% !important;
+  cursor: pointer;
+}
+
+#album-prev{
+  left: 14%;
+  background-position: 0% 77% !important;
+  &:hover{
+      background-position: 19% 77% !important;
+  }
+}
+
+#album-next{
+  left: 76%;
+  background-position: 9% 77% !important;
+  &:hover{
+    background-position: 28% 77% !important;
+  }
+}
+
+#album-art{
+  position: absolute;
+  display: block;
+  width: 47%;
+  height: 84%;
+  border: 1px solid whitesmoke;
+  left: 27%;
+  top: 0%;
+}
+
+//****** CHANNEL SELECTOR STYLES *******//
+
+#channel-wrapper{
+  position: relative;
+  display: block;
+  height: 10%;
+  bottom: 6%;
+}
+
+#channel-selector,
+#channel-prev,
+#channel-next,
+#channel-info,
+#channels{
+  display: block;
+  position: absolute;
+}
+
+#channel-selector{
+  width: 60%;
+  height: 65%;
+  left: 0%;
+  top: 27%;
+}
+
+#channel-prev,
+#channel-next{
+  display:none;
+  width: 11%;
+  height: 72%;
+  top: 23%;
+  background-size: 1240% !important;
+}
+
+#channel-prev{
+ left: 8%;
+ background-position: 0% 90% !important;
+ &:hover{
+   background-position: 9% 90% !important;
+ }
+}
+
+#channel-next{
+  right: 5%;
+  background-position: 0% 100% !important;
+  &:hover{
+      background-position: 9% 100% !important;
+  }
+}
+
+#channel-selector:hover>#channel-prev,
+#channel-selector:hover>#channel-next{
+  display: block;
+}
+
+#channel-info{
+  width: 30%;
+  height: 43%;
+  bottom: 18%;
+  right: 6%;
+}
+
+#channels{
+  width: 60%;
+  height: 54%;
+  top: 28%;
+  left: 21%;
+  ul{
+    height: 100%;
+    overflow: hidden;
+    .ch-item{
+      cursor: pointer;
+      width: 20px;
+      height: 100%;
+      margin-left: 4px;
+      background: #800000;
+      float: left;
+      &:hover{
+        border-top: 2px solid @basePrincipal;
+        border-left: 1px solid @basePrincipal;
+        border-right: 1px solid @basePrincipal;
+      }
+      &.active{
+        border-top: 2px solid yellow;
+        border-left: 1px solid yellow;
+        border-right: 1px solid yellow;
+      }
+    }
+  }
+}
+//****** CONTROL STYLES *******//
+
+#controls{
+  position: relative;
+  display: block;
+  height: 41%;
+  bottom: 56%;
+}
+
+#play-song,
+#pause-song,
+#prev-song,
+#next-song,
+#prev-song,
+#volume-song-bar{
+  position: absolute;
+  display: block;
+}
+
+#pause-song,
+#volume-song{
+  display:none; //Oculto en este estilo
+}
+
+#prev-song,
+#next-song,
+#play-song{
+  right: 7%;
+  top: 12px;
+  width: 13.001%;
+  height: 26.3%;
+  background-size: 610% !important;
+  &:hover,
+  &.active{
+    background-position: 20.5% 0% !important;
+  }
+}
+
+#prev-song{
+  top: 72%;
+  background-position: 0% 55% !important;
+  &:hover{
+    background-position: 20.5% 55% !important;
+  }
+}
+
+#next-song{
+  top: 41%;
+  background-position: 0% 27% !important;
+  &:hover{
+    background-position: 20.5% 27% !important;
+  }
+}
+
+#volume-song-bar{
+  top: 8%;
+  left: 7.7%;
+  height: 80.7%;
+  width: 11%;
+  background-position: 55% 88% !important;
+  background-size: 700% !important;
+  .indicator{
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    background: black;
+  }
+}

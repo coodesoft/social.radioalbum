@@ -1,0 +1,27 @@
+out: tagEditor.css, compress: true
+@import 'assets';
+
+.action-edit:hover{ background-position: 36.5% 33.22%}
+
+.directory{
+  color: @baseContraste ;
+  font-weight: bold;
+  &:hover{
+    cursor: pointer;
+    color: @baseMusical !important;
+    text-decoration: underline;
+  }
+}
+
+
+#tagEditorNavigationArea{
+  td.actions div{
+    cursor: pointer;
+    display: inline-block;
+    color: @segundoContraste;
+    margin: 2% 3%;
+    &:hover{
+      color: @claroBase !important;
+    }
+  }
+}

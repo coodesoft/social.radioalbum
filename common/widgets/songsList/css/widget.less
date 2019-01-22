@@ -1,0 +1,49 @@
+out: widget.css, compress: true
+@import 'assets';
+
+.ra-table{
+  &.ra-dark{
+    th{
+      &.actions{
+        border-left: 0px solid #fff;
+      }
+    }
+  }
+}
+
+#songsList{
+  margin-top: 10px;
+  &.song-list-mobile{
+    th{
+      text-align: left !important;
+    }
+    td{
+      text-align: left;
+      padding-left: 2%;
+      .song-name{
+        font-size: 20px;
+        color: @basePrincipal;
+        margin-bottom: 10px;
+      }
+      .song-info{
+        padding-top: 5px;
+        padding-bottom: 5px;
+        .song-info-label{
+          float:left;
+          font-weight: bold;
+          font-style: italic;
+          margin-right: 5px;
+          color: @claroBase;
+        }
+        .song-info-data{
+          width: 100%;
+        }
+      }
+    }
+
+  }
+}
+
+#songListTable_info{
+  display: none;
+}

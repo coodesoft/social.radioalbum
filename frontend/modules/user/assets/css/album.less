@@ -1,0 +1,21 @@
+out: album.css, compress: true
+@import 'assets';
+
+#submitWrapp{
+  button,
+  .uploadProgress{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .uploadProgress{
+    height: 13px;
+    width: 78%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    .ra-uploadBar{
+      height: 100%;
+      width: 0;
+      background: @basePrincipal;
+    }
+  }
+}

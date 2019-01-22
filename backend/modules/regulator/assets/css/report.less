@@ -1,0 +1,80 @@
+out: report.css, compress: true
+@import 'assets';
+
+#reportsAdminPanel{
+
+  .action-report{
+    display: inline-block;
+    margin: 0 3%;
+  }
+
+  .link-report,
+  .action-report{
+    form,
+    a{
+      color: @baseContraste;
+      &:hover{
+        color: @baseMusical !important;
+      }
+    }
+  }
+
+  .actions-container{
+    text-align: center;
+  }
+
+  .report-pending{
+    background: red;
+  }
+
+  .report-processed{
+    background: green;
+  }
+}
+
+#reportView{
+  >div{
+    float: none;
+    margin: auto;
+  }
+
+  .profile-container,
+  .album-container{
+    &:first-child{
+      border-right: 1px solid @claroBase;
+    }
+
+    .title{
+      padding: 10px 0;
+      border-bottom: 1px solid @claroBase;
+      margin-bottom: 15px;
+    }
+
+    > div > img{
+      width: 100%;
+    }
+    .report-info-block{
+      &:first-child{
+        padding-top: 0;
+      }
+      padding: 10px 0;
+      div:first-child{
+        font-size: 13px;
+        margin-bottom: 3px;
+      }
+    }
+  }
+
+  .report-section{
+    margin: 15px 0;
+    border-top: 1px solid @claroBase;
+  }
+
+  .content-container,
+  .action-container{
+    .title{
+      margin: 15px 0;
+    }
+  }
+
+}

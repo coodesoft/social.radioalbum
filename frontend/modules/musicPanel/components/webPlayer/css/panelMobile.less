@@ -1,0 +1,49 @@
+out: panelMobile.css, compress: true
+@import 'assets.less';
+
+#webPlayer{
+  .first-separator{
+    margin-top: 65px;
+  }
+
+  .horizontal-separator{
+    height: 2px !important;
+  }
+
+  .wp-control{
+    width: 50px;
+    display: table;
+  }
+
+  .control-icon{
+    margin: auto;
+    color: #ccc;
+    display: table-cell;
+  }
+
+  .control-flow{
+    &:active{
+      color:@basePrincipal;
+    }
+  }
+
+  #volumeControl{
+    .control-icon{
+      margin-bottom: 15px;
+    }
+  }
+
+  #volume-song-bar{
+    height: 120px;
+    width: 10px;
+    background: #ccc;
+    margin: auto;
+    .indicator{
+      height: 30px;
+      width: 20px;
+      .border-radius(5px);
+      background: #666;
+      margin: -50%;
+    }
+  }
+}

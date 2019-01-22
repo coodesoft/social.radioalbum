@@ -1,0 +1,126 @@
+out: panel.css, compress: true
+@import 'assets';
+
+.global-search{
+  min-height: 37px;
+}
+
+#showSkinPanel{
+  display: none;
+}
+
+#skinSelectorWrapper{
+  position: absolute;
+  top: 57px;
+  z-index: 100;
+  background: @baseContraste;
+  width: 100%;
+  .transition(right, 0.3s, ease);
+}
+
+#musicPanel{
+  position: relative;
+  overflow: hidden;
+}
+
+#webPlayer,
+#playbackInfoWrapper{
+  position: relative;
+  z-index: 90;
+}
+
+
+@media screen and (min-width: @min-screen) {
+  #showSkinPanel{
+    display: block;
+    font-size: 0.75vw;
+    text-align: center;
+    color: @claroBase;
+    padding: 20px 20px 0px;
+    cursor: pointer;
+    &.active{ color: @baseMusical }
+    .transition(color, 0.3s, ease);
+    &:hover{ color: @basePrincipal }
+  }
+  #musicPanel{ width: 170px; }
+
+  #webPlayer{ height: 170px * @skinFactor; }
+
+  #skinSelectorWrapper{
+    right: -170px;
+    &.active{ right: 0; }
+  }
+
+  #skinSelector{
+    .skin-item{
+    width: 170px;
+    height: 170px / @skinPreviewFactor;
+    }
+  }
+}
+
+@media screen and (max-width: @min-screen){
+  #musicPanel{
+    width: 50px;
+  }
+  #webPlayer{
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: @std-screen) {
+  #musicPanel{
+    width: 180px;
+  }
+  #webPlayer{
+    height: 180px * @skinFactor;
+  }
+  #skinSelector{
+    .skin-item{
+    width: 180px;
+    height: 180px / @skinPreviewFactor;
+    }
+  }
+  #skinSelectorWrapper{
+    right: -180px;
+    &.active{ right: 0; }
+  }
+}
+
+@media screen and (min-width: @wide-screen) {
+  #musicPanel{
+    width: 200px;
+  }
+  #webPlayer{
+    height: 200px * @skinFactor;
+  }
+  #skinSelector{
+    .skin-item{
+      width: 180px;
+      height: 180px / @skinPreviewFactor;
+    }
+  }
+  #skinSelectorWrapper{
+    right: -250px;
+    &.active{ right: 0; }
+  }
+}
+
+@media screen and (min-width: @big-screen) {
+  #musicPanel{
+    width: 320px;
+  }
+  #webPlayer{
+    height: 320px * @skinFactor;
+  }
+  #skinSelector{
+    .skin-item{
+      width: 215px;
+      height: 215px / @skinPreviewFactor;
+    }
+  }
+  #skinSelectorWrapper{
+    right: -320px;
+    &.active{ right: 0; }
+  }
+}

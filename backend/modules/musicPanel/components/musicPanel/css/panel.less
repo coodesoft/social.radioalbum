@@ -1,0 +1,56 @@
+out: panel.css, compress: true
+@import 'assets';
+
+.global-search{
+  min-height: 37px;
+}
+
+#wp_wrapper{
+  height: 100%;
+}
+
+#album-pre,
+#album-next,
+#album-art,
+#channel-prev,
+#channel-next,
+#controls>div{
+  cursor: pointer;
+}
+
+#album-art img{
+  width: 100%;
+  height: 100%;
+}
+
+#channel-info{
+  color: @basePrincipal;
+  font-size: 12px;
+}
+
+@media screen and (min-width: @min-screen) {
+  #musicPanel{
+    width: 170px;
+  }
+  #webPlayer{
+    height: 170px * @skinFactor;
+  }
+}
+
+@media screen and (min-width: @std-screen) {
+  #musicPanel{
+    width: 180px;
+  }
+  #webPlayer{
+    height: 180px * @skinFactor;
+  }
+}
+
+@media screen and (min-width: @wide-screen) {
+  #musicPanel{
+    width: 220px;
+  }
+  #webPlayer{
+    height: 220px * @skinFactor;
+  }
+}

@@ -1,0 +1,118 @@
+<?php
+use user\assets\EditProfileAsset;
+EditProfileAsset::register($this);
+
+use frontend\modules\artist\models\Artist;
+use frontend\models\Gender;
+
+use yii\widgets\ActiveForm;
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+$days = [];
+$months = [];
+$year = [];
+
+for ($i=1; $i <=31 ; $i++) { $days[$i] = $i; }
+for ($i=1; $i <=12 ; $i++) { $months[$i] = $i; }
+for ($i = 1920; $i <= date('Y') ; $i++) { $year[$i] = $i; }
+
+$visibility_options = [0 =>'', 1 => ''];
+
+
+?>
+
+<div id="editProfile" class="ra-container">
+  <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'data-content' => 'file']]) ?>
+
+  <div class="edit-panel col-lg-6 col-md-8">
+
+    <div id="personalInfoPanel" class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <div class="title secondary-title"><?php echo \Yii::t('app', 'personalInfo')?></div>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="col-md-12">
+          <?php echo $form->field($model, 'name')->textInput()->label(\Yii::t('app', 'name')); ?>
+        </div>
+        <div class="col-md-12">
+          <?php echo $form->field($model, 'last_name')->textInput()->label(\Yii::t('app', 'lastName')); ?>
+        </div>
+        <div class="col-md-12">
+          <?php echo $form->field($model, 'birth_location')->textInput()->label(\Yii::t('app', 'birthLocation')); ?>
+        </div>
+        <div class="col-md-12">
+          <?php echo $form->field($model, 'phone')->textInput()->label(\Yii::t('app', 'phone')); ?>
+        </div>
+        <div class="col-md-12 birth-date">
+          <div style="text-align:left; margin-bottom: 5px"><?php echo \Yii::t('app', 'birthDate')?></div>
+          <div class="col-md-4">
+              <?php echo $form->field($model, 'birth_day')->dropdownList($days)->label(\Yii::t('app', 'day')); ?>
+          </div>
+          <div class="col-md-4">
+              <?php echo $form->field($model, 'birth_month')->dropdownList($months)->label(\Yii::t('app', 'month')); ?>
+          </div>
+          <div class="col-md-4">
+              <?php echo $form->field($model, 'birth_year')->dropdownList($year)->label(\Yii::t('app', 'year')); ?>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <?php echo $form->field($model, 'gender')->dropdownList([
+              1 => \Yii::t('app', 'male'),
+              2 => \Yii::t('app', 'female'),
+              3 => \Yii::t('app', 'custom'),
+            ], ['class' => 'form-control gender-options'])->label(\Yii::t('app', 'gender')); ?>
+        </div>
+        <div class="col-md-12">
+            <?php if ($model->gender != Gender::CUSTOM)
+                echo $form->field($model, 'gender_desc')->hiddenInput(['placeholder' => \Yii::t('app', 'inputYourGender'), 'class' => 'form-control gender-custom'])->label(false);
+              else
+                echo $form->field($model, 'gender_desc')->textInput(['placeholder' => \Yii::t('app', 'inputYourGender'), 'class' => 'form-control gender-custom'])->label(false);
+            ?>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="socialInfoPanel" class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <div class="title secondary-title"><?php echo \Yii::t('app', 'socialInfo')?></div>
+        </h3>
+      </div>
+      <div class="panel-body">
+
+      </div>
+    </div>
+
+
+
+
+    <div id="profileVisibilityPanel" class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <div class="title secondary-title"><?php echo \Yii::t('app', 'profileVisibility')?></div>
+        </h3>
+      </div>
+      <div class="panel-body">
+
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12">
+          <div class="editProfileButton">
+            <?= Html::submitButton(\Yii::t('app', 'editProfile'), ['class' => 'btn ra-btn']) ?>
+          </div>
+      </div>
+    </div>
+
+  </div>
+  <?php echo $form->field($model, 'id')->hiddenInput()->label(false); ?>
+
+  <?php ActiveForm::end() ?>
+
+</div>

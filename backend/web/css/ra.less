@@ -1,0 +1,254 @@
+out: ra.css, compress: true
+@import 'reset';
+@import 'assets';
+
+span.vertical-helper{
+  height:100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.tab-item{
+    font-size: 12px;
+    padding: 14px;
+    display: block;
+    color: @claroPrincipal;
+    cursor: pointer;
+    &:hover{
+      color: @basePrincipal;
+      text-decoration: none;
+    }
+    &.active{
+      color: @basePrincipal;
+      background: @menuContraste;
+      text-decoration: none;
+    }
+}
+
+.nav-box
+.block-panel{
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+}
+
+.ra-container{
+  overflow: auto;
+}
+
+.container-fluid{
+  padding-right: 0 !important;
+}
+
+#centralPanel .navbar{
+  background: @basePrincipal;
+  border-bottom: 1px solid @claroBase ;
+  border-radius: 0;
+  height: 40px;
+  .navbar-right{
+    margin-right: 0;
+  }
+  li a{
+    color: @baseContraste;
+    font-size: 14px;
+    margin-top: -1px;
+  }
+  li:hover,
+  a:hover,
+  a:focus,
+  a.active{
+    color: @basePrincipal;
+    background-color: @menuContraste !important;
+  }
+}
+
+#leftPanel,
+#centralPanel,
+#rightPanel{
+  padding: 0;
+
+}
+
+#centralPanel{
+ overflow: auto;
+}
+
+#leftPanel{
+  background: @baseContraste;
+  float: left;
+}
+#rightPanel{
+  background: @baseContraste;
+  float:right;
+}
+
+#home-page{
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.public-area{
+  background: url('@{images}/wallpaper3.jpg') no-repeat;
+  background-size: 100%;
+  overflow: auto;
+}
+
+#login-box,
+#signup-box{
+  border: 1px solid @basePrincipal;
+  margin-top: 10px;
+  background: rgba(47, 47, 47, 0.52);
+//  filter: blur(2px);
+//   -webkit-filter: blur(2px);
+}
+
+
+.form-box-img{
+  background: url('@{images}/logo-ra.png') no-repeat 50% 100%;
+  background-size: 100%;
+}
+
+.form-box-separator{
+  height: 3px;
+  width: 95%;
+  background: @basePrincipal;
+}
+
+.form-input{
+  padding-left: 14px;
+}
+
+.ra-form-cmp{
+    height: 43px;
+    margin: 4px auto;
+    width: 100%;
+    font-size: 13px;
+    border: 2px solid @basePrincipal;
+}
+
+.form-btn{
+  text-align: center;
+  background: @baseContraste ;
+  color: @segundoContraste ;
+}
+
+.small-text-info{
+  font-size: 12px;
+  line-height: 14pt;
+  color: @claroBase;
+}
+
+.tos{
+  margin-top: 25px;
+  margin-bottom: 5px;
+  text-align: justify;
+}
+
+.login-box-form .form-group,
+.signup-box-form .form-group,{
+  margin-bottom: 0;
+}
+
+#signup-box{
+    margin-left: auto;
+    margin-right: auto;
+    .form-box-img{
+      height: 100px;
+    }
+
+    .form-box-separator{
+      margin: 10px auto;
+    }
+    .radio-inline{
+          color: @basePrincipal;
+          font-size: 17px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+    }
+    .radio-inline:last-child{
+      float: right;
+    }
+    .signup-message{
+
+      color: @claroBase;
+      .head{
+        margin-bottom: 40px;
+        margin-top: 70px;
+        text-align: center;
+        font-size: 30px;
+      }
+      .body{
+        font-size: 19px;
+        text-align: justify;
+        line-height: 16pt;
+        margin-top: 50px;
+      }
+    }
+}
+
+#login-box{
+    .form-box-img{
+      height: 200px;
+    }
+    .form-box-separator{
+      margin:  65px auto 0 auto;
+    }
+    .small-text-info{
+      margin-top: 20px;
+    }
+    .response-box{
+      height: 60px;
+      margin: 3px 0 2px;
+      width: 100%;
+      text-align: center;
+      div{
+        display: inline-block;
+        width: 97%;
+        vertical-align: middle;
+      }
+    }
+}
+
+.migration-area{
+  .item-name{
+    width: 70%;
+    display:inline-block;
+  }
+  .item-options{
+    width: 29%;
+    display:inline-block;
+  }
+}
+
+
+.gridContainer{
+  margin-left: 12%;
+}
+
+.pagination{
+  margin-top: 0 !important;
+  .pagination-mix !important;
+}
+
+.loader{
+  width: 150px;
+  height: 150px;
+  background: url('@{images}/loader.gif') no-repeat;
+  background-size: 100%;
+  display: inline-block;
+}
+
+.navbar{
+  span{
+    background: black;
+  }
+  .navbar-form{
+    position: relative;
+    z-index: 2001;
+  }
+}
+#mainNav{
+  background: fade(@basePrincipal, 90%);
+  position: relative;
+  z-index: 2000;
+}

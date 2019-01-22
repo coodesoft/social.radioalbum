@@ -1,0 +1,16 @@
+out: loadBar.css, compress: true
+@import "assets.less";
+
+#loadBar{
+  position: absolute;
+  z-index: 5000;
+  width: 100%;
+  height: 2px;
+  background: @darkBaseContraste;
+}
+
+#progress{
+  height: 2px;
+  width: 0;
+  background: @baseMusical;
+}

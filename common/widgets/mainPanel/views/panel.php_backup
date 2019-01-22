@@ -1,0 +1,35 @@
+<?php
+use common\widgets\mainPanel\PanelAsset;
+use yii\helpers\Url;
+
+PanelAsset::register($this);
+$urlImg = Url::to(["/img/logo-ra.png"]);
+?>
+<div class="ra-panel">
+  <div class="ra-panel-logo"><img src=<?php echo $urlImg ?> alt=""></div>
+  <div class="ra-panel-items">
+    <?php if (isset($items)) { ?>
+      <ul>
+        <?php foreach($items as $item) { ?>
+        <li class="item">
+          <a href="<?= $item['url'] ?>" data-context="<?= $item['context'] ?>" data-action="nav">
+          <span class="vertical-helper"></span>
+          <div class="thumb thumb-<?= $item['img'] ?>"></div>
+          <div class="item-name">
+
+              <span><?= $item['name'] ?></span>
+          </div>
+        </a>
+        </li>
+        <?php } ?>
+        <li class="item">
+          <a href="<?= Url::to(['/site/logout'])?>"  data-method="post" data-context="logout">
+          <span class="vertical-helper"></span>
+          <div class="thumb thumb-logout"></div>
+          <div class="item-name"><?= \Yii::t('app','salir') ?></div>
+          </a>
+        </li>
+      </ul>
+    <?php } ?>
+  </div>
+</div>

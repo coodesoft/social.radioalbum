@@ -1,0 +1,119 @@
+out: notification.css, compress: true
+@import 'assets';
+
+#notificationContainer{
+  width: 300px;
+  &.notification-hide{ margin-left: -300px; }
+  &.notification-show{ margin-left: 0; }
+  @media (max-width: @small-screen){
+    width: 100%;
+    &.notification-hide{ margin-left: -100%; }
+  }
+  position: absolute;
+  z-index: 1050;
+  margin-top: -20px;
+  background: darken(fade(@baseContraste, 95%), 10%);
+  padding: 0 15px;
+  color: darken(@fondoSemiBlanco, 40%);
+  .transition(margin-left, 0.2s, ease);
+
+
+  a{
+    text-decoration: none !important;
+    color: darken(@fondoSemiBlanco, 40%) !important;
+    &:hover{
+      color: @basePrincipal !important;
+    }
+  }
+
+  .notifications-header{
+    padding: 15px 0;
+    border-bottom: 1px solid @claroPrincipal;
+    margin-bottom: 10px;
+
+  }
+
+  .notifications-list{
+    padding: 0;
+  }
+
+
+  ul{
+    width: 105%;
+    padding-right: 5%;
+    overflow-y: auto;
+    li{
+     padding-bottom: 10px;
+     padding-top: 10px;
+     border-bottom: 1px solid @claroPrincipal;
+     >div{
+       display: inline-block;
+       vertical-align: top;
+     }
+
+     .sender-thumb{ width: 20%; }
+
+     .notifi-message{ width: 78%; }
+
+     img{
+       width: 100%;
+       border: 2px solid @basePrincipal;
+     }
+    }
+
+  }
+
+  .notifi-message div{
+    display: table;
+
+    .paragraph,
+    .notifi-action{
+      display: inline-block;
+      display: table-cell;
+    }
+
+    .paragraph{
+      vertical-align: top;
+      width: 89%;
+      font-size: 15px;
+
+      span{ font-weight: bold; }
+      .content{ margin-bottom: 10px; }
+    }
+
+    .notifi-action{
+      vertical-align: middle;
+      width: 10%;
+      text-align: center;
+      cursor: pointer;
+
+    }
+  }
+
+  .no-notifications{
+    text-align:center;
+    font-size: 30px;
+    color: @claroPrincipal;
+    .centerY();
+  }
+
+  .notifications-footer{
+    font-size: 13px;
+    padding: 10px 0;
+    border-top: 1px solid #353535;
+    div{
+      display: inline-block;
+      float: right;
+    }
+    a{
+      padding: 0 5px;
+    }
+  }
+
+  .notifi-time{
+    margin-top: 10px;
+    display: block;
+    font-size: 12px;
+  }
+
+}

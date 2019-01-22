@@ -1,0 +1,127 @@
+out: widget.css, compress: true
+@import "assets.less";
+
+
+#profileAreaSelector{
+  .profile-selector{
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid @claroBase;
+    cursor: pointer;
+    &.active{
+      background: @menuContraste;
+      color: @basePrincipal ;
+    }
+  }
+}
+
+#profileInfo{
+    border-right: 1px solid @claroBase;
+    &.profile-info-mobile{
+      border-right: none;
+    }
+    .thumbnail img{
+      width: 100%;
+    }
+    .title-wrapper{
+      position:absolute;
+      height: 100%;
+      .title{
+        position: absolute;
+        bottom: 22px;
+      //  border-bottom: 1px solid @claroBase;
+        .title-text{ color: @segundoContraste; }
+        @media screen and (min-width: @small-screen) {
+          .title-text{ font-size: 27px; }
+        }
+        @media screen and (min-width: @min-screen) {
+          .title-text{ font-size: 30px; }
+        }
+        @media screen and (min-width: @std-screen) {
+          .title-text{ font-size: 25px; }
+        }
+        @media screen and (min-width: @wide-screen) {
+          .title-text{ font-size: 27px; }
+        }
+        @media screen and (min-width: @big-screen) {
+          .title-text{ font-size: 33px; }
+        }
+      }
+    }
+
+    .horizontal-separator{
+      position: absolute;
+      bottom: 1px;
+      height: 1px;
+      width: 90%;
+      background: @claroBase;
+    }
+
+    .profile-body{
+      clear: both;
+      .panel{
+        .box-shadow(0px, 0px, 10px, #d2d2d2) ;
+      }
+      .social{
+        a {
+        &.facebook,
+        &.facebook:hover{
+          color: @facebook !important;
+        }
+        &.twitter,
+        &.twitter:hover{
+          color: @twitter !important;
+        }
+        }
+      }
+      .information{
+        .title{
+          font-size: 14px;
+          color: @segundoContraste;
+          margin-bottom: 5px;
+        }
+        .paragraph{
+          margin: 0 10px 10px;
+          font-size: 20px;
+          display: inline-block;
+
+        }
+        &.social{
+          padding-top: 5px;
+          padding-bottom: 20px;
+        }
+      }
+    }
+}
+
+#profileProduction{
+  .production-header{
+    width: 100%;
+    background: @fondoSemiBlanco;
+    border: 1px solid @claroBase ;
+    li{
+      display: inline-block;
+    }
+  }
+  .profile-body{
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: @min-screen) {
+
+  #profileInfo{
+    .profile-header,
+    .profile-body,
+    .profile-body > div{
+      padding-left : 0 !important;
+      padding-right : 0 !important;
+    }
+  }
+  #profileInfo,
+  #profileProduction{
+    padding-left : 0 !important;
+    padding-right : 0 !important;
+  }
+}

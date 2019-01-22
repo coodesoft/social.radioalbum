@@ -1,0 +1,87 @@
+out: share.css, compress: true
+@import 'assets';
+
+
+#sharePost {
+  textarea{
+    background: white;
+    color: @menuContraste;
+    font-size: 12px;
+    border: none;
+    height: 50px;
+    width: 100%;
+    resize: none !important;
+    outline: none;
+    font-size: 0.8vw;
+    padding: 10px !important;
+
+  }
+}
+
+
+#previewAlbum{
+  padding: 5px;
+  background: @darkBaseContraste;
+  border: 1px solid @segundoContraste;
+  margin-bottom: 5px;
+    .thumb{
+      display: inline-block;
+      vertical-align: middle;
+      border: 1px solid @baseMusical;
+      width: 20%;
+      img{ width: 100%; }
+    }
+
+    .album-content{
+      display: inline-block;
+      vertical-align: middle;
+      .album-info{
+        div{
+          margin: 5px 0 5px 5px;
+          &.album-name{ color: @baseMusical; }
+        }
+      }
+    }
+}
+
+.previewPost{
+  background: @fondoSemiBlanco;
+  border-bottom: 1px solid @claroBase;
+  padding: 10px;
+  .previewOwner{
+    position: relative;
+    margin-bottom: 10px;
+    border-bottom: 1px solid @claroBase;
+    .thumb{
+      width: 5%;
+      display: inline-block;
+      vertical-align: middle;
+      border: 1px solid @basePrincipal;
+      img{ width: 100%; }
+    }
+    .name{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 0.75vw;
+      a{
+        color: @menuContraste;
+        &:hover {
+          color: @menuContraste !important;
+        }
+       }
+    }
+    .date{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 0.7vw;
+      color: @segundoContraste;
+    }
+  }
+
+  .previewBody{
+    color: @claroPrincipal;
+    .postContent{
+      margin-top: 5px;
+    }
+  }
+}

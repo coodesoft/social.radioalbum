@@ -1,0 +1,67 @@
+out: extended.css, compress: true
+@import '../assets';
+
+
+.playlist-container{
+    padding-right: 5px;
+    .playlists{
+      width: 33%;
+      float: left;
+      height: 100%;
+      margin-right: 10px;
+      font-size: 12px;
+      .ra-title{
+        .title-text{
+          vertical-align: middle;
+          display: inline-block;
+          width: 75%;
+        }
+        .pl-action{
+          vertical-align: middle;
+          display: inline-block;
+        }
+        .new-playlist-btn{
+
+          width: 30px;
+          height: 30px;
+          vertical-align: middle;
+        }
+      }
+      .ra-tab{
+        position: relative;
+        overflow: auto;
+        a{
+          color: @claroBase;
+        }
+        .playlists-list,
+        .new-playlist{
+          position: absolute;
+          width: 100%
+        }
+        .new-playlist{
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+        .playlists-create{
+          padding: 5px;
+          label{
+            margin-bottom: 5px;
+          }
+          form{
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+
+    .playlists-content{
+      overflow: auto;
+      height: 100%;
+      .text-center{
+        font-size: 40px;
+        padding-top: 50px;
+        color: @menuContraste;
+      }
+    }
+}

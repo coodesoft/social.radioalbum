@@ -1,0 +1,79 @@
+
+.colored-box(@w, @h, @bckg){
+  width: @w;
+  height: @h;
+  background: @bckg;
+}
+
+.pagination-mix(){
+  li{
+    a{
+      color: @baseContraste;
+      &:hover{
+        color: @basePrincipal;
+      }
+    }
+    &.active a{
+      background: @baseContraste;
+      color: @basePrincipal;
+    }
+  }
+}
+
+.translate(@x, @y){
+  -webkit-transform: translate(@x, @y);
+      -ms-transform: translate(@x, @y);
+       -o-transform: translate(@x, @y);
+          transform: translate(@x, @y);
+}
+
+.centerXY(){
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  .translate(-50%, -50%);
+}
+
+.centerY(){
+  position: relative;
+  top: 50%;
+  .translate(0, -50%);
+}
+
+.centerX(){
+  position: relative;
+  left: 50%;
+  .translate(-50%, 0);
+}
+
+.circle(@color, @weigth, @style: 'solid'){
+  border: @weigth @style @color;
+  -webkit-border-radius: 100%;
+     -moz-border-radius: 100%;
+          border-radius: 100%;
+}
+
+
+.transition(@property, @duration, @type, @delay: 0s){
+  -webkit-transition: @property @duration @type @delay;
+      -ms-transition: @property @duration @type @delay;
+          transition: @property @duration @type @delay;
+
+}
+
+.double-transition(@elementA, @elementB){
+  -webkit-transition: @elementA, @elementB;
+      -ms-transition: @elementA, @elementB;
+          transition: @elementA, @elementB
+}
+.border-radius(@radius){
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+.box-shadow(@x: 0px, @y: 0px, @blur: 10px, @color: #000000){
+  -webkit-box-shadow: @x @y @blur 0px @color;
+     -moz-box-shadow: @x @y @blur 0px @color;
+          box-shadow: @x @y @blur 0px @color;
+}

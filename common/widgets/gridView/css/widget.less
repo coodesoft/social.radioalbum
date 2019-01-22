@@ -1,0 +1,179 @@
+out: widget.css, compress: true
+@import "assets.less";
+
+@media screen and (min-width: @big-screen) {
+  .grid-minimal{
+    .grid-item{
+      width: 33%;
+    }
+  }
+}
+
+
+#gridView{
+      .grid-item{
+        &.grid-initial{
+          opacity: 0 ;
+          .transition(0, 0.2s, 'ease');
+        }
+        &.grid-complete{
+          opacity: 1;
+        }
+      }
+
+
+      &.grid-complete .grid-item{
+        opacity: 1;
+      }
+
+      .grid-item{
+        margin-bottom: 15px;
+        margin-top: 15px;
+        position: relative;
+        a{ vertical-align:top; }
+        img{ width: 100%; }
+        .it-min{ height: 25%; }
+        .it-std{ height: 50%; }
+        .it-big{ height: 75%; }
+        .it-full{ height: 100%; }
+
+        .item-top{ top: 0; }
+        .item-bottom{ bottom: 0; }
+        .item-thumb{
+          display: block;
+          position: absolute;
+          left: 0;
+          width: 100%;
+          padding: 0 15px;
+          z-index : 100;
+          .item-thumb-hover{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+          }
+        }
+        .item-thumb-name{
+          display: block;
+          opacity: 1;
+          .transition(opacity, 0.2s, ease);
+          z-index: 102;
+          color: @smoothBasePrincipal;
+          .centerXY();
+          font-size: 90%;
+          text-align: center;
+        }
+        .item-thumb-main-action{
+          display: block;
+          opacity: 0;
+          .transition(opacity, 0.2s, ease);
+          z-index: 102;
+          color: white;
+          .centerXY();
+          .transition(color, 0.3s, ease);
+          &:hover{
+            color: @baseMusical;
+          }
+        }
+
+        #extActions{
+         display: block;
+         opacity: 0;
+         .transition(opacity, 0.2s, ease);
+         a{
+           color: white;
+           &:hover{
+             text-decoration: none;
+             color: @baseMusical !important;
+           }
+         }
+         z-index: 103;
+         >div{
+           display: table;
+           width: 100%;
+           height: 100%;
+           >div{
+             display: table-cell;
+             vertical-align: middle;
+             span{
+               cursor: pointer;
+               .transition(color, 0.3s, ease);
+
+             }
+           }
+          }
+        }
+
+        #popActions{
+          opacity: 0;
+          position: absolute;
+          padding-left: 10px;
+          right: 15px;
+          .transition(opacity, 0.2s, ease);
+          z-index: 103;
+          cursor: pointer;
+          #popButton{
+            padding-right: 10px;
+            color: white;
+            position: relative;
+          }
+          .popActions-list{
+              position: absolute;
+              right:5px;
+              ul{
+                color: @baseContraste;
+                background: whitesmoke;
+                box-shadow: 0px 0px 5px @baseContraste;
+                padding: 10px;
+                li > a{
+                  color: @baseContraste;
+                  text-decoration: none;
+                  &:hover{
+                    color: @darkBaseContraste !important;
+                  }
+                }
+              }
+          }
+        }
+
+        &:hover{
+           .item-thumb-hover{
+             background: rgba(0, 0, 0, 0) !important;
+             box-shadow: 0px 0px 10px @baseContraste;
+           }
+           #extActions,
+           #popActions,
+           .item-thumb-main-action{
+             opacity: 1;
+           }
+           .item-thumb-name{
+             opacity: 0;
+
+           }
+        }
+      }
+}
+
+
+
+#gridView.clean-wall{
+  .grid-item{
+    .item-thumb-name{
+      font-size: 100%;
+    }
+    .item-thumb-name,
+    .item-thumb-hover{
+      opacity: 0;
+    }
+
+    &:hover{
+      .item-thumb-name,
+      .item-thumb-hover{
+        opacity: 1;
+      }
+      .item-thumb-hover{
+        background: rgba(0, 0, 0, 0.7) !important;
+      }
+    }
+  }
+}

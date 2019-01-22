@@ -1,0 +1,510 @@
+out: ra.css, compress: true
+@import 'reset';
+@import 'assets';
+
+
+
+span.vertical-helper{
+  height:100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tab-item{
+    font-size: 12px;
+    padding: 14px;
+    display: block;
+    color: @claroPrincipal;
+    cursor: pointer;
+    &:hover{
+      color: @basePrincipal;
+      text-decoration: none;
+    }
+    &.active{
+      color: @basePrincipal;
+      background: @menuContraste;
+      text-decoration: none;
+    }
+}
+
+.nav-box
+.block-panel{
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+}
+
+
+.container-fluid{
+//  padding-right: 0 !important;
+}
+
+#navBar {
+  margin-bottom: @navBarMarginBottom;
+  background: @basePrincipal;
+  border-bottom: 1px solid @claroBase ;
+  height: @navBarHeight;
+  .navbar{
+    display: inline-block;
+    background: @basePrincipal;
+    border-radius: 0;
+    height: 40px;
+    margin-bottom: 0;
+    li a{
+      color: @baseContraste;
+      font-size: 14px;
+      margin-top: -1px;
+    }
+    li:hover,
+    a:hover,
+    a:focus,
+    a.active{
+      color: @basePrincipal;
+      background-color: @menuContraste !important;
+    }
+    @media (max-width: @std-screen){
+      .navbar-collapse{
+        padding-left: 0;
+        padding-right: 0;
+        li{
+          padding-left: 0;
+          padding-right: 0;
+          a{
+            text-align: center;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+          }
+        }
+      }
+    }
+    &.navbar-left li{
+      float: left;
+    }
+    &.navbar-right{
+      margin-right: 0;
+      float:right;
+    }
+    .navbar-nav >li > a{
+      padding-top: 15px;
+      padding-bottom: 15px
+    }
+  }
+}
+
+#leftPanel,
+#centralPanel,
+#rightPanel{
+  padding: 0;
+
+}
+
+#centralPanel{
+ overflow: hidden;
+ position: relative;
+}
+
+#centralPanel{
+  background: @smoothBasePrincipal;
+}
+
+#leftPanel{
+  position: relative;
+  z-index: 1001;
+  background: @baseContraste;
+  float: left;
+}
+
+#rightPanel{
+  background: @baseContraste;
+  float:right;
+}
+
+
+#main-container{
+  >.ra-container{
+    padding-left: 15px !important;
+    padding-right: 15px
+  }
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+//  position:relative;
+//  z-index: 900;
+
+}
+
+@media screen and (max-width: @min-screen){
+  #main-container{
+    height: 92%;
+    min-height: 92% !important;
+  }
+}
+
+
+#centralContainer{
+  margin-top: -(@navBarHeight + @navBarMarginBottom);
+  padding-top: (@navBarHeight + @navBarMarginBottom);
+}
+
+#home-page{
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.public-area{
+  background: url('@{images}/wallpaper3.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: auto;
+}
+
+#login-box,
+#signup-box,
+#resetPass-box{
+  border: 1px solid @basePrincipal;
+  margin-top: 10px;
+  background: rgba(47, 47, 47, 0.52);
+//  filter: blur(2px);
+//   -webkit-filter: blur(2px);
+}
+
+
+.form-box-img{
+  background: url('@{images}/logo-circulo-verde-url.png') no-repeat 50% 100%;
+  background-size: 67%;
+}
+
+.form-box-separator{
+  height: 3px;
+  width: 95%;
+  background: @basePrincipal;
+}
+
+.form-input{
+  padding-left: 14px;
+}
+
+.ra-form-cmp{
+    height: 43px;
+    margin: 4px auto;
+    width: 100%;
+    font-size: 13px;
+    border: 2px solid @basePrincipal;
+}
+
+.form-btn{
+  text-align: center;
+  background: @baseContraste ;
+  color: @claroBase ;
+  &:hover{
+    color: @basePrincipal;
+  }
+}
+
+a.form-btn{
+  display: block;
+  padding: 5% 10%;
+  &:hover{
+    text-decoration:none;
+  }
+}
+
+.small-text-info{
+  font-size: 12px;
+  line-height: 14pt;
+  color: @claroBase;
+}
+
+.tos{
+  margin-top: 25px;
+  margin-bottom: 5px;
+  text-align: justify;
+}
+
+.login-box-form .form-group,
+.signup-box-form .form-group,{
+  margin-bottom: 0;
+}
+
+#signup-box{
+    margin-left: auto;
+    margin-right: auto;
+    .form-box-img{
+      height: 125px;
+    }
+
+    .form-box-separator{
+      margin: 10px auto;
+    }
+    .radio-inline{
+          color: @basePrincipal;
+          font-size: 17px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+    }
+    .radio-inline:last-child{
+      float: right;
+    }
+    .signup-message{
+
+      color: @claroBase;
+      .head{
+        margin-bottom: 40px;
+        margin-top: 70px;
+        text-align: center;
+        font-size: 30px;
+      }
+      .body{
+        font-size: 19px;
+        text-align: justify;
+        line-height: 16pt;
+        margin-top: 50px;
+      }
+    }
+
+    &.oauth-signup{
+      .secondary-title{
+        margin: 20% 0;
+      }
+      .form-box-separator{
+        margin: 0 auto 10%;
+      }
+    }
+}
+
+#login-box,
+#resetPass-box{
+    .form-box-img{
+      height: 230px;
+    }
+    .form-box-separator{
+      margin:  30px auto 0 auto;
+    }
+    .small-text-info{
+      margin-top: 20px;
+    }
+    .response-box{
+      height: 60px;
+      margin: 3px 0 2px;
+      width: 100%;
+      text-align: center;
+      div{
+        display: inline-block;
+        width: 97%;
+        vertical-align: middle;
+      }
+    }
+
+}
+
+#resetPass-box{
+  .title{
+    margin: 65px 0 10px;
+  }
+  .form-box-separator{
+    margin:  0 auto;
+  }
+  .paragraph{
+    color: @claroBase;
+    margin-bottom: 30px;
+  }
+}
+
+.migration-area{
+  .item-name{
+    width: 70%;
+    display:inline-block;
+  }
+  .item-options{
+    width: 29%;
+    display:inline-block;
+  }
+}
+
+#login-box,
+#signup-box{
+  .paragraph{
+    font-size: 14px;
+    color: @claroBase;
+    margin: 5% 0;
+  }
+  .auth-clients{
+    display: inline-block;
+  }
+}
+
+.pagination{
+  margin-top: 0 !important;
+  .pagination-mix !important;
+}
+
+.loader{
+  width: 150px;
+  height: 150px;
+  background: url('@{images}/loader.gif') no-repeat;
+  background-size: 100%;
+  display: inline-block;
+}
+
+.navbar{
+  span{
+    background: black;
+  }
+  .navbar-form{
+    position: relative;
+    z-index: 2001;
+  }
+}
+
+#mainNav{
+  background: fade(@basePrincipal, 90%);
+  position: relative;
+  z-index: 1000;
+  padding-left: 0;
+  padding-right:0;
+}
+
+
+.notification-wrapper{
+  .fa-layers{
+    background: transparent;
+    top: 5px;
+    right: 2px;
+    position: absolute;
+  }
+  .fa-layers-text{
+    background: transparent;
+  }
+}
+
+#myModal{
+  background: rgba(17, 43, 38, 0.67);
+  .modal-content{
+    background: @baseContraste;
+    color: @claroBase;
+  }
+
+  .modal-header{
+    border-bottom: 1px solid @claroPrincipal;
+    button,
+    .modal-title{
+      color: @claroBase;
+    }
+  }
+
+  .modal-footer{
+    border: none;
+  }
+}
+
+
+.error-page{
+  background: pink;
+  color: black;
+  border: 1px solid red;
+  font-size: 20px;
+  padding: 20px;
+  margin: 20px;
+  .border-radius(10px);
+}
+
+#sectionHead{
+  border-bottom: 1px solid @claroBase;
+  margin: 0 2%;
+  .title{
+    font-size: 40px;
+    //font-family: 'Rubik Mono One', sans-serif;
+    margin: 3% 0 7px;
+  }
+  .subtitle{
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+
+}
+
+.horizontal-separator{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 1px;
+  &.transparent{
+    background: transparent;
+    border: none;
+  }
+  &.middle{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+#ToS{
+  background: whitesmoke;
+  margin-top: 10px;
+  padding: 30px;
+  width: 50%;
+  border: 1px solid #ccc;
+
+  .title{
+    font-size: 30px;
+  }
+
+  .subtitle{
+    font-size: 25px;
+  }
+
+  p, li{
+    line-height: 1.5;
+    font-size: 17px;
+  }
+  ul{
+    margin-left: 70px !important;
+    display: block;
+    margin-top: 10px !important;
+    li{
+      list-style: square;
+    }
+  }
+
+  a{
+    color: @darkBasePrincipal;
+    &:hover{
+      color: @baseContraste !important;
+      text-decoration: none;
+    }
+    text-decoration: underline;
+  }
+
+}
+
+#previewContainer{
+  height: 87% !important;
+
+}
+
+.preview-left-panel{
+  display: none;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  .logo{
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    margin-top: 30%;
+    img{
+      width: 100%;
+    }
+  }
+  .secondary-title{
+    margin-bottom: 20px;
+    color: @basePrincipal;
+  }
+  .ra-btn{
+    width: 130px;
+  }
+}
+
+@media screen and (min-width: @std-screen){
+  .preview-left-panel{
+    display: block;
+    width: 200px;
+  }
+}

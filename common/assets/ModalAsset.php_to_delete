@@ -1,0 +1,23 @@
+<?php
+namespace common\assets;
+
+use yii\web\AssetBundle;
+
+class ComponentAsset extends AssetBundle{
+
+  public $sourcePath = '@common/assets';
+
+  public $css =[
+    'css/themes/ra-dark.css',
+  ];
+
+  public $js = [
+    'js/ra.modalBox.js',
+    'js/ra.texts.js',
+  ];
+
+  public $depends = [
+      'yii\web\YiiAsset',
+      'yii\bootstrap\BootstrapPluginAsset',
+  ];
+}

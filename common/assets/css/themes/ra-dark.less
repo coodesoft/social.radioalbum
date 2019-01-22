@@ -1,0 +1,49 @@
+out: ra-dark.css, compress: true
+@import '../variables';
+@import '../paths';
+
+.ra-dark{
+  background: @baseContraste;
+  color: @claroBase;
+}
+
+
+
+.ra-table.ra-dark{
+  border-collapse: separate;
+  tr{
+    &.header{ color: @basePrincipal; }
+    .action{
+      background: none
+    }
+    &:hover{
+      color: @baseMusical;
+      a{ color: @claroBase !important; }
+    }
+  }
+}
+
+.ra-dark-title{
+  text-align: center;
+  padding: 10px 10px;
+  font-size: 13px;
+  border-bottom: 1px inset #000000;
+  box-sizing: border-box;
+}
+
+.ra-dark-row{
+  border-top: 1px outset #353535;
+  border-bottom: 1px inset #000000;
+}
+
+.ra-dark-btn{
+  background: @baseContraste ;
+  color: @basePrincipal;
+  border: 1px solid @claroBase;
+  margin: 5px;
+  &:hover{
+    background: @basePrincipal ;
+    color: @baseContraste !important;
+    border: 1px solid @baseContraste;
+  }
+}

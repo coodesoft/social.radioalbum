@@ -1,0 +1,170 @@
+out: extended.css, compress: true
+@import '../assets';
+
+
+.playlist-container{
+    padding-right: 5px;
+    padding-left: 5px;
+    .playlists{
+      width: 33%;
+      float: left;
+      height: 100%;
+      margin-right: 10px;
+      font-size: 12px;
+      .ra-title{
+        .title-text{
+          vertical-align: middle;
+          display: inline-block;
+          width: 75%;
+        }
+        .pl-action{
+          vertical-align: middle;
+          display: inline-block;
+        }
+        .new-playlist-btn{
+          width: 30px;
+          height: 30px;
+          vertical-align: middle;
+        }
+      }
+      .ra-tab{
+        position: relative;
+        overflow: auto;
+        a{
+          color: @claroBase;
+          &:hover{ color: @baseMusical !important; }
+        }
+
+        .playlists-list,
+        .new-playlist{
+          position: relative;
+          width: 100%
+        }
+        .new-playlist{
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+        .playlists-create{
+          padding: 5px;
+          label{
+            margin-bottom: 5px;
+          }
+          form{
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+
+    .playlists-content{
+      position: relative;
+      overflow: auto;
+      @media screen and (min-width: @min-screen){
+        height: 100%;
+
+      }
+      .text-center{
+        font-size: 40px;
+        color: @menuContraste;
+      }
+    }
+
+    #noSongs{
+      .centerXY();
+    }
+
+    #playlistDescription{
+      .header{
+        padding: 1% 0;
+        margin: 0 2%;
+        border-bottom: 1px solid @claroBase;
+        .header-item{
+          margin: 1% 0;
+          span{
+            font-size: 15px;
+          }
+          .bold{
+            color: @segundoContraste;
+          };
+        }
+      }
+    }
+}
+
+.playlist-mobile{
+
+  .playlists,
+  .playlists-content{
+    width: 100%;
+  }
+
+}
+
+
+#playlistDescription{
+  .playlists-action{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    .action{
+        vertical-align: middle;
+        display: inline-block;
+        padding: 10px 10px 0px;
+        a{
+          color: @claroBase !important;
+          &:hover{
+            color: @baseMusical !important;
+          }
+        }
+      }
+    }
+}
+
+#collectionList{
+  a{
+    color: @claroBase !important;
+    &:hover{
+      color: @baseMusical !important;
+    }
+  }
+  .actions{
+    .action{
+      margin: 0px 5px;
+    }
+  }
+
+  &.mobile-view{
+    li{
+      padding: 10px;
+      .actions{
+        display: none;
+        .action{
+          display: inline-block;
+          vertical-align: middle;
+          margin-top: 15px;
+        }
+      }
+      .info{
+        padding-top: 2px;
+        padding-bottom: 2px;
+        font-size: 14px;
+      }
+
+      .name a{
+        font-size: 20px;
+        color: @basePrincipal !important;
+      }
+
+      &:hover{
+        .actions{
+          display: block;
+        }
+      }
+    }
+    div.horizontal-separator{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+  }
+}

@@ -1,0 +1,625 @@
+out: post.css, compress: true
+@import 'assets';
+
+
+/*
+ * Estilos del panel lateral y caja de publicacion nueva
+ */
+
+#postPanel{
+   position: absolute;
+  z-index: 1010;
+  .centerX();
+  width: 500px;
+  @media screen and (max-width: @small-screen){
+    width: 100%;
+  }
+  ul{
+    .box-shadow(0,0,2px, grey);
+    position: relative;
+    background: @darkSmoothBasePrincipal;
+    border: 1px solid @claroBase;
+    z-index:991;
+    .border-radius(2px);
+    li{
+      border-top: 1px solid @claroBase;
+      padding: 20px 5px;
+      text-align: center;
+      .transition(color, 0.2s, ease);
+      &:first-child{
+        border-top: 0px solid transparent;
+      }
+      &:hover{
+        color: @baseMusical;
+      }
+    }
+  }
+}
+
+#postPanelBackground{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: -100%;
+  z-index: 1009;
+  background: fade(@sombraPrincipal, 60%);
+  .double-transition(opacity 0.3s, top 0s);
+  &.panel-visible{
+    top: 0;
+    opacity: 1;
+  }
+  &.panel-hide{
+    opacity: 0;
+    .double-transition(opacity .3s, left 0s .3s);
+  }
+}
+
+#newPost {
+  width: 500px;
+  margin: auto;
+  @media screen and (max-width: @small-screen){
+    width: 100%;
+  }
+  min-height: 250px;
+  background: @smoothBasePrincipal;
+  padding: 2px 0;
+  z-index: 1011;
+  .box-shadow(0, 0, 40px, @baseContraste);
+  .border-radius(4px);
+  .double-transition(opacity .2s, left 0s);
+  &.panel-visible{
+    display:block;
+  }
+  &.panel-hide{
+    display:none;
+    .double-transition(opacity .2s, left 0s .2s);
+  }
+
+  textarea{
+    background: white;
+    border: none;
+    height: 140px;
+    width: 100%;
+    resize: none;
+    outline: none;
+  }
+
+  select{
+    option{
+      background: white;
+      color: @baseContraste;
+    }
+  }
+
+  .post-head{
+    padding: 7px 15px;
+    border-bottom: 1px solid lighten(@claroBase, 20%);
+  }
+
+  .post-content{
+    padding: 15px;
+    background: white;
+  }
+
+  .post-album{
+    display: none;
+    &.visible{
+      display: block;
+    }
+
+    >div{
+      border-top: 1px solid @baseBloque;
+      padding: 2%;
+      background: white;
+      position: relative;
+      span{
+        width: 20%;
+      }
+      input{
+        outline: none;
+        border: none;
+        width: 78%;
+        display: inline-block;
+        &.hide{
+          display: none;
+        }
+      }
+      span.selected-album{
+        background: lighten(@baseContraste, 10%);
+        color: whitesmoke;
+        font-size: 13px;
+        padding: 1%;
+        .remove-selected{
+          margin-left: 2%;
+        }
+      }
+      .album-result{
+        display: none;
+        background: white;
+        position: absolute;
+        z-index: 1012;
+        max-height: 200px;
+        overflow: auto;
+        width: 97%;
+        max-width: 97%;
+        border: 1px solid @baseBloque;
+        .box-shadow();
+        .album-share{
+          font-family: Roboto;
+          cursor: pointer;
+          padding: 2%;
+          &:hover{
+            background: @baseContraste;
+            color: @basePrincipal;
+          }
+          &:nth-child(even){
+            background: whitesmoke;
+            &:hover{
+              background: @baseContraste;
+            }
+          }
+        }
+        &.visible{
+          display: block;
+        }
+      }
+    }
+  }
+
+  .post-actions{
+    position: relative;
+    border-top: 1px solid lighten(@claroBase, 20%);
+    z-index: 1011;
+    .aditional-actions{
+      display: inline-block;
+    }
+    .attachEntities{
+      display: inline-block;
+      vertical-align: middle;
+      .icon-attach{
+        color: lighten(@baseContraste, 10%);
+        margin-right: 5%;
+      }
+      &:hover{
+        .icon-attach{
+          color: @claroBase;
+        }
+      }
+    }
+  }
+}
+
+
+/*
+ * Estilos de las publicaciones
+ */
+
+.post-sections{
+  .centerX();
+    display: inline-block;
+    a{
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+.noPosts{
+  margin-top: 20px;
+  text-align: center;
+}
+
+#postContainer{
+
+  li.post_cmpt{
+     width: 500px;
+     border: 1px solid lighten(@claroBase, 20%);
+     display: block;
+     margin: 20px auto;
+     background: white;
+     position: relative;
+     .box-shadow(0, 0, 6px, #d2d2d2);
+     .whois{
+       width: 17%;
+       padding: 10px;
+       display: inline-block;
+       .thumb{
+         padding: 3px;
+         background: @basePrincipal;
+         border: lighten(@claroBase, 10%);
+         width: 100%;
+         img{ width: 100%; }
+       }
+       .info{
+         .name{
+           font-size: 14px;
+           margin-top: 10px;
+           padding-bottom: 2px;
+           border-bottom: 1px solid @baseMusical;
+           .sharePostMsg span{
+             color: @segundoContraste;
+           }
+           a{
+             color: @menuContraste;
+             &:hover{ color: @menuContraste !important}
+           }
+         }
+        .date{
+          font-size: 13px;
+          margin-top: 5px;
+        }
+       }
+     }
+
+     .body{
+       display: inline-block;
+       vertical-align: top;
+       padding: 10px 10px 10px 0;
+       width: 81%;
+       .content{
+         border-bottom: 1px solid lighten(@claroBase, 20%);
+         min-height: 88px;
+         font-size: 16px;
+         padding-top: 10px;
+         padding-bottom: 10px;
+         >span{
+           vertical-align: top;
+           display: inline-block;
+           width: 100%;
+           padding-top: 2%
+         }
+         .album-shared{
+           width: 100%;
+           background: @baseContraste;
+           display: inline-block;
+           padding: 1%;
+           .thumb{
+             width: 20%;
+             display: inline-block;
+             vertical-align: middle;
+             img{ width: 100%; }
+           }
+           .album-content{
+             display: inline-block;
+             width: 78%;
+             vertical-align: middle;
+
+             .album-info{
+               border-bottom: 1px solid lighten(@baseContraste, 20%);
+               padding: 2% 0;
+               div{
+                 padding-top: 1%;
+                 color: @smoothBaseMusical;
+                  a{
+                    color: @baseMusical;
+                    &:hover{ color: @baseMusical !important; }
+                  }
+               }
+             }
+             .album-actions{
+                padding-top: 2%;
+                a{
+                  display: inline-block;
+                  width: 9%;
+                  color: @smoothBaseMusical;
+                  &:hover{
+                    color: @claroBase !important;
+                    text-decoration: none;
+                  }
+                  &:first-child{
+                    margin-right: 10px;
+                  }
+                }
+             }
+           }
+         }
+         a.comment-reply-profile{
+           color: white;
+           text-decoration: none;
+           background: @segundoContraste;
+           padding: 0 3px;
+           .border-radius(5px);
+           &:hover{
+             background: @baseMusical !important;
+             color: white !important;
+           }
+         }
+       }
+       .reply{
+         padding-top: 15px;
+       }
+       .reply-icons{
+         display: inline-block;
+         vertical-align:middle;
+         width: 100%;
+         a{
+            color: @baseContraste;
+            &:hover{
+              color: @baseMusical !important;
+            }
+         }
+         form{
+           position: relative;
+           color: @baseContraste;
+           display: inline-block;
+           &:hover{
+             color: @baseMusical !important;
+           }
+           &.i_like{
+             color: @baseMusical !important;
+           }
+           .like-counter{
+              position: absolute;
+              top: 0;
+              right: -4px;
+              font-size: 15px;
+           }
+         }
+       }
+       .reply-text{
+         display: inline-block;
+         width: 100%;
+         min-height: 33px;
+         vertical-align: middle;
+         border: 1px solid lighten(@claroBase, 20%);
+         .border-radius(3px);
+         padding: 6px;
+         textarea{
+           width: 100%;
+           display: inline-block;
+           border: 0px solid transparent;
+           outline: 0;
+           resize: none;
+           font-size: 13px;
+         }
+       }
+     }
+   }
+
+  .comment-section{
+    div.show-more-comments{
+      background: @menuContraste;
+      color: @basePrincipal;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 12px;
+      &:hover{
+        background: @baseContraste;
+      }
+    }
+    ul{
+      padding: 10px 0;
+      background: @baseBloque;
+      border-top: 1px solid lighten(@claroBase, 18.6%);
+    }
+  }
+
+  .remove-block{
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    cursor: pointer;
+    a{
+     color: @claroBase;
+     &:hover{
+       color: @claroBase !important;
+     }
+    }
+  }
+
+  li.post_cmpt li.comment_cmpt{
+    background: lighten(@claroBase, 50%);
+    margin: 3%;
+    border: 1px solid lighten(@claroBase, 22%);
+    position: relative;
+    .border-radius(10px);
+    .whois{
+      width: 100%;
+      padding: 5px;
+      .thumb{
+        width: 5%;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .info{
+        display: inline-block;
+        width: 89%;
+        border-bottom: 1px solid @baseMusical;
+        vertical-align: middle;
+        .name{
+          float: left;
+          border-bottom: 0px solid transparent;
+          margin-top: 3px;
+          a{
+            color: @menuContraste;
+            &:hover{ color: @menuContraste !important}
+          }
+        }
+        .date{
+          font-size: 12px;
+          text-align: right;
+          margin-top: 0;
+        }
+      }
+    }
+    .body{
+      width: 100%;
+      padding: 5px;
+      .content{
+        font-size: 13px;
+        min-height: 0;
+        margin: 0 10px;
+        border-bottom: 1px solid lighten(@claroBase, 20%);
+      }
+      .reply{
+        padding: 1%;
+        .reply-text{
+          width: 100%;
+          background: white;
+        }
+      }
+    }
+    &:first-child{
+      margin-top: 0;
+    }
+    &:last-child{
+      margin-bottom:0;
+    }
+  }
+
+li.comment_cmpt{
+  .info {
+    width: 96% !important;
+    .date{
+      margin-top: 6px !important;
+      margin-right: 2%;
+    }
+  }
+}
+
+  @media screen and (min-width: @small-screen) {
+       li.post_cmpt{
+         width: 600px;
+         &.embedded{
+           width: 100%;
+         }
+       }
+  }
+
+  @media screen and (max-width: @std-screen) {
+       li.post_cmpt{
+         width: 97%;
+         .whois{
+           width: 100%;
+           .thumb{
+             width: 20%;
+             display: inline-block;
+           }
+           .info{
+             width: 75%;
+             display: inline-block;
+             vertical-align: top;
+           }
+         }
+         .body{
+           width: 100%;
+           padding: 10px;
+           .content{
+             min-height: 0;
+             .album-actions a{
+               width: 17% !important;
+             }
+           }
+         }
+         &.embedded{
+           width: 100%;
+           .whois{
+             width: 30%;
+             .thumb{
+               width: 100%;
+             }
+           }
+           .body{
+             width: 68%;
+             .album-shared{
+               .thumb,
+               .album-content{ width: 100%;}
+
+             }
+           }
+         }
+       }
+
+       li.post_cmpt li.comment_cmpt{
+         .body{
+           .content{
+             min-height: 0;
+           }
+           .reply{
+             .reply-text{
+               background: white;
+             }
+           }
+         }
+       }
+
+  }
+}
+
+
+
+/*
+ * ESTILO DE PUBLICACIONES COMPARTIDAS
+ */
+
+ #previewAlbum{
+   padding: 5px;
+   background: @darkBaseContraste;
+   border: 1px solid @segundoContraste;
+   margin-bottom: 5px;
+     .thumb{
+       display: inline-block;
+       vertical-align: middle;
+       border: 1px solid @baseMusical;
+       width: 20%;
+       img{ width: 100%; }
+     }
+
+     .album-content{
+       display: inline-block;
+       vertical-align: middle;
+       .album-info{
+         div{
+           margin: 5px 0 5px 5px;
+           &.album-name{ color: @baseMusical; }
+         }
+       }
+     }
+ }
+
+ .previewPost{
+   background: @fondoSemiBlanco;
+   border: 1px solid @baseBloque;
+   padding: 10px;
+   margin-top: 15px;
+   .previewOwner{
+     position: relative;
+     margin-bottom: 10px;
+     border-bottom: 1px solid @claroBase;
+     .thumb{
+       width: 5%;
+       display: inline-block;
+       vertical-align: middle;
+       border: 1px solid @basePrincipal;
+       img{ width: 100%; }
+     }
+     .name{
+       display: inline-block;
+       vertical-align: middle;
+       font-size: 1em;
+       a{
+         color: @menuContraste;
+         &:hover {
+           color: @menuContraste !important;
+         }
+        }
+     }
+     .date{
+       display: inline-block;
+       vertical-align: middle;
+       font-size: 1em;
+       color: @segundoContraste;
+     }
+   }
+
+   .previewBody{
+     color: @claroPrincipal;
+     .postContent{
+       margin-top: 5px;
+     }
+   }
+ }
+
+.postRemoved{
+  padding: 20px;
+  margin-top: 15px;
+}

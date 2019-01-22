@@ -1,0 +1,203 @@
+out: c_player.css, compress: true
+@import '../../assets';
+
+#wp_wrapper{
+  background-size: 147% !important;
+  background-position-x: 103% !important;
+  position: relative;
+}
+
+//****** ALBUM SELECTOR STYLES *******//
+
+#album_wrapper{
+  display: block;
+  height: 60%;
+  position: relative;
+}
+#album-prev,
+#album-next{
+  display: block;
+  position: absolute;
+  height: 16%;
+  width: 8%;
+  top: 53%;
+  background-size: 1130% !important;
+  cursor: pointer;
+}
+
+#album-prev{
+  left: 29%;
+  background-position: 18% 71% !important;
+  &:hover{
+    background-position: -1% 71% !important;
+  }
+}
+
+#album-next{
+  left: 80%;
+  background-position: 27% 71% !important;
+  &:hover{
+      background-position: 8% 71% !important;
+  }
+}
+
+#album-art{
+  position: absolute;
+  display: block;
+  width: 43%;
+  height: 55%;
+  border: 1px solid grey;
+  left: 39%;
+  top: 36%;
+}
+//****** CHANNEL SELECTOR STYLES *******//
+
+#channel-wrapper{
+  position: relative;
+  display: block;
+  height: 8%;
+}
+
+
+#channel-selector{
+  width: 100%;
+  height: 73%;
+  left: 0%;
+  top: 18%;
+}
+
+#channel-prev,
+#channel-next{
+  display:none;
+  width: 7%;
+  height: 180%;
+  top: -40%;
+  background-size: 1220% !important;
+}
+
+#channel-prev{
+ left: 20%;
+ background-position: 17% 72% !important;
+ &:hover{
+   background-position: -2% 72% !important;
+ }
+}
+
+#channel-next{
+  right: 6%;
+  background-position: 27% 72% !important;
+  &:hover{
+      background-position: 9% 72% !important;
+  }
+}
+
+#channel-selector:hover>#channel-prev,
+#channel-selector:hover>#channel-next{
+  display: block;
+}
+
+#channel-label{
+  display: none;
+}
+
+#channels{
+  width: 60%;
+  height: 70%;
+  top: 24%;
+  left: 28%;
+  ul{
+    height: 100%;
+    overflow: hidden;
+    .ch-item{
+      cursor: pointer;
+      width: 20px;
+      height: 100%;
+      margin-left: 4px;
+      background: rgba(255, 205, 0, 0.71);
+      float: left;
+      &:hover{
+        border-top: 2px solid @basePrincipal;
+        border-left: 1px solid @basePrincipal;
+        border-right: 1px solid @basePrincipal;
+      }
+      &.active{
+        border-top: 2px solid yellow;
+        border-left: 1px solid yellow;
+        border-right: 1px solid yellow;
+      }
+    }
+  }
+}
+
+
+//****** CONTROL STYLES *******//
+
+#controls{
+  position: absolute;
+  display: block;
+  height: 81%;
+  top: 12%;
+  left: 5%;
+  width: 24%;
+}
+
+#play-song,
+#pause-song,
+#prev-song,
+#next-song,
+#prev-song,
+#volume-song{
+  position: absolute;
+  display: block;
+}
+
+#pause-song{
+  display: none;
+}
+
+#play-song{
+  position: absolute;
+  width: 64%;
+  height: 15%;
+  top: 22px;
+  left: 15%;
+  background-position: 0 -1% !important;
+  background-size: 620% !important;
+  &:hover,
+  &.active{
+    background-position: 20.97% -1% !important;
+  }
+}
+
+#prev-song,
+#next-song{
+  width: 64%;
+  height: 15%;
+  left: 15%;
+  background-size: 650% !important;
+}
+
+#prev-song{
+  background-position: 0% 24% !important;
+  top: 29%;
+  &:hover{
+    background-position: 20.76% 24% !important;
+  }
+}
+
+#next-song{
+  background-position: 0% 49% !important;
+  top: 50%;
+  &:hover{
+    background-position: 20.76% 49% !important;
+  }
+}
+
+#volume-song{
+  bottom: 5px;
+  left: 4%;
+  height: 24%;
+  width: 97%;
+  background-position: 19.8% 97% !important;
+  background-size: 611% !important;
+}

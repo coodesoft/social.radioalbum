@@ -1,0 +1,50 @@
+out: channel.css, compress: true
+@import 'assets';
+
+
+#channelView{
+
+  #imgChannel{
+    width: 100%;
+  }
+
+  .hover-thumb{
+    width: 87%;
+    display: block;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    position: absolute;
+    top: 0;
+  }
+
+  .title-container{
+    padding-left: 0;
+    margin-bottom: 30px;
+  }
+
+  .description-container{
+    padding-left: 0;
+  }
+
+  .channel-view-actions{
+    padding-left: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    a{
+      color: @baseContraste;
+      .transition(color, 0.3s, ease);
+      &:hover{
+        color:@baseMusical !important;
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: @small-screen){
+  #channelView{
+    .title{
+      font-size: 6vw !important;
+    }
+  }
+}

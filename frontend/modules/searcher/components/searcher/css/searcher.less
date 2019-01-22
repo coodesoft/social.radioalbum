@@ -1,0 +1,61 @@
+out: searcher.css, compress: true
+@import "assets.less";
+
+
+#globalSearch{
+  background: @baseContraste;
+  position: absolute;
+  overflow: hidden;
+  display: block;
+  .form-control-feedback{
+    color : @claroBase;
+    pointer-events: auto;
+  }
+
+  .filters-box{ display: block;}
+
+  .filters-box{
+    width: 100%;
+    position: relative;
+    //z-index: 900;
+    right: 0;
+    bottom: 0;
+    .header{
+      position: relative;
+      .title{
+        color: @segundoContraste;
+        padding: 10px 0;
+        text-align: center;
+      }
+      .close-filters{
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px 15px;
+        color: @segundoContraste;
+      }
+    }
+    .horizontal-separator{
+      width: 90%;
+      margin: auto;
+      height: 1px;
+      background: @claroPrincipal;
+    }
+    .content{
+      .filter{
+        margin-top: 15px;
+        .title{
+          color: @segundoContraste;
+        }
+        .filter-options{
+          padding-left: 23%;
+          color: @claroBase;
+          .checkbox{
+            margin: 13px 0;
+          }
+        }
+      }
+    }
+
+  }
+}
