@@ -8,7 +8,7 @@ class DataService{
 
   public $provider;
 
-  protected $pageSize = 24;
+  protected $pageSize = 42;
 
   public function __construct(){
     $this->provider = new ActiveDataProvider([

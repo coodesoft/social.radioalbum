@@ -44,7 +44,7 @@ return [
   'birthDate'          => 'Fecha de nacimiento',
   'day'                => 'Día',
   'month'              => 'Mes',
-  'year'               => 'Año',
+  'noYear'             => 'Año no disponible',
   'instrumentos'       => 'Instrumentos',
   'beginDate'          => 'Fecha de Inicio de actividad',
   'fullName'           => 'Nombre Completo',
@@ -213,6 +213,7 @@ return [
   'cargarCatalogo'     => 'Cargar Catálogo',
   'catalog'            => 'Catálogo',
   'actualizarCatalogo' => 'Actualizar Catálogo',
+  'catalogAdminArea'   => 'Área de administración del Catálogo',
 
   'errorProcesarR'     => 'The above error occurred while the Web server was processing your request.',
   'errorProcesarRContact' => 'Please contact us if you think this is a server error. Thank you.',

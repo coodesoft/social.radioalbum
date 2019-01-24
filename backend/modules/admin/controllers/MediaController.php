@@ -25,7 +25,7 @@ class MediaController extends RaBaseController{
           'class' => AccessControl::className(),
           'rules' => [
                 [
-                    'actions' => ['view'],
+                    'actions' => ['view', 'album'],
                     'allow' => true,
                     'roles' => ['admin', 'regulator'],
                 ],
@@ -42,7 +42,7 @@ class MediaController extends RaBaseController{
     $infinite['route'] = Url::to(array_merge([$route], $params));
 
     $infinite['status'] =  $service->isLastPage();
-    $infinite['content'] = $this->renderPartial($view, ['elements'=> $rows]);
+    $infinite['content'] = $this->renderPartial($view, ['albums'=> $rows]);
     return Response::getInstance($infinite, Flags::ALL_OK)->jsonEncode();
   }
 
@@ -53,16 +53,50 @@ class MediaController extends RaBaseController{
     $service->setQuery($query);
     $segment = Yii::$app->request->get('segment');
     if ($segment){
-      return $this->getDataSegment('/admin/media/view', 'view', $service, $segment);
+      return $this->getDataSegment('/admin/media/view', 'list-lazy', $service, $segment);
     } else{
       $rows = $service->getData();
       $visible = ($service->isLastPage()) ? false : true;
       $lazyRoute = Url::to(['/admin/media/view', 'segment' => 1]);
       $body = $this->renderPartial('albums', ['albums' => $rows, 'lazyLoad' => ['route' => $lazyRoute, 'visible' => $visible]]);
-      return $this->renderSection('view', ['body' => $body, 'title' => \Yii::t('app', 'areaAdminUsers')]);
+      return $this->renderSection('view', ['body' => $body, 'title' => \Yii::t('app', 'catalogAdminArea')]);
     }
-    return $this->renderSection('view', ['model' => $model]);
+  }
+  
+  public function actionAlbum(){
+	$id = Yii::$app->request->get('id');
+	
+	if (is_numeric($id) && $id>0){
+		$album = Album::findOne($id);
+		return $this->renderSection('album', ['album' => $album]);
+	}
+	throw new \Exception('Incorrect Param Type', 1);
+	
+  }
+  
+  public function actionEdit(){
+	$id = Yii::$app->request->get('id');
 
+  }
+  
+  public function actionEnable(){
+	$id = Yii::$app->request->get('id');
+	  
+  }
+
+  public function actionDisable(){
+	$id = Yii::$app->request->get('id');
+  
+  }
+  
+  public function actionModal(){
+	$id = Yii::$app->request->get('id');
+	  
+  }
+  
+  public function actionRemove(){
+	$id = Yii::$app->request->get('id');
+	  
   }
 
 }
