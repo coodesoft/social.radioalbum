@@ -105,6 +105,7 @@ return [
   'playlist'           => 'Colección',
   'collections'        => 'Colecciones',
   'nroSongs'           => '# Canciones',
+  'tracksList'		   => 'Lista de Canciones',
   'newCollection'      => 'Nueva colección',
   '#songs'             => 'Número de canciones',
   'confirEliminarLRep' => '¿Estas seguro de que deseas eliminar la Colección?',
@@ -120,7 +121,8 @@ return [
   'preguntaRegistrado' => '¿No estas registrado?',
   'disable'            => 'Deshabilitar',
   'enable'             => 'Habilitar',
-
+  'enabled'			   => 'Habilitado',	
+  'disabled'		   => 'Deshabilitado',
   'inicio'             => 'Inicio',
   'novedades'          => 'Novedades',
   'nosotros'           => 'Nosotros',
