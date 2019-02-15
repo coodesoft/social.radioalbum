@@ -12,7 +12,8 @@ let uploadAlbumCallback = function(data){
   let browser = Browser.getInstance();
   if (!error){
     setTimeout(function(){
-      $('[data-context="nav-albums"]').click();
+      console.log(error);
+      $('[data-context="migrate_multimedia"]').click();
     },500);
   }
 }
@@ -24,6 +25,19 @@ let albumAdmin = function(){
 
   let form = FormProcessor.getInstance();
   form.setCallback(uploadAlbumCallback);
+
+
+  $('#albumAdmin').off().on('click', '#chooseArtist', function(){
+    if ($(this).is(':checked')){
+      $('#uploadalbumform-storedartist').removeAttr('disabled');
+      $('#uploadalbumform-artist').attr('disabled', true);
+    } else{
+      $('#uploadalbumform-storedartist').attr('disabled', true);
+      $('#uploadalbumform-artist').removeAttr('disabled');
+    }
+
+  });
+
 }
 
 

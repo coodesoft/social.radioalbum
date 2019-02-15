@@ -17,6 +17,8 @@ use common\util\ArrayProcessor;
 use common\util\Response;
 use common\util\Flags;
 use common\services\DataService;
+use backend\modules\artist\models\Artist;
+
 
 class MediaController extends RaBaseController{
 
@@ -63,33 +65,34 @@ class MediaController extends RaBaseController{
       return $this->renderSection('view', ['body' => $body, 'title' => \Yii::t('app', 'catalogAdminArea')]);
     }
   }
-  
+
   public function actionAlbum(){
 	$id = Yii::$app->request->get('id');
-	
+
 	if (is_numeric($id) && $id>0){
 		$album = Album::findOne($id);
 		return $this->renderSection('album', ['album' => $album]);
 	}
 	throw new \Exception('Incorrect Param Type', 1);
-	
+
   }
-  
+
   public function actionEdit(){
 	$id = Yii::$app->request->get('id');
-	
+
 	if (Yii::$app->request->isPost) {
-	    
+
 	} else{
-	    
+
 	}
 
   }
-  
+
   public function actionAdd(){
       $model = new UploadAlbumForm();
       if (Yii::$app->request->isPost) {
           $model->load(Yii::$app->request->post());
+
           $model->image = UploadedFile::getInstance($model, 'image');
           $model->songs = UploadedFile::getInstances($model, 'songs');
           $upload = $model->upload();
@@ -97,44 +100,49 @@ class MediaController extends RaBaseController{
               $message = ['text' => Yii::t('app', 'uploadAlbumSuccess'), 'type' => 'success'];
               return Response::getInstance($message, Flags::UPLOAD_SUCCESS)->jsonEncode();
           }
-          
+
           $response = ArrayProcessor::toString($upload->getResponse());
           $message = ['text' => $response, 'type' => 'danger'];
           return Response::getInstance($message, $upload->getFlag())->jsonEncode();
       }
-      return $this->renderSection('add', ['model' => $model]);
+
+      $artists = Artist::find()->select('id, name')->orderBy('name')->all();
+      $arrArtists = [];
+      $arrArtists[0] = 'Seleccione un artista';
+      foreach ($artists as $key => $artist) {
+        $arrArtists[$artist->id] = $artist->name;
+      }
+      return $this->renderSection('add', ['model' => $model, 'artists' => $arrArtists]);
   }
-  
+
   public function actionEnable(){
-	$id = Yii::$app->request->get('id');
-	$album = Album::findOne($id);
-	$album->status = 1;
-	if ( $album->save() ) 
-	    return Response::getInstance(Url::to(['/admin/media/disable', 'id' => $id]), FLags::SAVE_SUCCESS)->jsonEncode(); 
-	          
-	return Response::getInstance(Json::encode($album->errors), Flags::SAVE_ERROR)->jsonEncode();
-	        
-	  
+  	$id = Yii::$app->request->get('id');
+  	$album = Album::findOne($id);
+  	$album->status = 1;
+  	if ( $album->save() )
+  	    return Response::getInstance(Url::to(['/admin/media/disable', 'id' => $id]), FLags::SAVE_SUCCESS)->jsonEncode();
+
+  	return Response::getInstance(Json::encode($album->errors), Flags::SAVE_ERROR)->jsonEncode();
   }
 
   public function actionDisable(){
-	$id = Yii::$app->request->get('id');
-	$album = Album::findOne($id);
-	$album->status = 0;
-	if ( $album->save() )
-	    return Response::getInstance(Url::to(['/admin/media/enable', 'id' => $id]), FLags::SAVE_SUCCESS)->jsonEncode(); 
-	
-	    return Response::getInstance(Json::encode($album->errors), Flags::SAVE_ERROR)->jsonEncode(); 
+  	$id = Yii::$app->request->get('id');
+  	$album = Album::findOne($id);
+  	$album->status = 0;
+  	if ( $album->save() )
+  	    return Response::getInstance(Url::to(['/admin/media/enable', 'id' => $id]), FLags::SAVE_SUCCESS)->jsonEncode();
+
+  	    return Response::getInstance(Json::encode($album->errors), Flags::SAVE_ERROR)->jsonEncode();
   }
-  
+
   public function actionModal(){
-	$id = Yii::$app->request->get('id');
-	  
+	   $id = Yii::$app->request->get('id');
+
   }
-  
+
   public function actionRemove(){
-	$id = Yii::$app->request->get('id');
-	  
+	   $id = Yii::$app->request->get('id');
+
   }
 
 }

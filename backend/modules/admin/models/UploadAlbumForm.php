@@ -25,6 +25,8 @@ class UploadAlbumForm extends Model{
 
     public $artist;
 
+    public $storedArtist;
+
     public $channels;
 
     private $uploadRoute;
@@ -37,7 +39,9 @@ class UploadAlbumForm extends Model{
 
     public function rules(){
         return [
-            [['name', 'channels', 'artist'], 'required'],
+            [['name', 'channels'], 'required'],
+            [['artist'], 'string', 'max' => 200],
+            [['storedArtist'], 'string', 'max' => 10],
             ['year', 'string', 'skipOnEmpty' => true],
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, ico, jpeg'],
             [['songs'], 'file', 'skipOnEmpty' => false, 'extensions' => 'mp3', 'maxFiles' => 20],
@@ -52,6 +56,7 @@ class UploadAlbumForm extends Model{
             'year' =>  \Yii::t('app', 'year'),
             'channels' => \Yii::t('app', 'selectChannels'),
             'artist' => \Yii::t('app', 'artista'),
+            'storedArtist' => \Yii::t('app', 'storedArtist')
         ];
     }
 
@@ -79,14 +84,22 @@ class UploadAlbumForm extends Model{
 
     public function upload(){
         if ( $this->validate() ){
-            $parentFolder = strtolower($this->artist)."/";
+            $artist = null;
+            //recupero el artista enviado
+            if ($this->storedArtist)
+              $artist = Artist::findOne($this->storedArtist);
+            $artistName = $artist ? $artist->name : $this->artist;
+
+            $parentFolder = strtolower($artistName)."/";
             $newFolder = $this->uploadRoute . $parentFolder . $this->name;
 
-            //Si no existe el directorio
-            if ( !is_dir($newFolder) ){
+            $stored = Album::find()->where('LOWER(name) = '.strtolower($this->name))->all();
+
+            if (!$stored){
+
                 //creo el directorio del álbum
                 RAFileHelper::createDirectory($newFolder);
-                
+
                 $album = new Album();
                 $album->name = $this->name;
                 $album->status = 1;
@@ -96,18 +109,18 @@ class UploadAlbumForm extends Model{
                     //guardo la imagen de portada dentro del directorio de imágenes
                     $this->image->saveAs(Album::dataPath() . $album->art);
                 }
-                
+
                 //comienzo a almacenar en la db
                 $transaction = Album::getDb()->beginTransaction();
                 if ($album->save()){
-                    
+
                     foreach ($this->channels as $name){
                        //recupero los canales almacenados
                        $channel = Channel::findOne(['name' => $name]);
-                       
+
                        // Chequeo que el canal exista.
                        // En teoría siempre debiera existir, puesto que los canales
-                       // sobre los que loopeo son recuperados desde la db y   
+                       // sobre los que loopeo son recuperados desde la db y
                        // enviados a traves del form.
                        if (!$channel){
                            $channel = new Channel();
@@ -120,24 +133,22 @@ class UploadAlbumForm extends Model{
                            }
                        }
                     }
-                    
-                    //recupero el artista enviado
-                    $artist = Artist::findOne(['name' => $this->artist]);
-                    
+
+
                     //Es posible que el artista enviado no este previamente almacenado
                     if (!$artist){
                        // Creamos una instancia minimalista del Artista.
                        $artist = Artist::createDefault();
                        $artist->name = $this->artist;
-                       
+
                        // Si no lo puedo guardar, borro el directorio y lanzo una excepción
                        if (!$artist->save()){
                            RAFileHelper::removeDirectory($newFolder);
                            throw new \Exception("Se detecto un artista nuevo pero no se pudo guardar", 1);
-                           
+
                        }
                     }
-                    
+
                     try {
                         $album->link('channels', $channel);
                         $album->link('artists', $artist);
@@ -150,10 +161,10 @@ class UploadAlbumForm extends Model{
                     foreach ($this->songs as $songFile) {
                         $songPath = $newFolder ."/". $songFile->baseName . '.' . $songFile->extension;
                         $songFile->saveAs($songPath);
-                        
+
                         $tagEditor = new TagEditorService(['mp3']);
                         $metadata = $tagEditor->getAudioFileInfo($songPath, 'audio');
-                        
+
                         $song = new Song();
                         $song->name = $songFile->baseName;
                         $song->path_song = $songPath;
@@ -161,8 +172,8 @@ class UploadAlbumForm extends Model{
                         $song->rate = $metadata['sample_rate'];
                         $song->bitrate = intval( $metadata['bitrate'] );
                         $song->size = intval( $tagEditor->getAudioFileInfo($songPath, 'filesize') );
-                        
-                     
+
+
                         try {
                             $album->link('songs', $song);
                         } catch (yii\base\InvalidCallException $e) {
@@ -174,12 +185,12 @@ class UploadAlbumForm extends Model{
                     $transaction->commit();
                     return Response::getInstance(true, Flags::ALL_OK);
                 }
-                
+
                 RAFileHelper::removeDirectory($newFolder);
                 $transaction->rollBack();
                 return Response::getInstance(false, Flags::SAVE_ERROR);
-                
-            }
+
+
             return Response::getInstance('El artista ya tiene un álbum con ese nombre', Flags::SAVE_ERROR);
         }
         return Response::getInstance($this->errors, Flags::SAVE_ERROR);

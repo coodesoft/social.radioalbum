@@ -4,6 +4,8 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use backend\models\Channel;
 use admin\models\UploadAlbumForm;
+
+
 use admin\assets\AlbumAsset;
 AlbumAsset::register($this);
 
@@ -34,15 +36,15 @@ foreach($channels as $channel){
               <?php echo $form->field($model, 'image')->fileInput(['multiple' => true, 'accept' => 'image/*', 'class' => 'input-art form-control']) ?>
               <?php echo $form->field($model, 'name')->textInput() ?>
               <?php echo $form->field($model, 'channels')->dropdownList($arrChannel, ['multiple' => 'multiple']) ?>
-              
-              <div class="row">
-              	<div class="col-xs-9">
-	          		<?php echo $form->field($model, 'artist')->textInput() ?>
-              	</div>
-				<div class="col-xs-3">
-             		<button type="button" class="btn ra-btn"><i class="fas fa-search"></i> Buscar</button>
-				</div>
-	          </div>
+         	    <?php echo $form->field($model, 'artist')->textInput() ?>
+
+              <div class="checkbox">
+                 <label>
+                   <input id="chooseArtist" type="checkbox"> Elegir un artista existente
+                 </label>
+               </div>
+
+              <?php echo $form->field($model, 'storedArtist')->dropdownList($artists, ['disabled' => 'disabled']) ?>
               <?php echo $form->field($model, 'songs[]')->fileInput(['multiple' => true, 'accept' => 'audio/mpeg', 'class' => 'form-control']) ?>
               <button type ="submit" class="btn ra-btn"><?php echo \Yii::t('app', 'uploadAlbum')?></button>
             </div>
