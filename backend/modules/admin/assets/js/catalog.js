@@ -1,37 +1,70 @@
-let flags = Flags.getInstance();
 
-let success = function(data, textStatus){
-  let status = Status.getInstance();
-  $('.init-analisis').removeClass('disabled');
-  if (flags.SUCCESS == textStatus){
-    $('#analisisLoader img').addClass(status.HIDE);
-    $('#analisisResult .results').html(data);
-    $('#analisisResult .results').trigger(status.LOADED);
-  }
-}
-
-let error = function(data, textStatus){
-  $('.init-analisis').removeClass('disabled');
-  let modal = ModalBox.getInstance();
-  let texts = Texts.getInstance();
-  modal.show(textStatus,texts.getT('errorBrowPage'));
-}
 
 let catalogAdmin = function(){
-  let requester = Requester.getInstance();
-  let status = Status.getInstance();
-  $('#analisisLoader img').addClass(status.HIDE);
-  $('#migrationArea').off().on('click', '.init-analisis', function(e){
-    e.preventDefault();
-    e.stopPropagation();
-    $(this).addClass('disabled');
-    $('#analisisResult .results').empty();
-    $('#analisisLoader img').removeClass(status.HIDE);
-    requester.request(this.href, success, error);
-  });
+	var requester = Requester.getInstance();
+	var flags = Flags.getInstance();
+	
+	$('#catalogAdmin').off().on('click', 'a[data-action="enable-album"]', function(e){
+		e.preventDefault();
+		e.stopPropagation();
 
+		let self = this;
+		
+		let success = function(data, textStatus){
+			data =  JSON.parse(data);
+			if (data['flag'] == flags.SAVE_SUCCESS){
+				let element  = '<span class="fa-layers fa-fw">';
+					element += '<i class="fal fa-circle" data-fa-transform="grow-15"></i>';
+					element += '<i class="far fa-eye-slash" data-fa-transform="shrink-3"></i>';
+					element += '</span>';            
+					$(self).html(element);
+					$(self).attr('data-action', 'disable-album');
+					self.href = data['response'];
+					
+			} else{
+				alert('Se produjo el siguiente error: '+data['response']);
+			}
+		}
+		
+		let error = function(data, textStatus){
+			alert('Se produjo un error de red: '+data);
+		}
+		
+		requester.request(this.href, success, error);
+	});
+	
+	$('#catalogAdmin').on('click', 'a[data-action="disable-album"]', function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		
+		let self = this;
+		
+		let success = function(data, textStatus){
+			data =  JSON.parse(data);
+			if (data['flag'] == flags.SAVE_SUCCESS){
+				let element  = '<span class="fa-layers fa-fw">';
+					element += '<i class="fal fa-circle" data-fa-transform="grow-15"></i>';
+					element += '<i class="far fa-eye" data-fa-transform="shrink-3"></i>';
+					element += '</span>';            
+					$(self).html(element);
+					$(self).attr('data-action', 'enable-album');
+					self.href = data['response'];
+			} else{
+				alert('Se produjo el siguiente error: '+data['response']);
+			}
+		}
+		
+		let error = function(data, textStatus){
+			alert('Se produjo un error de red: '+data);
+		}
+		
+		requester.request(this.href, success, error);
+	});
 }
+
+
+
 
 
 let register = Register.getInstance();
-register.addRegister('catalog', catalogAdmin, '#migrationArea');
+register.addRegister('catalog', catalogAdmin, '#catalogAdmin');

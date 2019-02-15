@@ -3,8 +3,11 @@
 namespace backend\modules\artist\models;
 
 use backend\models\Profile;
+use backend\models\ProfileOpts;
+
 use backend\modules\album\models\Album;
 use common\models\User;
+use common\models\Visibility;
 
 use Yii;
 
@@ -94,5 +97,26 @@ class Artist extends \yii\db\ActiveRecord
     public function getAlbums()
     {
         return $this->hasMany(Album::className(), ['id' => 'album_id'])->viaTable('artist_has_album', ['artist_id' => 'id']);
+    }
+    
+    public static function createDefault(){
+        $artist = new Artist();
+        
+        $profile = new Profile();
+        $profile->name = $artist->name;
+        $profile->visibility = Visibility::VPUBLIC;
+        $profile->listed = true;
+        
+        $opts = new ProfileOpts();
+        $opts->begin_date = 1;
+        $opts->presentation = 1;
+        $opts->full_name = 1;
+        $opts->save();
+        
+        $profile->options_id = $opts->id;
+        $profile->save();
+        $artist->profile_id = $profile->id;
+        
+        return $artist;
     }
 }

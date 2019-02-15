@@ -44,6 +44,10 @@ class AlbumController extends RaBaseController{
       $model->songs = UploadedFile::getInstances($model, 'songs');
       $upload = $model->upload();
       if ($upload->getFlag() === Flags::ALL_OK) {
+          
+            
+          
+          
         $message = ['text' => Yii::t('app', 'uploadAlbumSuccess'), 'type' => 'success'];
         return Response::getInstance($message, Flags::UPLOAD_SUCCESS)->jsonEncode();
       }

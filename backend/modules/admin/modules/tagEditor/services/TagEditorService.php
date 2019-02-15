@@ -142,4 +142,12 @@ class TagEditorService{
       $this->extensions = ['mp3'];
   }
 
+  public function getAudioFileInfo($path, $key){
+      if (!is_file($path))
+          throw new \Exception(Yii::t('app', 'invalidFile'), 1);
+      
+      $result = $this->reader->analyze($path);
+      return isset($result[$key]) ? $result[$key] : [Yii::t('app', 'unknown')];;
+  }
+  
 }

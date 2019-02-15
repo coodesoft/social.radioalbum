@@ -55,7 +55,7 @@ class AlbumCrudService  extends CrudService{
     }
 
     $ampSongs = $obj['songs'];
-    $arrSong = array();
+
     foreach($ampSongs as $ampSong){
       $song = new Song();
       $song->name = $ampSong['name'];

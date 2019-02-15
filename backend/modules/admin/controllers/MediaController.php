@@ -5,14 +5,15 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\helpers\Url;
+use yii\web\UploadedFile;
 
 use backend\controllers\RaBaseController;
-use backend\models\Channel;
-use backend\models\Song;
-
-use backend\modules\artist\models\Artist;
 use backend\modules\album\models\Album;
 
+use admin\models\UploadAlbumForm;
+
+
+use common\util\ArrayProcessor;
 use common\util\Response;
 use common\util\Flags;
 use common\services\DataService;
@@ -25,7 +26,7 @@ class MediaController extends RaBaseController{
           'class' => AccessControl::className(),
           'rules' => [
                 [
-                    'actions' => ['view', 'album'],
+                    'actions' => ['view', 'album', 'add', 'enable', 'disable', 'edit'],
                     'allow' => true,
                     'roles' => ['admin', 'regulator'],
                 ],
@@ -76,17 +77,54 @@ class MediaController extends RaBaseController{
   
   public function actionEdit(){
 	$id = Yii::$app->request->get('id');
+	
+	if (Yii::$app->request->isPost) {
+	    
+	} else{
+	    
+	}
 
+  }
+  
+  public function actionAdd(){
+      $model = new UploadAlbumForm();
+      if (Yii::$app->request->isPost) {
+          $model->load(Yii::$app->request->post());
+          $model->image = UploadedFile::getInstance($model, 'image');
+          $model->songs = UploadedFile::getInstances($model, 'songs');
+          $upload = $model->upload();
+          if ($upload->getFlag() === Flags::ALL_OK) {
+              $message = ['text' => Yii::t('app', 'uploadAlbumSuccess'), 'type' => 'success'];
+              return Response::getInstance($message, Flags::UPLOAD_SUCCESS)->jsonEncode();
+          }
+          
+          $response = ArrayProcessor::toString($upload->getResponse());
+          $message = ['text' => $response, 'type' => 'danger'];
+          return Response::getInstance($message, $upload->getFlag())->jsonEncode();
+      }
+      return $this->renderSection('add', ['model' => $model]);
   }
   
   public function actionEnable(){
 	$id = Yii::$app->request->get('id');
+	$album = Album::findOne($id);
+	$album->status = 1;
+	if ( $album->save() ) 
+	    return Response::getInstance(Url::to(['/admin/media/disable', 'id' => $id]), FLags::SAVE_SUCCESS)->jsonEncode(); 
+	          
+	return Response::getInstance(Json::encode($album->errors), Flags::SAVE_ERROR)->jsonEncode();
+	        
 	  
   }
 
   public function actionDisable(){
 	$id = Yii::$app->request->get('id');
-  
+	$album = Album::findOne($id);
+	$album->status = 0;
+	if ( $album->save() )
+	    return Response::getInstance(Url::to(['/admin/media/enable', 'id' => $id]), FLags::SAVE_SUCCESS)->jsonEncode(); 
+	
+	    return Response::getInstance(Json::encode($album->errors), Flags::SAVE_ERROR)->jsonEncode(); 
   }
   
   public function actionModal(){

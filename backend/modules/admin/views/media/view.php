@@ -9,7 +9,7 @@ use yii\helpers\Url;
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-        <a type="button" class="btn ra-btn" href="<?php echo Url::to(['/admin/media/upload'])?>" data-action="nav">
+        <a type="button" class="btn ra-btn" href="<?php echo Url::to(['/admin/media/add'])?>" data-action="admin">
           <?php echo \Yii::t('app', 'uploadAlbum') ?>
         </a>
         </div>

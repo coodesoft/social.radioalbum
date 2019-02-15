@@ -3,13 +3,15 @@ namespace admin\models;
 
 use Yii;
 use yii\base\Model;
-use yii\web\UploadedFile;
 use common\util\RAFileHelper;
 use common\util\Response;
 use common\util\Flags;
+use common\util\StrProcessor;
 
 use admin\modules\tagEditor\services\TagEditorService;
-
+use backend\modules\album\models\Album;
+use backend\modules\artist\models\Artist;
+use backend\models\Song;
 
 class UploadAlbumForm extends Model{
 
@@ -76,19 +78,110 @@ class UploadAlbumForm extends Model{
     }
 
     public function upload(){
-        if ($this->validate()) {
-            $newFolder = $this->uploadRoute . $this->name;
-            if (!is_dir($newFolder)){
-              RAFileHelper::createDirectory($newFolder);
-            }
-            $this->image->saveAs($newFolder ."/". $this->image->baseName . '.' . $this->image->extension);
-            foreach ($this->songs as $file) {
-                $file->saveAs($newFolder ."/". $file->baseName . '.' . $file->extension);
+        if ( $this->validate() ){
+            $parentFolder = strtolower($this->artist)."/";
+            $newFolder = $this->uploadRoute . $parentFolder . $this->name;
 
+            //Si no existe el directorio
+            if ( !is_dir($newFolder) ){
+                //creo el directorio del álbum
+                RAFileHelper::createDirectory($newFolder);
+                
+                $album = new Album();
+                $album->name = $this->name;
+                $album->status = 1;
+
+                if ($this->image){
+                    $album->art = StrProcessor::getRandomString($album->name);;
+                    //guardo la imagen de portada dentro del directorio de imágenes
+                    $this->image->saveAs(Album::dataPath() . $album->art);
+                }
+                
+                //comienzo a almacenar en la db
+                $transaction = Album::getDb()->beginTransaction();
+                if ($album->save()){
+                    
+                    foreach ($this->channels as $name){
+                       //recupero los canales almacenados
+                       $channel = Channel::findOne(['name' => $name]);
+                       
+                       // Chequeo que el canal exista.
+                       // En teoría siempre debiera existir, puesto que los canales
+                       // sobre los que loopeo son recuperados desde la db y   
+                       // enviados a traves del form.
+                       if (!$channel){
+                           $channel = new Channel();
+                           $channel->name = $name;
+
+                           // Si no lo puedo guardar, borro el directorio y lanzo una excepción
+                           if (!$channel->save()){
+                               RAFileHelper::removeDirectory($newFolder);
+                               throw new \Exception("Se detecto un canal nuevo pero no se pudo guardar", 1);
+                           }
+                       }
+                    }
+                    
+                    //recupero el artista enviado
+                    $artist = Artist::findOne(['name' => $this->artist]);
+                    
+                    //Es posible que el artista enviado no este previamente almacenado
+                    if (!$artist){
+                       // Creamos una instancia minimalista del Artista.
+                       $artist = Artist::createDefault();
+                       $artist->name = $this->artist;
+                       
+                       // Si no lo puedo guardar, borro el directorio y lanzo una excepción
+                       if (!$artist->save()){
+                           RAFileHelper::removeDirectory($newFolder);
+                           throw new \Exception("Se detecto un artista nuevo pero no se pudo guardar", 1);
+                           
+                       }
+                    }
+                    
+                    try {
+                        $album->link('channels', $channel);
+                        $album->link('artists', $artist);
+                    } catch (yii\base\InvalidCallException $e) {
+                        RAFileHelper::removeDirectory($newFolder);
+                        $transaction->rollBack();
+                        throw new \Exception('Se genero un error al linkear el album con el artista/canal, con el siguiente mensaje de error: '.$e->getName(), 1);
+                    }
+
+                    foreach ($this->songs as $songFile) {
+                        $songPath = $newFolder ."/". $songFile->baseName . '.' . $songFile->extension;
+                        $songFile->saveAs($songPath);
+                        
+                        $tagEditor = new TagEditorService(['mp3']);
+                        $metadata = $tagEditor->getAudioFileInfo($songPath, 'audio');
+                        
+                        $song = new Song();
+                        $song->name = $songFile->baseName;
+                        $song->path_song = $songPath;
+                        $song->time = intval( $tagEditor->getAudioFileInfo($songPath, 'playtime_seconds') );
+                        $song->rate = $metadata['sample_rate'];
+                        $song->bitrate = intval( $metadata['bitrate'] );
+                        $song->size = intval( $tagEditor->getAudioFileInfo($songPath, 'filesize') );
+                        
+                     
+                        try {
+                            $album->link('songs', $song);
+                        } catch (yii\base\InvalidCallException $e) {
+                            RAFileHelper::removeDirectory($newFolder);
+                            $transaction->rollBack();
+                            throw new \Exception('Se genero un error al linkear el album la cancion '.$songFile->baseName.', con el siguiente mensaje de error: '.$e->getName(), 1);
+                        }
+                    }
+                    $transaction->commit();
+                    return Response::getInstance(true, Flags::ALL_OK);
+                }
+                
+                RAFileHelper::removeDirectory($newFolder);
+                $transaction->rollBack();
+                return Response::getInstance(false, Flags::SAVE_ERROR);
+                
             }
-            return $this->setAlbumTags($newFolder);
-        } else {
-            return Response::getInstance($this->errors, Flags::UPLOAD_ERROR);
+            return Response::getInstance('El artista ya tiene un álbum con ese nombre', Flags::SAVE_ERROR);
         }
+        return Response::getInstance($this->errors, Flags::SAVE_ERROR);
     }
 }

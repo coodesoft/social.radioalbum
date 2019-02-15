@@ -221,4 +221,6 @@ class RaController extends RaBaseController{
     return ImageProcessor::thumbnail($img, $entity);
 
   }
+  
+
 }

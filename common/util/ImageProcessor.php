@@ -47,7 +47,9 @@ class ImageProcessor{
     }
     return null;
   }
-
+  
+  // Esta funcion hay que corregirla, si se añaden mas tipos de datos que requieran imágenes
+  // es necesario modificar esta función lo que rompe el principio "open/close"
   public static function thumbnail($img = null, $entity = null){
     if (isset($img) && isset($entity)){
       $model = ($entity == 'profile' || $entity == 'album' || $entity == 'channel') ? Mapper::mapModel($entity) : null;
