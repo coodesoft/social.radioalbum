@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-01-2019 a las 20:20:33
--- Versión del servidor: 10.1.32-MariaDB
--- Versión de PHP: 7.0.30
+-- Tiempo de generación: 15-02-2019 a las 06:22:37
+-- Versión del servidor: 10.1.37-MariaDB
+-- Versión de PHP: 7.1.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -38,7 +38,7 @@ CREATE TABLE `access` (
 --
 
 INSERT INTO `access` (`id`, `last_access`) VALUES
-(2, '1547841576'),
+(2, '1550110048'),
 (44, '1534284869'),
 (45, '1520295013'),
 (46, '1520751952'),
@@ -67,28 +67,7 @@ CREATE TABLE `album` (
 --
 
 INSERT INTO `album` (`id`, `name`, `art`, `year`, `description`, `status`, `id_referencia`) VALUES
-(1, '...For The Whole World To See', 'ce838e08aeb5b60613a8f7d6c51280b4655b99b5', NULL, NULL, '1', '2124'),
-(32, 'Aeroblues', '4184f77b2416ac053d0e31927f30e2fa2d5e8525', NULL, NULL, '1', '2444'),
-(277, 'Creo que te amo', '50b5ac4ff09dcfc4fe1f43831ac89f0c0f37625e', NULL, NULL, '1', '1907'),
-(1327, 'Ultimos dias del tren fantasma', '740ea4545ad03f60f009eeda8133346fdddc0d1e', NULL, NULL, '1', '2180'),
-(1445, '11 Savior Eyes', 'e0b5c92625dd41d938c97c23f8c6552078bb8e59', NULL, NULL, '1', '3095'),
-(1446, 'Ahí Va Chavela', '6c66106ffb64b752f4b85d70044f8c89bc40b704', NULL, NULL, '1', '3106'),
-(1447, 'antipatriarca', '9a7be81393b98002916f7dbf911c59027abdd187', NULL, NULL, '1', '3091'),
-(1448, 'Ecliptica', 'fe3f05a78eb1bfde6be53eb03405db786ce51c80', NULL, NULL, '1', '3096'),
-(1449, 'El Baile Interior', 'cd4064f10b8085ae7d25e2b9153db0dd999b0a1d', NULL, NULL, '1', '3104'),
-(1450, 'El baile interior', 'e4117d961025bacb0548bf47c2aa6b883a947e03', NULL, NULL, '1', '3103'),
-(1451, 'El Camino Del Fuego', '9bec10fb8d1587aab5e62baee4c50294fd7ec415', NULL, NULL, '1', '3099'),
-(1452, 'Grandes Éxitos', 'f3c86f1b0908d379fc1488c5cd76f009043b427e', NULL, NULL, '1', '3100'),
-(1453, 'Huayno 14', '1e0aa420147d1fb00f25ccedce3728b775058b51', NULL, NULL, '1', '3107'),
-(1454, 'Me Voy', '30c93252b7caaf7d7f9daf26f0dd73b4626eaeda', NULL, NULL, '1', '3105'),
-(1455, 'Mis 30 Mejores Canciones (CD 1)', 'f7631e83ff2a17b65b475f43b2d96e8e0c804b9b', NULL, NULL, '1', '3098'),
-(1456, 'Mis 30 Mejores Canciones (CD 2)', '31119baddbd64fe502d6721ff0fb9f979f934dc4', NULL, NULL, '1', '3097'),
-(1457, 'Modjo', 'a5d66d3cbe4b8f37e399c25117f0818190afca92', NULL, NULL, '1', '3094'),
-(1458, 'qwe', '26793e24789193fb86b6080cfaccf504fc8ecf61', NULL, NULL, '1', '3090'),
-(1459, 'qweqwe', '96bc9877a7d42493659dd69f10762162acc9d519', NULL, NULL, '1', '3093'),
-(1460, 'qweqwe qw', '557950094b1f1b5353eff0e464a0c7bae68347e4', NULL, NULL, '1', '3102'),
-(1461, 'reina de la bailanta', 'decd86a487b7bf77e96175676e84be341a605f3e', NULL, NULL, '1', '3101'),
-(1462, 'Volviendo a Casa', '92d1f4b9cbcc8845a0a483ea82888bbcfc236940', NULL, NULL, '1', '3092');
+(1, 'Born In Babylon', '573f678bb2b4ce9c6befd7bb289e6759cfedb69b', NULL, NULL, '0', NULL);
 
 -- --------------------------------------------------------
 
@@ -106,27 +85,7 @@ CREATE TABLE `album_has_channel` (
 --
 
 INSERT INTO `album_has_channel` (`album_id`, `channel_id`) VALUES
-(1445, 8),
-(1446, 15),
-(1447, 10),
-(1448, 12),
-(1448, 14),
-(1449, 15),
-(1450, 15),
-(1451, 15),
-(1452, 15),
-(1453, 15),
-(1454, 15),
-(1455, 13),
-(1456, 13),
-(1457, 8),
-(1457, 9),
-(1458, 8),
-(1458, 11),
-(1459, 8),
-(1460, 8),
-(1461, 12),
-(1462, 15);
+(1, 13);
 
 -- --------------------------------------------------------
 
@@ -161,17 +120,7 @@ CREATE TABLE `artist` (
 --
 
 INSERT INTO `artist` (`id`, `begin_date`, `instrument`, `presentation`, `name`, `user_id`, `id_referencia`, `profile_id`) VALUES
-(10, NULL, NULL, '', 'Aerobluesss', 63, '1700', 10),
-(1046, NULL, NULL, NULL, 'Aerobluesss', NULL, '2099', 1047),
-(1047, NULL, NULL, NULL, 'Bersuit', NULL, '2107', 1048),
-(1048, NULL, NULL, NULL, 'Bersuit Vergarabat', NULL, '2108', 1049),
-(1049, NULL, NULL, NULL, 'El Cachote', NULL, '2105', 1050),
-(1050, NULL, NULL, NULL, 'José Luis Perales', NULL, '2104', 1051),
-(1051, NULL, NULL, NULL, 'Laion', NULL, '2101', 1052),
-(1052, NULL, NULL, NULL, 'Modjo', NULL, '2102', 1053),
-(1053, NULL, NULL, NULL, 'qwe qe', NULL, '2106', 1054),
-(1054, NULL, NULL, NULL, 'Rata Blanca', NULL, '2100', 1055),
-(1055, NULL, NULL, NULL, 'Sonata Arctica', NULL, '2103', 1056);
+(1, NULL, NULL, NULL, 'SOJA', NULL, NULL, 1062);
 
 -- --------------------------------------------------------
 
@@ -189,26 +138,7 @@ CREATE TABLE `artist_has_album` (
 --
 
 INSERT INTO `artist_has_album` (`artist_id`, `album_id`) VALUES
-(10, 32),
-(1046, 1447),
-(1046, 1458),
-(1047, 1450),
-(1048, 1446),
-(1048, 1449),
-(1048, 1453),
-(1048, 1454),
-(1049, 1452),
-(1049, 1461),
-(1050, 1455),
-(1050, 1456),
-(1051, 1459),
-(1052, 1445),
-(1052, 1457),
-(1053, 1460),
-(1054, 1451),
-(1054, 1458),
-(1054, 1462),
-(1055, 1448);
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -1844,7 +1774,10 @@ INSERT INTO `profile` (`id`, `name`, `last_name`, `birth_date`, `birth_location`
 (1053, 'Modjo', NULL, NULL, NULL, 'a5d66d3cbe4b8f37e399c25117f0818190afca92', NULL, NULL, NULL, NULL, NULL, NULL, 1054, NULL, 1),
 (1054, 'qwe qe', NULL, NULL, NULL, '2429bb752eb26ca3cbf66da1d691f54437b9656f', NULL, NULL, NULL, NULL, NULL, NULL, 1055, NULL, 1),
 (1055, 'Rata Blanca', NULL, NULL, NULL, 'f47792f10bfff36e88631d6d36894a7b6f56b159', NULL, NULL, NULL, NULL, NULL, NULL, 1056, NULL, 1),
-(1056, 'Sonata Arctica', NULL, NULL, NULL, 'db5cb7ec2e99be583c93e3ba0707db65a50a4333', NULL, NULL, NULL, NULL, NULL, NULL, 1057, NULL, 1);
+(1056, 'Sonata Arctica', NULL, NULL, NULL, 'db5cb7ec2e99be583c93e3ba0707db65a50a4333', NULL, NULL, NULL, NULL, NULL, NULL, 1057, NULL, 1),
+(1060, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 1061, NULL, 1),
+(1061, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 1062, NULL, 1),
+(1062, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 1063, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2928,7 +2861,10 @@ INSERT INTO `profileOpts` (`id`, `begin_date`, `instrument`, `presentation`, `fu
 (1054, 1, NULL, 1, 1, NULL, NULL, NULL, 0, NULL, NULL),
 (1055, 1, NULL, 1, 1, NULL, NULL, NULL, 0, NULL, NULL),
 (1056, 1, NULL, 1, 1, NULL, NULL, NULL, 0, NULL, NULL),
-(1057, 1, NULL, 1, 1, NULL, NULL, NULL, 0, NULL, NULL);
+(1057, 1, NULL, 1, 1, NULL, NULL, NULL, 0, NULL, NULL),
+(1061, 1, NULL, 1, 1, NULL, NULL, NULL, 0, NULL, NULL),
+(1062, 1, NULL, 1, 1, NULL, NULL, NULL, 0, NULL, NULL),
+(1063, 1, NULL, 1, 1, NULL, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3042,165 +2978,7 @@ CREATE TABLE `song` (
 --
 
 INSERT INTO `song` (`id`, `name`, `path_song`, `time`, `bitrate`, `rate`, `size`, `id_referencia`, `album_id`) VALUES
-(1, 'Keep on Knocking', '/home/radioalbum/Musica/Julio2015-17/01-Keep on Knocking.mp3', 170, 320000, 44100, 6830542, '23221', 1),
-(2, 'Rock-N-Roll Victim', '/home/radioalbum/Musica/Julio2015-17/02-Rock-N-Roll Victim.mp3', 161, 320000, 44100, 6478411, '23217', 1),
-(3, 'Let The World Turn', '/home/radioalbum/Musica/Julio2015-17/03-Let The World Turn.mp3', 356, 320000, 44100, 14270215, '23208', 1),
-(4, 'You\'re A Prisoner', '/home/radioalbum/Musica/Julio2015-17/04-You\'re A Prisoner.mp3', 144, 320000, 44100, 5782509, '23227', 1),
-(5, 'Freakin Out', '/home/radioalbum/Musica/Julio2015-17/05-Freakin Out.mp3', 168, 320000, 44100, 6758444, '23219', 1),
-(6, 'Where Do We Go From Here???', '/home/radioalbum/Musica/Julio2015-17/06-Where Do We Go From Here###.mp3', 230, 320000, 44100, 9222313, '23230', 1),
-(7, 'Politicians In My Eyes', '/home/radioalbum/Musica/Julio2015-17/07-Politicians In My Eyes.mp3', 350, 320000, 44100, 14029889, '23248', 1),
-(397, 'Vamos A Buscar La Luz', '/home/radioalbum/Musica/Octubre2015-27/01.- Vamos A Buscar La Luz.mp3', 229, 192000, 44100, 5504985, '26573', 32),
-(398, 'Completamente Nervioso', '/home/radioalbum/Musica/Octubre2015-27/02.- Completamente Nervioso.mp3', 179, 192000, 44100, 4310666, '26540', 32),
-(399, 'Tema Solísimo', '/home/radioalbum/Musica/Octubre2015-27/03.- Tema Solísimo.mp3', 121, 192000, 44100, 2930147, '26602', 32),
-(400, 'Arboles Difusores', '/home/radioalbum/Musica/Octubre2015-27/04.- Arboles Difusores.mp3', 134, 192000, 44100, 3242363, '26559', 32),
-(401, 'Vendríamos A Buscar', '/home/radioalbum/Musica/Octubre2015-27/05.- Vendríamos A Buscar.mp3', 205, 192000, 44100, 4933844, '26606', 32),
-(402, 'Aire En Movimiento', '/home/radioalbum/Musica/Octubre2015-27/06.- Aire En Movimiento.mp3', 158, 192000, 44100, 3818520, '26548', 32),
-(403, 'Vine Cruzando El Mar', '/home/radioalbum/Musica/Octubre2015-27/07.- Vine Cruzando El Mar.mp3', 158, 192000, 44100, 3812877, '26599', 32),
-(404, 'Nada Estoy Sabiendo', '/home/radioalbum/Musica/Octubre2015-27/08.- Nada Estoy Sabiendo.mp3', 291, 192000, 44100, 7001488, '26604', 32),
-(405, 'Sofisticuatro', '/home/radioalbum/Musica/Octubre2015-27/09.- Sofisticuatro.mp3', 221, 192000, 44100, 5327561, '26555', 32),
-(406, 'Buen Tiempo', '/home/radioalbum/Musica/Octubre2015-27/10.- Buen Tiempo.mp3', 192, 192000, 44100, 4636048, '26560', 32),
-(3139, 'Scottie Pippen y yo', '/home/radioalbum/Musica/2015/febrero2015/01- Scottie Pippen y yo.mp3', 69, 320000, 44100, 2783924, '20938', 277),
-(3140, 'El imán de lo nuevo', '/home/radioalbum/Musica/2015/febrero2015/02- El imán de lo nuevo.mp3', 93, 320000, 44100, 3762044, '20932', 277),
-(3141, 'El jefe de los malos', '/home/radioalbum/Musica/2015/febrero2015/03- El jefe de los malos.mp3', 132, 320000, 44100, 5315959, '20997', 277),
-(3142, 'Fiesta de cerezas', '/home/radioalbum/Musica/2015/febrero2015/04- Fiesta de cerezas.mp3', 83, 320000, 44100, 3342999, '20945', 277),
-(3143, 'Noche spooky tropical', '/home/radioalbum/Musica/2015/febrero2015/05- Noche spooky tropical.mp3', 170, 320000, 44100, 6838524, '20903', 277),
-(3144, 'La gloria secreta', '/home/radioalbum/Musica/2015/febrero2015/06- La gloria secreta.mp3', 98, 320000, 44100, 3933424, '20987', 277),
-(3145, 'Pretemporada', '/home/radioalbum/Musica/2015/febrero2015/07- Pretemporada.mp3', 151, 320000, 44100, 6080899, '20977', 277),
-(3146, 'Muchachita', '/home/radioalbum/Musica/2015/febrero2015/08- Muchachita.mp3', 131, 320000, 44100, 5268934, '20998', 277),
-(3147, 'Pecho pardo', '/home/radioalbum/Musica/2015/febrero2015/09- Pecho pardo.mp3', 138, 320000, 44100, 5556309, '20926', 277),
-(3148, 'Incertidumbre', '/home/radioalbum/Musica/2015/febrero2015/10-Incertidumbre.mp3', 110, 320000, 44100, 4441294, '20910', 277),
-(3149, 'Un monton de miedo', '/home/radioalbum/Musica/2015/febrero2015/11- Un monton de miedo.mp3', 109, 320000, 44100, 4365009, '20962', 277),
-(3150, 'Los Amigos del Mal', '/home/radioalbum/Musica/2015/febrero2015/12- Los Amigos del Mal.mp3', 96, 320000, 44100, 3875949, '20979', 277),
-(3151, 'Movimiento de las montañas', '/home/radioalbum/Musica/2015/febrero2015/13- Movimiento de las montañas.mp3', 150, 320000, 44100, 6039099, '20983', 277),
-(15014, '2 de julio', '/home/radioalbum/Musica/Abril2016-28/11.107 Faunos - 2 de julio.mp3', 164, 128000, 44100, 2630550, '23822', 1327),
-(15015, 'Club de observadores', '/home/radioalbum/Musica/Abril2016-28/13.107 Faunos - Club de observadores.mp3', 136, 128000, 44100, 2185424, '23796', 1327),
-(15016, 'Cosas caras rotas', '/home/radioalbum/Musica/Abril2016-28/02.107 Faunos - Cosas caras rotas.mp3', 95, 128000, 44100, 1530482, '23818', 1327),
-(15017, 'Descenso luminoso', '/home/radioalbum/Musica/Abril2016-28/10.107 Faunos - Descenso luminoso.mp3', 88, 128000, 44100, 1423066, '23791', 1327),
-(15018, 'El camino', '/home/radioalbum/Musica/Abril2016-28/01.107 Faunos - El camino.mp3', 106, 128000, 44100, 1716055, '23815', 1327),
-(15019, 'Jazmin chino', '/home/radioalbum/Musica/Abril2016-28/06.107 Faunos - Jazmin chino.mp3', 137, 128000, 44100, 2197544, '23811', 1327),
-(15020, 'La Plata', '/home/radioalbum/Musica/Abril2016-28/09.107 Faunos - La Plata.mp3', 119, 128000, 44100, 1919184, '23816', 1327),
-(15021, 'La turba', '/home/radioalbum/Musica/Abril2016-28/03.107 Faunos - La turba.mp3', 103, 128000, 44100, 1653779, '23806', 1327),
-(15022, 'Ley de los hermanos', '/home/radioalbum/Musica/Abril2016-28/05.107 Faunos - Ley de los hermanos.mp3', 120, 128000, 44100, 1938410, '23812', 1327),
-(15023, 'Por ir a comprar', '/home/radioalbum/Musica/Abril2016-28/04.107 Faunos - Por ir a comprar.mp3', 144, 128000, 44100, 2319170, '23819', 1327),
-(15024, 'Tacho negro', '/home/radioalbum/Musica/Abril2016-28/12.107 Faunos - Tacho negro.mp3', 172, 128000, 44100, 2757610, '23794', 1327),
-(15025, 'Triceratops roll', '/home/radioalbum/Musica/Abril2016-28/07.107 Faunos - Triceratops Roll.mp3', 78, 128000, 44100, 1261734, '23801', 1327),
-(15026, 'Vendedores de lupas', '/home/radioalbum/Musica/Abril2016-28/08.107 Faunos - Vendedores de lupas.mp3', 124, 128000, 44100, 1991073, '23808', 1327),
-(16302, '11 Savior Eyes', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /11 Savior Eyes.mp3', 313, 320000, 44100, 12540908, '33207', 1445),
-(16303, '03 - Ahí Va Chavela', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/03 - Ahí Va Chavela.mp3', 247, 320000, 44100, 9889213, '33286', 1446),
-(16304, '01 - Vengo', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/01 - Vengo.mp3', 192, 163009, 44100, 4220015, '33193', 1447),
-(16305, '02 - Somos Sur (feat. Shadia Mansour)', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/02 - Somos Sur (feat. Shadia Mansour).mp3', 226, 169835, 44100, 5117953, '33188', 1447),
-(16306, '03 - Antipatriarca', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/03 - Antipatriarca.mp3', 184, 160333, 44100, 3995996, '33178', 1447),
-(16307, '04 - Somos Todos Erroristas (feat. Hordatoj)', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/04 - Somos Todos Erroristas (feat. Hordatoj).mp3', 177, 162751, 44100, 3901930, '33184', 1447),
-(16308, '05 - Er-rrro-r', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/05 - Er-rrro-r.mp3', 62, 153520, 44100, 1493864, '33186', 1447),
-(16309, '06 - Los Peces Gordos No Pueden Volar', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/06 - Los Peces Gordos No Pueden Volar.mp3', 216, 176971, 44100, 5080601, '33181', 1447),
-(16310, '07 - Creo en Ti (feat. Juanito Ayala)', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/07 - Creo en Ti (feat. Juanito Ayala).mp3', 240, 162755, 44100, 5195018, '33191', 1447),
-(16311, '08 - Los Diablitos', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/08 - Los Diablitos.mp3', 43, 162113, 44100, 1174314, '33182', 1447),
-(16312, '09 - Interludio Agua', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/09 - Interludio Agua.mp3', 45, 167040, 44100, 1240730, '33180', 1447),
-(16313, '10 - Río Abajo', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/10 - Río Abajo.mp3', 234, 168169, 44100, 5221089, '33190', 1447),
-(16314, '11 - Oro Negro', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/11 - Oro Negro.mp3', 265, 159983, 44100, 5616224, '33185', 1447),
-(16315, '12 - Delta (feat. MC Niel)', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/12 - Delta (feat. MC Niel).mp3', 227, 170768, 44100, 5161678, '33183', 1447),
-(16316, '13 - No Más', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/13 - No Más.mp3', 234, 162954, 44100, 5085493, '33192', 1447),
-(16317, '14 - Todo Lo Sólido Se Desvanece en el Aire', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/14 - Todo Lo Sólido Se Desvanece en el Aire.mp3', 219, 159846, 44100, 4687896, '33189', 1447),
-(16318, '15 - Emilia (feat. RR Burning)', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/15 - Emilia (feat. RR Burning).mp3', 253, 176113, 44100, 5870536, '33194', 1447),
-(16319, '16 - Rumbo al Sol', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/16 - Rumbo al Sol.mp3', 199, 169647, 44100, 4519292, '33187', 1447),
-(16320, '17 - Mi Verdad', '/opt/lampp/htdocs/radioalbum/catalogo/social/antipatriarca/17 - Mi Verdad.mp3', 166, 168991, 44100, 3818728, '33179', 1447),
-(16321, 'Blank File', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/01. Blank File.mp3', 245, 320000, 44100, 10258600, '33214', 1448),
-(16322, 'My Land', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/02. My Land.mp3', 277, 320000, 44100, 11519792, '33216', 1448),
-(16323, '8th Commandment', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/03. 8th Commandment.mp3', 222, 320000, 44100, 9306698, '33213', 1448),
-(16324, 'Replica', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/04. Replica.mp3', 295, 320000, 44100, 12233458, '33218', 1448),
-(16325, 'Kingdom For a Heart', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/05. Kingdom For a Heart.mp3', 231, 320000, 44100, 9705849, '33219', 1448),
-(16326, 'FullMoon', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/06. FullMoon.mp3', 308, 320000, 44100, 12750682, '33215', 1448),
-(16327, 'Letter To Dana', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/07. Letter To Dana.mp3', 360, 320000, 44100, 14861376, '33211', 1448),
-(16328, 'UnOpened', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/08. UnOpened.mp3', 223, 320000, 44100, 9354764, '33212', 1448),
-(16329, 'Picturing the Past', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/09. Picturing the Past.mp3', 216, 320000, 44100, 9106078, '33221', 1448),
-(16330, 'Destruction Preventer', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/10. Destruction Preventer.mp3', 464, 320000, 44100, 18992903, '33217', 1448),
-(16331, 'Mary-Lou', '/opt/lampp/htdocs/radioalbum/catalogo/Sonata/1999 - Ecliptica/11. Mary-Lou.mp3', 270, 320000, 44100, 11234535, '33220', 1448),
-(16332, 'Cuatro Vientos', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/04 - Cuatro Vientos.mp3', 185, 320000, 44100, 7430568, '33279', 1449),
-(16333, 'Para Bailar', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/05 - Para Bailar.mp3', 202, 320000, 44100, 8106617, '33283', 1449),
-(16334, 'Tilcara en Carnaval', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/06 - Tilcara en Carnaval.mp3', 169, 320000, 44100, 6796315, '33282', 1449),
-(16335, 'La Próxima Curda', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/07 - La Próxima Curda.mp3', 243, 320000, 44100, 9749197, '33290', 1449),
-(16336, 'Hay Pelado Para Todas', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/08 - Hay Pelado Para Todas.mp3', 158, 320000, 44100, 6339695, '33288', 1449),
-(16337, 'De Tripas Corazón', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/09 - De Tripas Corazón.mp3', 223, 320000, 44100, 8928952, '33281', 1449),
-(16338, 'La Señora', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/10 - La Señora.mp3', 152, 320000, 44100, 6085785, '33289', 1449),
-(16339, 'Ayer Se Cortó la Luz', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/11 - Ayer Se Cortó la Luz.mp3', 193, 320000, 44100, 7761801, '33284', 1449),
-(16340, 'Para Luis', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/12 - Para Luis.mp3', 169, 320000, 44100, 6792136, '33285', 1449),
-(16341, '01 - Huayno 14', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/01 - Huayno 14.mp3', 210, 320000, 44100, 8417997, '33275', 1450),
-(16342, '02 - Me Voy', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/02 - Me Voy.mp3', 189, 320000, 44100, 7579989, '33268', 1450),
-(16343, '03 - Ahí Va Chavela', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/03 - Ahí Va Chavela.mp3', 247, 320000, 44100, 9889213, '33274', 1450),
-(16344, '04 - Cuatro Vientos', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/04 - Cuatro Vientos.mp3', 185, 320000, 44100, 7430568, '33267', 1450),
-(16345, '05 - Para Bailar', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/05 - Para Bailar.mp3', 202, 320000, 44100, 8106617, '33271', 1450),
-(16346, '06 - Tilcara en Carnaval', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/06 - Tilcara en Carnaval.mp3', 169, 320000, 44100, 6796315, '33270', 1450),
-(16347, '07 - La Próxima Curda', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/07 - La Próxima Curda.mp3', 243, 320000, 44100, 9749197, '33278', 1450),
-(16348, '08 - Hay Pelado Para Todas', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/08 - Hay Pelado Para Todas.mp3', 158, 320000, 44100, 6339695, '33276', 1450),
-(16349, '09 - De Tripas Corazón', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/09 - De Tripas Corazón.mp3', 223, 320000, 44100, 8928952, '33269', 1450),
-(16350, '10 - La Señora', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/10 - La Señora.mp3', 152, 320000, 44100, 6085785, '33277', 1450),
-(16351, '11 - Ayer Se Cortó la Luz', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/11 - Ayer Se Cortó la Luz.mp3', 193, 320000, 44100, 7761801, '33272', 1450),
-(16352, '12 - Para Luis', '/opt/lampp/htdocs/radioalbum/catalogo/El baile interior/12 - Para Luis.mp3', 169, 320000, 44100, 6792136, '33273', 1450),
-(16353, 'La Canción del Guerrero', '/opt/lampp/htdocs/radioalbum/catalogo/Rata Blanca/03 La Canción del Guerrero.mp3', 305, 128000, 44100, 4900850, '33258', 1451),
-(16354, 'Sinfonía Fantástica', '/opt/lampp/htdocs/radioalbum/catalogo/Rata Blanca/07 Sinfonía Fantástica.mp3', 573, 128000, 44100, 9198725, '33255', 1451),
-(16355, 'Cuando la Luz Oscurece', '/opt/lampp/htdocs/radioalbum/catalogo/Rata Blanca/08 Cuando la Luz Oscurece.mp3', 468, 128000, 44100, 7505154, '33257', 1451),
-(16356, '¿En Nombre de Dios?', '/opt/lampp/htdocs/radioalbum/catalogo/Rata Blanca/09 En Nombre de Dios.mp3', 326, 128000, 44100, 5231874, '33259', 1451),
-(16357, 'Caballo Salvaje', '/opt/lampp/htdocs/radioalbum/catalogo/Rata Blanca/10 Caballo Salvaje.mp3', 267, 128000, 44100, 4288122, '33256', 1451),
-(16358, 'Cacho Castaña - Garganta con arena', '/opt/lampp/htdocs/radioalbum/catalogo/Grandes Éxitos/Cacho Castaña - Garganta con arena.mp3', 201, 128000, 44100, 3232412, '33260', 1452),
-(16359, 'Cacho Castaña - La Gata Varela', '/opt/lampp/htdocs/radioalbum/catalogo/Grandes Éxitos/Cacho Castaña - La Gata Varela.mp3', 196, 128000, 44100, 3151328, '33262', 1452),
-(16360, 'Cacho Castaña - Septiembre del \'88', '/opt/lampp/htdocs/radioalbum/catalogo/Grandes Éxitos/Cacho Castaña - Septiembre del \'88.mp3', 246, 128000, 22050, 3940981, '33264', 1452),
-(16361, 'Cacho de Buenos aires', '/opt/lampp/htdocs/radioalbum/catalogo/Grandes Éxitos/Cacho de Buenos aires.mp3', 145, 128000, 44100, 2327252, '33261', 1452),
-(16362, 'Cacho Castaña - Café La Humedad', '/opt/lampp/htdocs/radioalbum/catalogo/Grandes Éxitos/Cacho Castaña - Café La Humedad.mp3', 232, 128000, 44100, 3728642, '33265', 1452),
-(16363, '01 - Huayno 14', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/01 - Huayno 14.mp3', 210, 320000, 44100, 8417997, '33287', 1453),
-(16364, '02 - Me Voy', '/opt/lampp/htdocs/radioalbum/catalogo/(2014)El Baile Interior/02 - Me Voy.mp3', 189, 320000, 44100, 7579989, '33280', 1454),
-(16365, 'Un Velero Llamado Libertad', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/01 - Un Velero Llamado Libertad.mp3', 241, 259269, 44100, 7858176, '33249', 1455),
-(16366, 'Te Quiero', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/02 - Te Quiero.mp3', 230, 259371, 44100, 7512011, '33254', 1455),
-(16367, 'Balada Para Una Despedida', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/03 - Balada Para Una Despedida.mp3', 209, 257432, 44100, 6796152, '33252', 1455),
-(16368, 'Me Llamas', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/04 - Me Llamas.mp3', 289, 258574, 44100, 9416224, '33241', 1455),
-(16369, 'Y Como Es Él', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/05 - Y Como Es Él.mp3', 235, 259022, 44100, 7664183, '33253', 1455),
-(16370, 'Sí', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/06 - Sí.mp3', 216, 259590, 44100, 7077178, '33248', 1455),
-(16371, 'Y Te Vas', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/07 - Y Te Vas.mp3', 275, 258576, 44100, 8948200, '33243', 1455),
-(16372, 'El Amor', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/08 - El Amor.mp3', 262, 257638, 44100, 8511661, '33246', 1455),
-(16373, 'Cuando Vuelvas', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/09 - Cuando Vuelvas.mp3', 224, 259603, 44100, 7322267, '33245', 1455),
-(16374, 'Celos De Mi Guitarra', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/10 - Celos De Mi Guitarra.mp3', 188, 259722, 44100, 6161607, '33242', 1455),
-(16375, 'Canción De Otoño', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/11 - Canción De Otoño.mp3', 277, 260037, 44100, 9052853, '33247', 1455),
-(16376, 'Ella Y Él', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/12 - Ella Y Él.mp3', 193, 259205, 44100, 6307500, '33244', 1455),
-(16377, 'Quisiera Decir Tu Nombre', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/13 - Quisiera Decir Tu Nombre.mp3', 278, 259367, 44100, 9081224, '33240', 1455),
-(16378, 'Cosas De Doña Asunción', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/14 - Cosas De Doña Asunción.mp3', 180, 260066, 44100, 5918629, '33250', 1455),
-(16379, 'Canción Para La Navidad', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 01/15 - Canción Para La Navidad.mp3', 239, 258252, 44100, 7773762, '33251', 1455),
-(16380, 'Amor Sin Límite', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/01 - Amor Sin Límite.mp3', 280, 257794, 44100, 9070921, '33231', 1456),
-(16381, 'Quiero Ser Agua Fresca', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/02 - Quiero Ser Agua Fresca.mp3', 220, 256423, 44100, 7115923, '33227', 1456),
-(16382, 'La Primera Vez', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/03 - La Primera Vez.mp3', 217, 259816, 44100, 7106560, '33230', 1456),
-(16383, 'Amarte Así', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/04 - Amarte Así.mp3', 253, 258840, 44100, 8242211, '33239', 1456),
-(16384, 'América', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/05 - América.mp3', 310, 258180, 44100, 10077323, '33228', 1456),
-(16385, 'Me Gusta La Palabra Libertad', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/06 - Me Gusta La Palabra Libertad.mp3', 274, 257046, 44100, 8860273, '33238', 1456),
-(16386, 'Gente Maravillosa', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/07 - Gente Maravillosa.mp3', 289, 259179, 44100, 9437342, '33233', 1456),
-(16387, 'Una Locura', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/08 - Una Locura.mp3', 254, 257107, 44100, 8234213, '33232', 1456),
-(16388, 'No Resulta Fácil', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/09 - No Resulta Fácil.mp3', 245, 261517, 44100, 8078861, '33226', 1456),
-(16389, 'Amada Mía', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/10 - Amada Mía.mp3', 239, 257274, 44100, 7758683, '33235', 1456),
-(16390, 'La Espera', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/11 - La Espera.mp3', 302, 257087, 44100, 9763939, '33234', 1456),
-(16391, 'Desde Que Te Quiero', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/12 - Desde Que Te Quiero.mp3', 208, 256719, 44100, 6744771, '33237', 1456),
-(16392, 'Y Sigo Enamorado', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/13 - Y Sigo Enamorado.mp3', 280, 257731, 44100, 9087202, '33236', 1456),
-(16393, 'No Te Vayas Nunca', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/14 - No Te Vayas Nunca.mp3', 261, 257199, 44100, 8461136, '33225', 1456),
-(16394, 'Que Canten Los Niños', '/opt/lampp/htdocs/radioalbum/catalogo/Jose Luis Perales - 1994 - Mis 30 Mejores Canciones [2CD\'s]/CD 02/15 - Que Canten Los Niños.mp3', 284, 256217, 44100, 9151020, '33229', 1456),
-(16395, 'Acnowledgement', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /01 Acnowledgement.mp3', 184, 320000, 44100, 7391968, '33202', 1457),
-(16396, 'Chillin\'', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /02 Chillin\' .mp3', 292, 320000, 44100, 11702160, '33200', 1457),
-(16397, 'Lady (Hear Me Tonight)', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /03 Lady (Hear Me Tonight).mp3', 305, 320000, 44100, 12228817, '33204', 1457),
-(16398, 'Too Good To Be True', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /04 Too Good To Be True .mp3', 88, 320000, 44100, 3527945, '33198', 1457),
-(16399, 'Peace Of Mind', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /05 Peace Of Mind .mp3', 194, 320000, 44100, 7801566, '33199', 1457),
-(16400, 'What I Mean', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /06 What I Mean.mp3', 252, 320000, 44100, 10120191, '33197', 1457),
-(16401, 'Music Takes You Back', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /07 Music Takes You Back.mp3', 252, 320000, 44100, 10096176, '33201', 1457),
-(16402, 'No More Tears', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /08 No More Tears.mp3', 375, 320000, 44100, 15028810, '33206', 1457),
-(16403, 'Rollercoaster', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /09 Rollercoaster.mp3', 253, 320000, 44100, 10135868, '33203', 1457),
-(16404, 'On Fire', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /10 On Fire.mp3', 396, 320000, 44100, 15862943, '33210', 1457),
-(16405, 'Lady (Acoustic Version)', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /12 Lady (Acoustic Version)  .mp3', 195, 320000, 44100, 7813081, '33208', 1457),
-(16406, 'Lady (Hear Me Tonight) Choo Choo\'s Original R', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /13 Lady (Hear Me Tonight) Choo Choo\'s Original Recipe.mp3', 462, 320000, 44100, 18517062, '33205', 1457),
-(16407, 'Chillin\' (Live Version)', '/opt/lampp/htdocs/radioalbum/catalogo/Modjo /14 Chillin\' (Live Version).mp3', 376, 320000, 44100, 15063628, '33209', 1457),
-(16408, '01 - Huayno 14', '/opt/lampp/htdocs/radioalbum/catalogo/qwe/01 - Huayno 14.mp3', 210, 320000, 44100, 8417997, '33224', 1458),
-(16409, '01 - Vengo', '/opt/lampp/htdocs/radioalbum/catalogo/social/qwe/01 - Vengo.mp3', 192, 163009, 44100, 4220015, '33177', 1458),
-(16410, '02 - Me Voy', '/opt/lampp/htdocs/radioalbum/catalogo/qwe/02 - Me Voy.mp3', 189, 320000, 44100, 7579989, '33222', 1458),
-(16411, '02 - Somos Sur (feat. Shadia Mansour)', '/opt/lampp/htdocs/radioalbum/catalogo/social/qwe/02 - Somos Sur (feat. Shadia Mansour).mp3', 226, 169835, 44100, 5117953, '33176', 1458),
-(16412, '03 - Ahí Va Chavela', '/opt/lampp/htdocs/radioalbum/catalogo/qwe/03 - Ahí Va Chavela.mp3', 247, 320000, 44100, 9889213, '33223', 1458),
-(16413, '03 - Antipatriarca', '/opt/lampp/htdocs/radioalbum/catalogo/social/qwe/03 - Antipatriarca.mp3', 184, 160333, 44100, 3995996, '33175', 1458),
-(16414, '01 - Huayno 14', '/opt/lampp/htdocs/radioalbum/catalogo/qweqwe/01 - Huayno 14.mp3', 210, 320000, 44100, 8417997, '33196', 1459),
-(16415, '69813-08-one-night-in-bangkok-vinylshakerz-ar', '/opt/lampp/htdocs/radioalbum/catalogo/qweqwe qw/69813-08-one-night-in-bangkok-vinylshakerz-artist--1411585206.mp3', 208, 129725, 44100, 3380132, '33266', 1460),
-(16416, 'Cacho Castaña - La reina de la bailanta', '/opt/lampp/htdocs/radioalbum/catalogo/Grandes Éxitos/Cacho Castaña - La reina de la bailanta.mp3', 200, 128000, 44100, 3204956, '33263', 1461),
-(16417, '02 Volviendo a Casa', '/opt/lampp/htdocs/radioalbum/catalogo/02 Volviendo a Casa.mp3', 329, 128000, 44100, 5291642, '33195', 1462);
+(1, '01 Born In Babylon', '/opt/lampp/htdocs/radioalbum/catalogo/soja/Born In Babylon/01 Born In Babylon.mp3', 278, 160000, 44100, 5669290, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -3532,13 +3310,13 @@ ALTER TABLE `access`
 -- AUTO_INCREMENT de la tabla `album`
 --
 ALTER TABLE `album`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1463;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `artist`
 --
 ALTER TABLE `artist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1056;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `channel`
@@ -3616,13 +3394,13 @@ ALTER TABLE `post_like`
 -- AUTO_INCREMENT de la tabla `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1057;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1063;
 
 --
 -- AUTO_INCREMENT de la tabla `profileOpts`
 --
 ALTER TABLE `profileOpts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1058;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1064;
 
 --
 -- AUTO_INCREMENT de la tabla `report`
@@ -3646,7 +3424,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT de la tabla `song`
 --
 ALTER TABLE `song`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16418;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
@@ -3753,52 +3531,11 @@ ALTER TABLE `playlist_has_song`
   ADD CONSTRAINT `fk_playlist_has_song_song1` FOREIGN KEY (`song_id`) REFERENCES `song` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `post`
---
-ALTER TABLE `post`
-  ADD CONSTRAINT `fk_post_album1` FOREIGN KEY (`album_id`) REFERENCES `album` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_post_collection` FOREIGN KEY (`collection_id`) REFERENCES `playlist` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_post_post1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
-
---
 -- Filtros para la tabla `post_like`
 --
 ALTER TABLE `post_like`
   ADD CONSTRAINT `fk_post_like_post1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_post_like_profile1` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `profile`
---
-ALTER TABLE `profile`
-  ADD CONSTRAINT `fk_profile_gender1` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`id_gender`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_profile_profileOpts1` FOREIGN KEY (`options_id`) REFERENCES `profileOpts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `report`
---
-ALTER TABLE `report`
-  ADD CONSTRAINT `fk_report_report_type1` FOREIGN KEY (`report_type_id`) REFERENCES `report_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `song`
---
-ALTER TABLE `song`
-  ADD CONSTRAINT `fk_song_Album1` FOREIGN KEY (`album_id`) REFERENCES `album` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `song_has_genre`
---
-ALTER TABLE `song_has_genre`
-  ADD CONSTRAINT `fk_song_has_genre_genre1` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_song_has_genre_song1` FOREIGN KEY (`song_id`,`song_Album_id`) REFERENCES `song` (`id`, `album_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `fk_user_access1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_user_role1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
