@@ -10,7 +10,7 @@ CatalogAsset::register($this);
     <col style="width:20%">
     <col style="width:15%">
 	<col style="width:10%">
-	
+
   <thead>
     <tr>
       <th><?php echo \Yii::t('app', 'id')?></th>
@@ -28,7 +28,7 @@ CatalogAsset::register($this);
       <td><?php echo $album->status ? 'Activo' : 'Inactivo' ?></td>
       <td><?php echo isset($album->art) ? 'Si' : 'No' ?></td>
       <td class="actions">
-          <a data-crud="edit" data-toggle="tooltip" data-placement="left" title="<?php echo \Yii::t('app', 'edit')?>" data-action="edit-album" href="<?php echo Url::to(['/admin/media/edit', 'id' => $album->id])?>">
+          <a data-crud="edit" data-toggle="tooltip" data-placement="left" title="<?php echo \Yii::t('app', 'edit')?>" data-action="nav" href="<?php echo Url::to(['/admin/media/edit', 'id' => $album->id])?>">
             <span class="fa-layers fa-fw">
               <i class="fal fa-circle" data-fa-transform="grow-15"></i>
               <i class="far fa-pencil-alt" data-fa-transform="shrink-3"></i>
@@ -54,7 +54,7 @@ CatalogAsset::register($this);
               <i class="fal fa-circle" data-fa-transform="grow-15"></i>
               <i class="far fa-trash-alt" data-fa-transform="shrink-3"></i>
             </span>
-        </a>		  
+        </a>
       </td>
     </tr>
   <?php }?>

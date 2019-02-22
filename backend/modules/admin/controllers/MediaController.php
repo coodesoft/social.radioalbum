@@ -67,24 +67,29 @@ class MediaController extends RaBaseController{
   }
 
   public function actionAlbum(){
-	$id = Yii::$app->request->get('id');
+  	$id = Yii::$app->request->get('id');
 
-	if (is_numeric($id) && $id>0){
-		$album = Album::findOne($id);
-		return $this->renderSection('album', ['album' => $album]);
-	}
-	throw new \Exception('Incorrect Param Type', 1);
+  	if (is_numeric($id) && $id>0){
+  		$album = Album::findOne($id);
+  		return $this->renderSection('album', ['album' => $album]);
+  	}
+  	throw new \Exception('Incorrect Param Type', 1);
 
   }
 
   public function actionEdit(){
-	$id = Yii::$app->request->get('id');
+  	$id = Yii::$app->request->get('id');
 
-	if (Yii::$app->request->isPost) {
+  	if (Yii::$app->request->isPost) {
 
-	} else{
+  	} else{
+      if (is_numeric($id) && $id>0){
+        $album = Album::findOne($id);
+        return $this->renderSection('album', ['album' => $album]);
+      }
+      throw new \Exception('Incorrect Param Type', 1);
 
-	}
+  	}
 
   }
 

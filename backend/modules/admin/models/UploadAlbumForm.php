@@ -86,16 +86,17 @@ class UploadAlbumForm extends Model{
         if ( $this->validate() ){
             $artist = null;
             //recupero el artista enviado
-            if ($this->storedArtist)
-              $artist = Artist::findOne($this->storedArtist);
-            $artistName = $artist ? $artist->name : $this->artist;
+            $query = $this->storedArtist ? ['id' => $this->storedArtist] : "LOWER(name) = '".strtolower($this->artist)."'";
+            $artist = Artist::find()->where($query)->one();
 
-            $parentFolder = strtolower($artistName)."/";
-            $newFolder = $this->uploadRoute . $parentFolder . $this->name;
-
-            $stored = Album::find()->where('LOWER(name) = '.strtolower($this->name))->all();
+        
+            $stored = null;
+            if ($artist)
+              $stored = $artist->getAlbumByName($this->name)->all();
 
             if (!$stored){
+                $artistName = $artist ? $artist->name : $this->artist;
+                $newFolder = $this->uploadRoute . strtolower($artistName)."/" . $this->name;
 
                 //creo el directorio del álbum
                 RAFileHelper::createDirectory($newFolder);
@@ -104,6 +105,7 @@ class UploadAlbumForm extends Model{
                 $album->name = $this->name;
                 $album->status = 1;
 
+                //guardado de la portada del álbum
                 if ($this->image){
                     $album->art = StrProcessor::getRandomString($album->name);;
                     //guardo la imagen de portada dentro del directorio de imágenes
@@ -134,7 +136,6 @@ class UploadAlbumForm extends Model{
                        }
                     }
 
-
                     //Es posible que el artista enviado no este previamente almacenado
                     if (!$artist){
                        // Creamos una instancia minimalista del Artista.
@@ -145,7 +146,6 @@ class UploadAlbumForm extends Model{
                        if (!$artist->save()){
                            RAFileHelper::removeDirectory($newFolder);
                            throw new \Exception("Se detecto un artista nuevo pero no se pudo guardar", 1);
-
                        }
                     }
 
@@ -189,10 +189,11 @@ class UploadAlbumForm extends Model{
                 RAFileHelper::removeDirectory($newFolder);
                 $transaction->rollBack();
                 return Response::getInstance(false, Flags::SAVE_ERROR);
-
-
+            }
             return Response::getInstance('El artista ya tiene un álbum con ese nombre', Flags::SAVE_ERROR);
         }
         return Response::getInstance($this->errors, Flags::SAVE_ERROR);
     }
+
+
 }

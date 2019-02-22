@@ -98,25 +98,30 @@ class Artist extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Album::className(), ['id' => 'album_id'])->viaTable('artist_has_album', ['artist_id' => 'id']);
     }
-    
+
+
+    public function getAlbumByName($name){
+      return $this->getAlbums()->where("LOWER(name) = '".strtolower($name)."'");
+    }
+
     public static function createDefault(){
         $artist = new Artist();
-        
+
         $profile = new Profile();
         $profile->name = $artist->name;
         $profile->visibility = Visibility::VPUBLIC;
         $profile->listed = true;
-        
+
         $opts = new ProfileOpts();
         $opts->begin_date = 1;
         $opts->presentation = 1;
         $opts->full_name = 1;
         $opts->save();
-        
+
         $profile->options_id = $opts->id;
         $profile->save();
         $artist->profile_id = $profile->id;
-        
+
         return $artist;
     }
 }

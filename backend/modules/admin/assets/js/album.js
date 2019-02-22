@@ -4,7 +4,7 @@ let uploadAlbumCallback = function(data){
   let response = data['response'];
   let flags = Flags.getInstance();
   flag = data['flag'];
-  let error = (flag == flags.UPLOAD_ERROR) ? true : false;
+  let error = (flag == flags.SAVE_ERROR) ? true : false;
 
   let alert = getAlertBox(response['text'], response['type']);
   $('#albumAdmin .messages').html(alert);
@@ -15,6 +15,10 @@ let uploadAlbumCallback = function(data){
       console.log(error);
       $('[data-context="migrate_multimedia"]').click();
     },500);
+  } else{
+    setTimeout(function(){
+      $('#albumAdmin .messages').empty();
+    }, 1000)
   }
 }
 
