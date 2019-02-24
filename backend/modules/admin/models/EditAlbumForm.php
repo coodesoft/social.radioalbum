@@ -15,6 +15,8 @@ use backend\models\Song;
 
 class EditAlbumForm extends Model{
 
+    public $id;
+
     public $songs;
 
     public $image;
@@ -24,6 +26,10 @@ class EditAlbumForm extends Model{
     public $year;
 
     public $channels;
+
+    public $description;
+
+    public $status;
 
     private $uploadRoute;
 
@@ -35,10 +41,11 @@ class EditAlbumForm extends Model{
 
     public function rules(){
         return [
-            [['name', 'channels'], 'required'],
+            [['name', 'channels', 'status', 'id'], 'required'],
             ['year', 'string', 'skipOnEmpty' => true],
+          //  ['songsToDelete', 'each', 'rule' => ['integer']],
+            ['description', 'string', 'skipOnEmpty' => true],
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, ico, jpeg'],
-            [['songs'], 'file', 'skipOnEmpty' => false, 'extensions' => 'mp3', 'maxFiles' => 20],
         ];
     }
 
@@ -74,10 +81,59 @@ class EditAlbumForm extends Model{
       return $tagEditor->setDirectoryTags($path, $tags);
     }
 
-    public function upload(){
+    public function edit(){
         if ( $this->validate() ){
-          
+          $errors = [];
+          $transaction = Album::getDb()->beginTransaction();
+
+          $album = Album::findOne($this->id);
+
+          $album->name = $this->name;
+          $album->year = $this->year;
+          $album->description = $this->description;
+          $album->status = $this->status;
+
+          //guardado de la portada del álbum
+          if ($this->image){
+              $artHash = StrProcessor::getRandomString($this->name);
+              $newImgPath = Album::dataPath() . $artHash;
+
+              //guardo la imagen de portada dentro del directorio de imágenes
+              $savedArt = $this->image->saveAs($newImgPath);
+              //check si se pudo guardar la nueva imagen
+              if ($savedArt){
+                //recupero la ruta de la imagen anterior
+                $storedArt = Album::dataPath() . $album->art;
+                //check si se pudo borrar la imagen anterior
+                if (unlink($storedArt)){
+                  //actualizo el nombre del Art con el nuevo hash
+                  $album->art = $artHash;
+                } elseif (unlink($newImgPath)){
+                  $errors[] = 'Se subió la nueva imagen, pero no se pudo eliminar la previa. Se prodeció a borrar la nueva para mantener el coherencia entre la db y los datos físicos';
+                } else{
+                  $errors[] = 'Se subió la nueva imágen, pero no se pudo eliminar la previa. Al intentar borrar la nueva se produjo un error. Hay una imágen adicional en disco!!';
+                }
+              } else
+                $errors [] = 'No se pudo almacenar la portada nueva';
+          }
+
+          if ($album->save()){
+            try {
+              $album->unlinkAll('channels', true);
+              foreach ($this->channels as $channel_id) {
+                $channel = Channel::findOne($channel_id);
+                $album->link('channels', $channel);
+              }
+              $transaction->commit();
+            } catch (\yii\base\InvalidCallException $e) {
+              $errors[] = $e->getMessage();
+              $transaction->rollBack();
+            }
+            return Response::getInstance($errors, Flags::UPDATE_SUCCESS);
+          }
+          return Response::getInstance(false, Flags::UPDATE_ERROR);
         }
+        return Response::getInstance(false, Flags::FORM_VALIDATION);;
     }
 
 

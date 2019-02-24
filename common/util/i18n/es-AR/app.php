@@ -74,6 +74,8 @@ return [
   'profileVis'         => 'Visibilidad del perfil',
   'profilePhoto'       => 'Foto de perfil',
   'editProfile'        => 'Editar Perfil',
+  'editAlbum'          => 'Editar Álbum',
+  'editSongs'          => 'Editar Canciones',
   'inputYourGender'    => 'Ingresa el género con el que te identificas',
   'artisticInfo'       => 'Información artística',
   'visibility'         => 'Visibilidad',

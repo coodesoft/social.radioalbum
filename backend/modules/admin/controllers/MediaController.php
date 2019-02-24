@@ -11,7 +11,8 @@ use backend\controllers\RaBaseController;
 use backend\modules\album\models\Album;
 
 use admin\models\UploadAlbumForm;
-
+use admin\models\EditAlbumForm;
+use admin\models\Channel;
 
 use common\util\ArrayProcessor;
 use common\util\Response;
@@ -28,7 +29,14 @@ class MediaController extends RaBaseController{
           'class' => AccessControl::className(),
           'rules' => [
                 [
-                    'actions' => ['view', 'album', 'add', 'enable', 'disable', 'edit'],
+                    'actions' => ['view',
+                                  'album',
+                                  'add',
+                                  'enable',
+                                  'disable',
+                                  'edit',
+                                  'edit-songs'
+                                  ],
                     'allow' => true,
                     'roles' => ['admin', 'regulator'],
                 ],
@@ -79,17 +87,39 @@ class MediaController extends RaBaseController{
 
   public function actionEdit(){
   	$id = Yii::$app->request->get('id');
-
+    $model = new EditAlbumForm();
   	if (Yii::$app->request->isPost) {
+        $model->load(Yii::$app->request->post());
+        $model->image = UploadedFile::getInstance($model, 'image');
 
+        $response = $model->edit();
+        if ($response->getFlag() == FLags::UPDATE_SUCCESS)
+          return Response::getInstance(['text' => $response->getResponse(), 'type' =>"success"], Flags::UPDATE_SUCCESS)->jsonEncode();
+
+        return Response::getInstance(['text' => 'Errores', 'type' => 'danger'], Flags::UPDATE_ERROR)->jsonEncode();
   	} else{
       if (is_numeric($id) && $id>0){
         $album = Album::findOne($id);
-        return $this->renderSection('album', ['album' => $album]);
+        $model->name = $album->name;
+        $model->year = $album->year;
+        $model->description = $album->description;
+        $model->status = $album->status;
+        $model->channels = $album->channels;
+        $model->id = $album->id;
+
+        $storedChannels = Channel::find()->all();
+        $arrChannel = [];
+        foreach ($storedChannels as $key => $channel) {
+          $arrChannel[$channel->id] = $channel->name;
+        }
+        return $this->renderSection('edit', ['album' => $album, 'model' => $model, 'arrChannel' => $arrChannel]);
       }
       throw new \Exception('Incorrect Param Type', 1);
 
   	}
+  }
+
+  public function actionEditSongs(){
 
   }
 
