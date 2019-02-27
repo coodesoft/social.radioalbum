@@ -49,7 +49,7 @@ CatalogAsset::register($this);
             </span>
           </a>
 		  <?php } ?>
-          <a data-crud="remove" data-toggle="tooltip" data-placement="left" title="<?php echo \Yii::t('app', 'eliminar')?>" data-action="delete-album" href="<?php echo Url::to(['/admin/media/modal', 'id' => $album->id, 'action' => 'remove'])?>">
+          <a data-crud="remove" data-toggle="tooltip" data-placement="left" title="<?php echo \Yii::t('app', 'eliminar')?>" data-action="delete-album" data-title="<?php echo $album->name ?>" href="<?php echo Url::to(['/admin/media/remove', 'id' => $album->id])?>">
             <span class="fa-layers fa-fw">
               <i class="fal fa-circle" data-fa-transform="grow-15"></i>
               <i class="far fa-trash-alt" data-fa-transform="shrink-3"></i>

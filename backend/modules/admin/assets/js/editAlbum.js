@@ -3,14 +3,20 @@ let editAlbumCallback = function(data){
   data = JSON.parse(data);
   let response = data['response'];
   let flags = Flags.getInstance();
-  flag = data['flag'];
-  let error = (flag == flags.SAVE_ERROR) ? true : false;
-
+  let error = (data['flag'] == flags.SAVE_ERROR) ? true : false;
+  let browser = Browser.getInstance();
   let alert = getAlertBox(response['text'], response['type']);
-  $('#albumAdminEdit .messages').html(alert);
+
+
+  browser.reNav();
+  setTimeout(function(){
+    $('#albumAdminEdit .messages').html(alert);
     setTimeout(function(){
-      $('#albumAdminEdit .messages').empty();
-    }, 1000)
+        $('#albumAdminEdit .messages').empty();
+      }, 1000);
+
+  }, 500)
+
 
 }
 

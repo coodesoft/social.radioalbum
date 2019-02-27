@@ -158,6 +158,15 @@ var Browser = (function($){
         options.variableWrapper = wpr;
       }
 
+      self.reNav = function(){
+        navigate(window.history.state.source, 'reload_event', false, options.target);
+      }
+
+      self.reExplore = function(){
+        explore(window.history.state.source, options.variableWrapper);
+      }
+
+
   }
 
   var instance;

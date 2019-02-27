@@ -17,8 +17,6 @@ class EditAlbumForm extends Model{
 
     public $id;
 
-    public $songs;
-
     public $image;
 
     public $name;
@@ -69,16 +67,6 @@ class EditAlbumForm extends Model{
       }
 
       return $years;
-    }
-
-    public function setAlbumTags($path){
-      $tagEditor = new TagEditorService(['mp3']);
-      $tags = array();
-      $tags['artist'] = $this->artist;
-      $tags['year']   = $this->year;
-      $tags['album']  = $this->name;
-      $tags['genre']  = $this->channels;
-      return $tagEditor->setDirectoryTags($path, $tags);
     }
 
     public function edit(){

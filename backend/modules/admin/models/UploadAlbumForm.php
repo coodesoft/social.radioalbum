@@ -89,7 +89,7 @@ class UploadAlbumForm extends Model{
             $query = $this->storedArtist ? ['id' => $this->storedArtist] : "LOWER(name) = '".strtolower($this->artist)."'";
             $artist = Artist::find()->where($query)->one();
 
-        
+
             $stored = null;
             if ($artist)
               $stored = $artist->getAlbumByName($this->name)->all();
@@ -179,7 +179,7 @@ class UploadAlbumForm extends Model{
                         } catch (yii\base\InvalidCallException $e) {
                             RAFileHelper::removeDirectory($newFolder);
                             $transaction->rollBack();
-                            throw new \Exception('Se genero un error al linkear el album la cancion '.$songFile->baseName.', con el siguiente mensaje de error: '.$e->getName(), 1);
+                            throw new \Exception('Se genero un error al linkear el album  y la cancion '.$songFile->baseName.', con el siguiente mensaje de error: '.$e->getName(), 1);
                         }
                     }
                     $transaction->commit();

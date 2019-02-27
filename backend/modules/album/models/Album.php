@@ -124,4 +124,25 @@ class Album extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Song::className(), ['album_id' => 'id']);
     }
+
+    public function deleteOne($id){
+      $album = Album::findOne($id);
+      if ($album){
+
+        try {
+          $album->unlinkAll('channels', true);
+          $album->unlinkAll('artists', true);
+
+          foreach ($album->songs as $key => $song) {
+            $song->unlinkAll('playlists', true);
+            $album->unlink('songs', $song, true);
+          }
+
+          return $album->save();
+        } catch (yii\base\InvalidCallException $e) {
+          throw new \Exception('Se produjo un error al eliminar una o mas relaciones de álbum. Detalle del error: '. $e->getMessage(), 1);
+        }
+
+      }
+    }
 }

@@ -12,6 +12,7 @@ use backend\modules\album\models\Album;
 
 use admin\models\UploadAlbumForm;
 use admin\models\EditAlbumForm;
+use admin\models\EditAlbumSongsForm;
 use admin\models\Channel;
 
 use common\util\ArrayProcessor;
@@ -35,7 +36,8 @@ class MediaController extends RaBaseController{
                                   'enable',
                                   'disable',
                                   'edit',
-                                  'edit-songs'
+                                  'edit-songs',
+                                  'remove',
                                   ],
                     'allow' => true,
                     'roles' => ['admin', 'regulator'],
@@ -93,8 +95,11 @@ class MediaController extends RaBaseController{
         $model->image = UploadedFile::getInstance($model, 'image');
 
         $response = $model->edit();
-        if ($response->getFlag() == FLags::UPDATE_SUCCESS)
-          return Response::getInstance(['text' => $response->getResponse(), 'type' =>"success"], Flags::UPDATE_SUCCESS)->jsonEncode();
+        if ($response->getFlag() == FLags::UPDATE_SUCCESS){
+          $errors = $response->getResponse();
+          $msg = count($errors) > 0 ? 'Se produjeron los siguientes errores al actualizar el Canal: ' . Json::encode($errors) : 'Se actualizó el álbum correctamente';
+          return Response::getInstance(['text' => $msg, 'type' =>"success"], Flags::UPDATE_SUCCESS)->jsonEncode();
+        }
 
         return Response::getInstance(['text' => 'Errores', 'type' => 'danger'], Flags::UPDATE_ERROR)->jsonEncode();
   	} else{
@@ -120,7 +125,31 @@ class MediaController extends RaBaseController{
   }
 
   public function actionEditSongs(){
+    $id = Yii::$app->request->get('id');
+    $model = new EditAlbumSongsForm();
 
+    if (Yii::$app->request->isPost) {
+      if ($model->load(Yii::$app->request->post())){
+        $model->songs = UploadedFile::getInstances($model, 'songs');
+
+        $response = $model->edit();
+        if ($response->getFlag() == FLags::ALL_OK){
+          return Response::getInstance(['text' => 'Se actualizaron las canciones correctmente', 'type' => 'success'], Flags::ALL_OK)->jsonEncode();
+        }
+        return Response::getInstance(['text' => $response->getResponse(), 'type' => 'danger'], $response->getFlag())->jsonEncode();
+      }
+
+    } else{
+      if (is_numeric($id) && $id>0){
+        $album = Album::findOne($id);
+        if ($album){
+          $model->id = $album->id;
+          return $this->renderSection('edit-songs', ['songs' => $album->songs, 'model' => $model, 'albumTitle' => $album->name]);
+        }
+      }
+      throw new \Exception('Incorrect Param Type', 1);
+
+    }
   }
 
   public function actionAdd(){
@@ -176,8 +205,14 @@ class MediaController extends RaBaseController{
   }
 
   public function actionRemove(){
-	   $id = Yii::$app->request->get('id');
+	  $id = Yii::$app->request->get('id');
 
+    $result = Album::deleteOne($id);
+
+    if ($result)
+      return Response::getInstance(true, Flags::DELETE_SUCCESS)->jsonEncode();
+
+    return Response::getInstance(['text' => 'Se produjo un error al eliminar el álbum', 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
   }
 
 }
