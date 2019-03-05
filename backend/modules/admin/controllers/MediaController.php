@@ -209,8 +209,10 @@ class MediaController extends RaBaseController{
 
     $result = Album::deleteOne($id);
 
-    if ($result)
-      return Response::getInstance(true, Flags::DELETE_SUCCESS)->jsonEncode();
+    if ( $result->getResponse() && $result->getFlag()==Flags::DELETE_SUCCESS )
+      return $result->jsonEncode();
+    elseif ( $result->getResponse() )
+      return Response::getInstance(['text' => 'Se produjo un error al eliminar el álbum. No se pudo eliminar el directorio', 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
 
     return Response::getInstance(['text' => 'Se produjo un error al eliminar el álbum', 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
   }

@@ -8,6 +8,9 @@ use backend\models\Channel;
 
 use backend\modules\artist\models\Artist;
 
+use common\util\Response;
+use common\util\Flags;
+use common\util\RAFileHelper;
 use Yii;
 
 /**
@@ -125,8 +128,28 @@ class Album extends \yii\db\ActiveRecord
         return $this->hasMany(Song::className(), ['album_id' => 'id']);
     }
 
+    public function artist(){
+      foreach($this->artists as $artist)
+        return $artist;
+
+      return null;
+    }
+
+    public function getPath(){
+      $artist = $this->artist();
+      return Yii::getAlias('@catalog') .'/' . strtolower($artist->name) . '/' .$this->name;
+    }
+
     public function deleteOne($id){
       $album = Album::findOne($id);
+
+      $folder = $album->getPath();
+
+      if ( !is_dir($folder))
+        throw new \Exception('Se produjo al eliminar el álbum. Detalle: Error al localizar el directorio ['.$folder.']', 1);
+
+
+      $transaction = Album::getDb()->beginTransaction();
       if ($album){
 
         try {
@@ -138,8 +161,23 @@ class Album extends \yii\db\ActiveRecord
             $album->unlink('songs', $song, true);
           }
 
-          return $album->save();
+          if ( $album->delete() ){
+
+            if ( RAFileHelper::rrmdir($folder) ){
+              $transaction->commit();
+              return Response::getInstance(true, Flags::DELETE_SUCCESS);
+            }
+
+            $transaction->rollBack();
+            return Response::getInstance(true, Flags::DELETE_ERROR);
+
+          } else {
+            $transaction->rollBack();
+            return Response::getInstance(false, Flags::DELETE_ERROR);
+          }
+
         } catch (yii\base\InvalidCallException $e) {
+          $transaction->rollBack();
           throw new \Exception('Se produjo un error al eliminar una o mas relaciones de álbum. Detalle del error: '. $e->getMessage(), 1);
         }
 
