@@ -15,6 +15,9 @@ use yii\helpers\Url;
         <a type="button" class="btn ra-btn" href="<?php echo Url::to(['/admin/media/add'])?>" data-action="nav">
           <?php echo \Yii::t('app', 'uploadAlbum') ?>
         </a>
+        <a type="button" class="btn ra-btn" href="<?php echo Url::to(['/admin/channel/list'])?>" data-action="nav">
+          <?php echo \Yii::t('app', 'canales')?>
+        </a>
         </div>
         <div class="col-md-12">
           <?php echo $body ?>

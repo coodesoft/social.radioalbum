@@ -72,4 +72,24 @@ class Channel extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Album::className(), ['id' => 'album_id'])->viaTable('album_has_channel', ['channel_id' => 'id']);
     }
+
+    public function deleteOne($id){
+      $channel = Channel::findOne($id);
+
+      if ($channel){
+        try {
+          $channel->unlinkAll('albums', true);
+          if ( $channel->delete() ){
+            $unlink = unlink(Channel::dataPath() . $channel->art);
+            if ($unlink)
+              return Response::getInstance(true, Flags::DELETE_SUCCESS);
+            return Response::getInstance('Se eliminó el canal, pero no se pudo eliminar la imágen', Flags::DELETE_ERROR);
+          }
+          return Response::getInstance($channel->errors, Flags::DELETE_ERROR);
+        } catch (yii\base\InvalidCallException $e) {
+          $transaction->rollBack();
+          throw new \Exception('Se produjo un error al eliminar una o mas relaciones de canal. Detalle del error: '. $e->getMessage(), 1);
+        }
+      }
+    }
 }

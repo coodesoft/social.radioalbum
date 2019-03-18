@@ -10,14 +10,14 @@ use yii\web\UploadedFile;
 use backend\controllers\RaBaseController;
 use backend\modules\album\models\Album;
 
-use admin\models\Channel;
 use common\util\mapper\Mapper;
 use common\util\Response;
 use common\util\Flags;
 
 use common\services\DataService;
 use common\models\User;
-
+use admin\models\ChannelForm;
+use admin\models\Channel;
 
 class ChannelController extends RaBaseController{
 
@@ -27,7 +27,7 @@ class ChannelController extends RaBaseController{
           'class' => AccessControl::className(),
           'rules' => [
                 [
-                    'actions' => ['view', 'update'],
+                    'actions' => ['view', 'edit', 'list', 'add', 'remove'],
                     'allow' => true,
                     'roles' => ['@'],
                 ],
@@ -36,7 +36,7 @@ class ChannelController extends RaBaseController{
     ];
   }
 
-  public function actionView(){
+  public function actionView2(){
     $actions = [];
     if (Yii::$app->user->can('loginInAdminArea')){
       $actions['adicional'][] = ['icon' => 'plus', 'url' => Url::to(), 'type' => 'modal'];
@@ -76,32 +76,73 @@ class ChannelController extends RaBaseController{
     }
   }
 
-  public function actionUpdate(){
-    if (Yii::$app->request->isPost){
-      $updated = Yii::$app->request->post('Channel');
-      $crud = $this->module->get('crudChannel');
-      $updated['id'] = $updated['id_referencia'];
-      $updated['folder'] = $this->module->params['tmp_dir'];
+  public function actionList(){
+    $service = new DataService();
+    $query = Channel::find()->with('albums');
 
-      $errors = $crud->update($updated['id'], $updated);
-      if (strlen($errors)>0){
-        $message = ['text' => $errors, 'type' => 'danger'];
-        return Response::getInstance($message, Flags::UPDATE_ERROR)->jsonEncode();
-      }
-      $message = ['text' => Yii::t('app', 'updateChannelSuccess'), 'type' => 'success'];
-      return Response::getInstance($message, Flags::ALL_OK)->jsonEncode();
+    $service->setQuery($query);
+    $segment = Yii::$app->request->get('segment');
+    if ($segment){
+      return $this->getDataSegment('/admin/channel/view', 'list-lazy', $service, $segment);
     } else{
-      $id = Yii::$app->request->get('id');
-      $channel = Channel::findOne($id);
-      return $this->renderSection('update', ['model' => $channel]);
+      $rows = $service->getData();
+      $visible = ($service->isLastPage()) ? false : true;
+      $lazyRoute = Url::to(['/admin/channel/view', 'segment' => 1]);
+      $body = $this->renderPartial('channels', ['channels' => $rows, 'lazyLoad' => ['route' => $lazyRoute, 'visible' => $visible]]);
+      return $this->renderSection('view', ['body' => $body, 'title' => \Yii::t('app', 'areaAdminChannels')]);
+    }  }
+
+  public function actionView(){
+    $id = Yii::$app->request->get('id');
+    if ( is_numeric($id) && $id>0){
+      $channel = Channel::find()->with('albums')->where(['id' => $id])->one();
+      return $this->renderSection('channel', ['channel' => $channel]);
     }
+    throw new \Exception('Incorrect Param Type', 1);
   }
 
   public function actionAdd(){
+    $model = new ChannelForm();
+    if (Yii::$app->request->isPost) {
+      $model->load(Yii::$app->request->post());
+      $model->art = UploadedFile::getInstance($model, 'art');
+
+      $result = $model->add();
+      if ($result->getResponse() == Flags::ALL_OK)
+        return Response::getInstance(true, Flags::SAVE_SUCCESS)->jsonEncode();
+      elseif ($result->getResponse() == Flags::FORM_VALIDATION)
+        $response = ['text' => 'El formulario tiene errores: '.$result->getResponse(), 'type' => 'danger'];
+      else
+      $response = ['text' => 'Se produjo un error al crear el canal: '.$result->getResponse(), 'type' => 'danger'];
+
+
+      return Response::getInstance($response, Flags::SAVE_ERROR)->jsonEncode();
+    } else{
+      return $this->renderSection('add', ['model' => $model]);
+    }
+  }
+
+  public function actionEdit(){
 
   }
 
   public function actionRemove(){
+    $id = Yii::$app->response->get('id');
+
+    if ( !intval($id) )
+      return;
+
+    try {
+      $result = Channel::deleteOne($id);
+      if ( $result->getFlag() == Flags::DELETE_SUCCESS )
+        return $result->jsonEncode();
+
+      return Response::getInstance(['text' => 'Se produjo un error al eliminar el canal: '. $result->getResponse(), 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
+    } catch (\Exception $e) {
+      return Response::getInstance(['text' => 'Se produjo un error al eliminar el canal: '. $e->getMessage(), 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
+    }
+
+
 
   }
 }

@@ -1,4 +1,7 @@
+out: admin.css, compress: true
+
 @import "assets.less";
+
 .action-link:hover{ background-position: 23% 49.6%; }
 .action-remove:hover{ background-position: 36.5% 0; }
 .action-read:hover{ background-position: 36.5% 49.6%; }
@@ -37,8 +40,8 @@ a.inv-link{
   cursor: pointer;
   &:hover{
 	color: @baseContraste !important;
-    text-decoration: underline; 
-  } 
+    text-decoration: underline;
+  }
 }
 
 .view-element-wrapper{
@@ -72,4 +75,13 @@ a.inv-link{
 	margin-bottom: 30px;
 }
 
-
+#catalogAdmin{
+  td.actions a{
+    display: inline-block;
+    color: @segundoContraste;
+    margin: 2% 3%;
+    &:hover{
+      color: @claroBase !important;
+    }
+  }
+}

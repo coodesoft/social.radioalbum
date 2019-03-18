@@ -184,6 +184,7 @@ return [
   'errorUserNAut'      => 'Usuario no autorizado',
 
   'areaMigMusica'      => 'Área de Migración Musical',
+  'areaAdminChannels'  => 'Área de administración de Canales',
   'areaAdminUsers'     => 'Área de administración de usuarios',
   'areaUserDetail'     => 'Detalle del usuario',
 
@@ -262,6 +263,7 @@ return [
   'editUser'          => 'Editar usuario',
   'removeUser'        => 'Eliminar usuiario',
   'addUser'           => 'Agregar usuario',
+  'newChannel'        => 'Nuevo Canal',
   'selectStatus'      => 'Seleccione un estado',
   'selectRole'        => 'Seleccione el rol del usuario',
   'inactive'          => 'Inactivo',
@@ -290,6 +292,7 @@ return [
 
   'uploadAlbum'         => 'Subir Álbum',
   'uploadAlbumArea'     => 'Área de subida de álbumes',
+  'createChannel'       => 'Crear Canal',
   'uploadAlbumInfo'     => 'IMPORTANTE: El material que subas a Radioalbum estará publicado dentro de las próximas 12 horas <br><br> NOTAS: <br><br> - Podes subir hasta 20 canciones de una vez <br> - El tamaño máximo por canción es de 30MB',
   'editChannelChannel'  => 'Área de edición de Canal',
   'albumArt'            => 'Tapa del álbum',

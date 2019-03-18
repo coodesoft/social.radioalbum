@@ -1,33 +1,40 @@
 <?php
 use common\widgets\gridView\GridView;
 use yii\helpers\Url;
+use admin\assets\ChannelAsset;
+ChannelAsset::register($this);
 ?>
-<?php if (isset($partial) && $partial) {?>
-  <?php echo GridView::widget(['elements' => $albums, 'partialRender' => true]) ?>
-<?php } else{ ?>
-<div class="row">
-  <div class="col-md-12">
-    <a class="btn ra-btn" href="<?php echo Url::to(['/channel/channel/add']) ?>" data-action="nav"><?php echo \Yii::t('app', 'uploadAlbum')?></a>
-    <button id="showSearchBox" class="btn ra-btn"><?php echo \Yii::t('app', 'search') ?></button>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-12 text-center">
-    <div class="row">
-      <div id="userSearchFormContainer" class="col-md-offset-2 col-md-8 ra-hidden">
-        <form action="<?php echo Url::to(['/admin/user/user-search'])?>">
-          <table class="table table-bordered table-striped">
-          </table>
-        </form>
-        <a id="searchUsersLink" href="" data-action="explore" hidden></a>
-        <a id="instantSearchUsersLink" href="<?php echo Url::to(['/admin/user/instant-user-search'])?>" data-action="explore" hidden></a>
+<div class="panel panel-default">
+  <div class="panel-heading text-center"><?php  ?></div>
+
+  <div id="userAdmin" class="panel-body">
+      <div class="row">
+      <div class="album-view-detail col-md-6 col-sm-12">
+  			<div class="col-md-12">
+  				<img width="300" src="<?php echo Url::to(['/ra/thumbnail', 'id' => $channel->art, 'entity' => 'channel']); ?>" alt="" />
+  			</div>
+  			<div class="view-element-wrapper col-md-12">
+  				<div class="title view-title-label"><?php echo \Yii::t('app', 'name') ?> </div>
+  				<div class="title view-element"><?php echo $channel->name ?></div>
+  			</div>
+  			<div class="view-element-wrapper col-md-12">
+  				<div class="title view-title-label"><?php echo \Yii::t('app', 'description') ?> </div>
+  				<div ><?php echo strlen($channel->description)>0 ? $channel->description : \Yii::t('app', 'noDescription') ?></div>
+  			</div>
       </div>
-    </div>
+      <div class="col-md-6 col-sm-12 tracksList">
+			<div class="col-sm-12 title text-center"><?php echo \Yii::t('app', 'albumes')?></div>
+			<table class="table table-striped">
+				<?php foreach($channel->albums as $key => $album) {?>
+				<tr>
+          <td><a class="inv-link" data-action="nav" href="<?php echo Url::to(['/admin/media/album', 'id' => $album->id] )?>">
+             <?php echo $key+1 .' - '.$album->name ?>
+           </a></td>
+				</tr>
+				<?php } ?>
+			</table>
+        </div>
+      </div>
   </div>
 </div>
-
-<div class="gridContainer  ra-container">
-      <?php echo GridView::widget(['elements' => $albums, 'lazyLoad' => $lazyLoad]) ?>
-</div>
-<?php } ?>

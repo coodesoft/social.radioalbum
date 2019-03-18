@@ -10,9 +10,6 @@ class CatalogAsset extends AdminAsset{
       'js/catalog.js'
     ];
 
-    public $css = [
-      'css/catalog.css'
-    ];
 
 }
 

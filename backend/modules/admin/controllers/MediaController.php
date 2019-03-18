@@ -207,14 +207,20 @@ class MediaController extends RaBaseController{
   public function actionRemove(){
 	  $id = Yii::$app->request->get('id');
 
-    $result = Album::deleteOne($id);
+    try {
+      $result = Album::deleteOne($id);
 
-    if ( $result->getResponse() && $result->getFlag()==Flags::DELETE_SUCCESS )
-      return $result->jsonEncode();
-    elseif ( $result->getResponse() )
-      return Response::getInstance(['text' => 'Se produjo un error al eliminar el álbum. No se pudo eliminar el directorio', 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
+      if ( $result->getResponse() && $result->getFlag()==Flags::DELETE_SUCCESS )
+        return $result->jsonEncode();
+      elseif ( $result->getResponse() )
+        return Response::getInstance(['text' => 'Se produjo un error al eliminar el álbum. No se pudo eliminar el directorio', 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
 
-    return Response::getInstance(['text' => 'Se produjo un error al eliminar el álbum', 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
+      return Response::getInstance(['text' => 'Se produjo un error al eliminar el álbum', 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
+
+    } catch (\Exception $e) {
+      return Response::getInstance(['text' => $e->getMessage(), 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
+    }
+
   }
 
 }
