@@ -17,14 +17,20 @@ class ChannelForm extends Model{
 
     public $art;
 
+    public $art_name;
+
     public $name;
 
     public $description;
+
+    public $delete_art;
 
     public function rules(){
         return [
             [['name'], 'required'],
             ['description', 'string', 'skipOnEmpty' => true],
+            ['id', 'string', 'skipOnEmpty' => true],
+            ['delete_art', 'string', 'skipOnEmpty' => true],
             [['art'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, ico, jpeg'],
         ];
     }
@@ -34,6 +40,7 @@ class ChannelForm extends Model{
             'name' =>  \Yii::t('app', 'name'),
             'description' => \Yii::t('app', 'description'),
             'art' => \Yii::t('app', 'art'),
+            'delete_art' => \Yii::t('app', 'deleteArt'),
         ];
     }
 
@@ -48,15 +55,47 @@ class ChannelForm extends Model{
               $this->art->saveAs(Channel::dataPath() . $channel->art);
           }
 
-          if ($channel->save()){
+          if ($channel->save())
             return Response::getInstance(true, Flags::ALL_OK);
-          }
 
           // NO SE CHEQUEA SI LA IMÁGEN SE BORRA EXITOSAMENTE. CORREGIR
           unlink(Channel::dataPath() . $channel->art);
           return Response::getInstance($channel->errors, Flags::SAVE_ERROR);
         }
         return Response::getInstance($this->errors, Flags::FORM_VALIDATION);
+    }
+
+    public function edit(){
+      if ($this->validate()){
+        $channel = Channel::findOne($this->id);
+        $channel->name = $this->name;
+        $channel->description = $this->description;
+
+        $storedArtPath = Channel::dataPath() . $channel->art;
+        $deleteOldArt = true;
+        if ($this->delete_art){
+            $channel->art = null;
+        } elseif ($this->art){
+          $channel->art = StrProcessor::getRandomString($channel->name);;
+          $this->art->saveAs(Channel::dataPath() . $channel->art);
+        } else{
+          $deleteOldArt = false;
+        }
+
+        $unlink = false;
+        if ( $channel->save() ){
+          if ($deleteOldArt && is_file($storedArtPath))
+              $unlink = unlink($storedArtPath);
+          else
+            $unlink = true;
+
+          if ($unlink)
+            return Response::getInstance(true, Flags::ALL_OK);
+          return Response::getInstance('Se actualizó el canal, pero no se pudo eliminar la imágen previamente guardada', Flags::DELETE_ERROR);
+        }
+        return Response::getInstance($channel->errors, Flags::UPDATE_ERROR);
+      }
+      return Response::getInstance($this->errors, FLags::FORM_VALIDATION);
     }
 
 }

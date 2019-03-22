@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\modules\artist\models;
+namespace admin\models;
 
 use backend\models\Profile;
 use backend\models\ProfileOpts;

@@ -59,4 +59,12 @@ class Visibility extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Playlist::className(), ['visibility_id' => 'id']);
     }
+
+    public static function getPrettyVisibilty($id){
+      if ( ($id!=self::VPUBLIC) && ($id!=self::VPROTECTED) && ($id!=self::VPRIVATE) )
+        throw new \Exception("Tipo de parámetro inválido", 1);
+
+      $visibility = Visibility::findOne($id);
+      return Yii::t('app', $visibility->type);
+    }
 }

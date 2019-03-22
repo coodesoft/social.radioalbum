@@ -23,18 +23,6 @@ out: admin.css, compress: true
   overflow: auto;
 }
 
-#userList{
-  td.actions a{
-    display: inline-block;
-    color: @segundoContraste;
-    margin: 2% 3%;
-    &:hover{
-      color: @claroBase !important;
-    }
-  }
-}
-
-
 a.inv-link{
   color: @baseContraste !important;
   cursor: pointer;
@@ -75,7 +63,10 @@ a.inv-link{
 	margin-bottom: 30px;
 }
 
-#catalogAdmin{
+#catalogAdmin,
+#channelAdmin,
+#userList,
+#artistAdmin{
   td.actions a{
     display: inline-block;
     color: @segundoContraste;
@@ -84,4 +75,18 @@ a.inv-link{
       color: @claroBase !important;
     }
   }
+}
+
+.ra-admin-panel{
+  .view-element-wrapper{
+    margin-left: 2%;
+    margin-right: 2%;
+
+    .view-title-label{
+      color: @segundoContraste;
+    }
+  }
+
+
+
 }

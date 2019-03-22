@@ -14,6 +14,14 @@ use Yii;
  */
 class Gender extends \yii\db\ActiveRecord
 {
+
+    const MALE = 1;
+
+    const FEMALE = 2;
+
+    const CUSTOM = 3;
+
+
     /**
      * @inheritdoc
      */
@@ -51,5 +59,13 @@ class Gender extends \yii\db\ActiveRecord
     public function getProfiles()
     {
         return $this->hasMany(Profile::className(), ['gender_id' => 'id_gender']);
+    }
+
+    public function getPrettyGender($id){
+      if ( ($id!=self::MALE) && ($id!=self::FEMALE) && ($id!=self::CUSTOM) )
+        throw new \Exception("Tipo de parámetro inválido", 1);
+
+      $gender = Gender::findOne($id);
+      return Yii::t('app', $gender->type);
     }
 }

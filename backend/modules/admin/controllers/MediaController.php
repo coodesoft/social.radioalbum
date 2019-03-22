@@ -19,7 +19,7 @@ use common\util\ArrayProcessor;
 use common\util\Response;
 use common\util\Flags;
 use common\services\DataService;
-use backend\modules\artist\models\Artist;
+use admin\models\Artist;
 
 
 class MediaController extends RaBaseController{

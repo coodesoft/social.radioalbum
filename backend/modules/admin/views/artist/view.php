@@ -12,8 +12,8 @@ use yii\helpers\Url;
       </div>
       <div class="row">
         <div class="col-md-12">
-        <a type="button" class="btn ra-btn" href="<?php echo Url::to(['/admin/media/add'])?>" data-action="nav">
-          <?php echo \Yii::t('app', 'uploadAlbum') ?>
+        <a type="button" class="btn ra-btn" href="<?php echo Url::to(['/admin/artist/add'])?>" data-action="nav">
+          <?php echo \Yii::t('app', 'newArtist') ?>
         </a>
         </div>
         <div class="col-md-12">

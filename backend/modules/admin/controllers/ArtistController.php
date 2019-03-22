@@ -4,7 +4,6 @@ namespace admin\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use yii\helpers\Json;
 use yii\web\UploadedFile;
 
 use backend\controllers\RaBaseController;
@@ -16,10 +15,10 @@ use common\util\Flags;
 
 use common\services\DataService;
 use common\models\User;
-use admin\models\ChannelForm;
-use admin\models\Channel;
+use admin\models\Artist;
 
-class ChannelController extends RaBaseController{
+
+class ArtistController extends RaBaseController{
 
   public function behaviors(){
     return [
@@ -38,25 +37,26 @@ class ChannelController extends RaBaseController{
 
   public function actionList(){
     $service = new DataService();
-    $query = Channel::find()->with('albums');
+    $query = Artist::find()->with('albums');
 
     $service->setQuery($query);
     $segment = Yii::$app->request->get('segment');
     if ($segment){
-      return $this->getDataSegment('/admin/channel/view', 'list-lazy', $service, $segment);
+      return $this->getDataSegment('/admin/artist/view', 'list-lazy', $service, $segment);
     } else{
       $rows = $service->getData();
       $visible = ($service->isLastPage()) ? false : true;
-      $lazyRoute = Url::to(['/admin/channel/view', 'segment' => 1]);
-      $body = $this->renderPartial('channels', ['channels' => $rows, 'lazyLoad' => ['route' => $lazyRoute, 'visible' => $visible]]);
-      return $this->renderSection('view', ['body' => $body, 'title' => \Yii::t('app', 'areaAdminChannels')]);
-    }  }
+      $lazyRoute = Url::to(['/admin/artist/view', 'segment' => 1]);
+      $body = $this->renderPartial('artists', ['artists' => $rows, 'lazyLoad' => ['route' => $lazyRoute, 'visible' => $visible]]);
+      return $this->renderSection('view', ['body' => $body, 'title' => \Yii::t('app', 'areaAdminArtists')]);
+    }
+  }
 
   public function actionView(){
     $id = Yii::$app->request->get('id');
     if ( is_numeric($id) && $id>0){
-      $channel = Channel::find()->with('albums')->where(['id' => $id])->one();
-      return $this->renderSection('channel', ['channel' => $channel]);
+      $artist = Artist::find()->with(['albums', 'profile'])->where(['id' => $id])->one();
+      return $this->renderSection('artist', ['artist' => $artist, 'title' => Yii::t('app', 'artistInfo')]);
     }
     throw new \Exception('Incorrect Param Type', 1);
   }

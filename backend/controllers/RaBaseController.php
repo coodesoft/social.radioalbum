@@ -21,7 +21,9 @@ class RaBaseController extends Controller{
     }
 
     if (Yii::$app->user->can('loadRegulatorMainPanel')){
-      $items[] = [ 'url' => Url::to(["/admin/media/view"]), 'context' => "migrate_multimedia", 'name'    => \Yii::t('app', 'catalog'), 'img' => 'star' ];
+      $items[] = [ 'url' => Url::to(["/admin/media/view"]), 'context' => "admin-albums", 'name'    => \Yii::t('app', 'albumes'), 'img' => 'compact-disc' ];
+      $items[] = ['url' => Url::to(["/admin/channel/list"]), 'context' => "admin-channels", 'name' => \Yii::t('app', 'canales'), 'img' => 'music'];
+      $items[] = ['url' => Url::to(["/admin/artist/list"]), 'context' => "admin-artists", 'name' => \Yii::t('app', 'artistas'), 'img' => 'users'];
       $items[] = [ 'url' => Url::to(["/regulator/regulator/reports"]), 'context' => "regulate_content", 'name'  => \Yii::t('app', 'Regular contenido'), 'img' => 'cog'];
       $menu = $items;
     }
@@ -30,6 +32,7 @@ class RaBaseController extends Controller{
   }
 
   protected function getItemsNav(){
+    return [];
       return [
         ['label'=>'CANALES', 'url' => Url::to(["/ra/channels"]), 'linkOptions' =>['data-action'=>"nav", 'data-context' => 'nav-channels']],
         ['label'=>'ARTISTAS', 'url' => Url::to(["/ra/artists"]), 'linkOptions' =>['data-action'=>"nav", 'data-context' => 'nav-artists']],

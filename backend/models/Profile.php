@@ -7,7 +7,7 @@ use common\models\Gender;
 use backend\modules\playlist\models\Playlist;
 use common\models\Song;
 use backend\models\ProfileOpts;
-use backend\modules\artist\models\Artist;
+use admin\models\Artist;
 use backend\modules\listener\models\Listener;
 
 use user\models\Post;

@@ -3,7 +3,8 @@
 namespace admin\models;
 
 use backend\modules\album\models\Album;
-
+use common\util\Response;
+use common\util\Flags;
 
 use Yii;
 
@@ -80,7 +81,12 @@ class Channel extends \yii\db\ActiveRecord
         try {
           $channel->unlinkAll('albums', true);
           if ( $channel->delete() ){
-            $unlink = unlink(Channel::dataPath() . $channel->art);
+            $unlink = true;
+            $artPath = Channel::dataPath() . $channel->art;
+            if ( is_file($artPath) )
+              $unlink = unlink(Channel::dataPath() . $channel->art);
+
+
             if ($unlink)
               return Response::getInstance(true, Flags::DELETE_SUCCESS);
             return Response::getInstance('Se eliminó el canal, pero no se pudo eliminar la imágen', Flags::DELETE_ERROR);
