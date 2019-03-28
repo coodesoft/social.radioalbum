@@ -93,7 +93,6 @@ class Channel extends \yii\db\ActiveRecord
           }
           return Response::getInstance($channel->errors, Flags::DELETE_ERROR);
         } catch (yii\base\InvalidCallException $e) {
-          $transaction->rollBack();
           throw new \Exception('Se produjo un error al eliminar una o mas relaciones de canal. Detalle del error: '. $e->getMessage(), 1);
         }
       }

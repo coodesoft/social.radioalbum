@@ -92,6 +92,10 @@ ArtistAsset::register($this);
               <div class="view-element"><?php echo $artist->name ?></div>
             </div>
             <div class="view-element-wrapper">
+              <div class="title view-title-label"><?php echo \Yii::t('app', 'presentation') ?> </div>
+              <div class="<?php echo isset($artist->presentation) ? 'view-element' : ''?>"><?php echo isset($artist->presentation) ? $artist->presentation : \Yii::t('app', 'noInformation') ?></div>
+            </div>
+            <div class="view-element-wrapper">
               <div class="title view-title-label"><?php echo \Yii::t('app', 'instruments') ?> </div>
               <div class="<?php echo isset($artist->instrument) ? 'view-element' : ''?>"><?php echo isset($artist->instrument) ? $artist->instrument : \Yii::t('app', 'noInformation') ?></div>
             </div>
@@ -117,10 +121,5 @@ ArtistAsset::register($this);
           </div>
 
         </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 text-center">
-        <a data-action="nav" class="btn ra-btn" href="<?php echo Url::to(['/admin/artist/edit', 'id' => $artist->id])?>"><?php echo \Yii::t('app', 'editArtist')?></a>
-      </div>
     </div>
 </div>

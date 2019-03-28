@@ -14,6 +14,9 @@ use user\models\Post;
 use user\models\Comment;
 use user\models\PostLike;
 use user\models\CommentLike;
+
+use common\util\Response;
+use common\util\Flags;
 /**
  * This is the model class for table "profile".
  *
@@ -215,5 +218,35 @@ class Profile extends \yii\db\ActiveRecord
           return true;
        }
        return false;
+     }
+
+     public function deleteOne($id){
+       $profile = Profile::findOne($id);
+
+       if ($profile){
+         try {
+           $transaction = Profile::getDb()->beginTransaction();
+
+           //$profile->unlink('options', true);
+           $artPath = Profile::dataPath() . $profile->photo;
+
+           if ( $profile->delete() ){
+             $profile->options->delete();
+             $unlink = is_file($artPath) ? unlink($artPath) : true;
+             if ($unlink){
+               $transaction->commit();
+               return Response::getInstance(true, Flags::DELETE_SUCCESS);
+             }
+             $transaction->rollBack();
+             return Response::getInstance('Se eliminó el perfil, pero no se pudo eliminar la imágen', Flags::DELETE_ERROR);
+           }
+           $transaction->rollBack();
+           return Response::getInstance($profile->errors, Flags::DELETE_ERROR);
+         } catch (yii\base\InvalidCallException $e) {
+           $transaction->rollBack();
+           throw new \Exception('Se produjo un error al eliminar una o mas relaciones del artista. Detalle del error: '. $e->getMessage(), 1);
+         }
+       }
+       return Response::getInstance('No se encontró un perfil con el id proporcionado', Flags::INVALID_ID);
      }
  }

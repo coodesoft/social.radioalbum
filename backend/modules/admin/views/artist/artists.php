@@ -34,7 +34,7 @@ ArtistAsset::register($this);
               <i class="far fa-pencil-alt" data-fa-transform="shrink-3"></i>
             </span>
           </a>
-          <a data-crud="remove" data-toggle="tooltip" data-placement="left" title="<?php echo \Yii::t('app', 'eliminar')?>" data-action="delete-channel" data-title="<?php echo $artist->name ?>" href="<?php echo Url::to(['/admin/channel/remove', 'id' => $artist->id])?>">
+          <a data-crud="remove" data-toggle="tooltip" data-placement="left" title="<?php echo \Yii::t('app', 'eliminar')?>" data-action="delete-artist" data-title="<?php echo $artist->name ?>" href="<?php echo Url::to(['/admin/artist/remove', 'id' => $artist->id])?>">
             <span class="fa-layers fa-fw">
               <i class="fal fa-circle" data-fa-transform="grow-15"></i>
               <i class="far fa-trash-alt" data-fa-transform="shrink-3"></i>

@@ -61,6 +61,16 @@ class Gender extends \yii\db\ActiveRecord
         return $this->hasMany(Profile::className(), ['gender_id' => 'id_gender']);
     }
 
+
+    public function getAsArray($pretty = false){
+       $genders = Gender::find()->all();
+       $arr = [];
+       foreach ($genders as $key => $gender) {
+         $arr[$gender->id_gender] = $pretty ? Yii::t('app', $gender->type) : $gender->type;
+       }
+       return $arr;
+    }
+
     public function getPrettyGender($id){
       if ( ($id!=self::MALE) && ($id!=self::FEMALE) && ($id!=self::CUSTOM) )
         throw new \Exception("Tipo de parámetro inválido", 1);

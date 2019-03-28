@@ -9,6 +9,9 @@ use backend\modules\album\models\Album;
 use common\models\User;
 use common\models\Visibility;
 
+use common\util\Response;
+use common\util\Flags;
+use common\util\StrProcessor;
 use Yii;
 
 /**
@@ -123,5 +126,31 @@ class Artist extends \yii\db\ActiveRecord
         $artist->profile_id = $profile->id;
 
         return $artist;
+    }
+
+    public function deleteOne($id){
+      $artist = Artist::find()->with('profile')->where(['id' => $id])->one();
+
+      if ($artist){
+        try {
+          $transaction = Artist::getDb()->beginTransaction();
+
+          $artist->unlinkAll('albums', true);
+
+          if ( $artist->delete() ){
+            $profileDelete = Profile::deleteOne($artist->profile->id);
+            if ( $profileDelete->getFlag() == FLags::ALL_OK ){
+              $transaction->commit();
+              return Response::getInstance(true, Flags::DELETE_SUCCESS);
+            }
+            $transaction->rollBack();
+            return Response::getInstance($profileDelete->getResponse(), $profileDelete->getFlag());
+          }
+          return Response::getInstance($artist->errors, Flags::DELETE_ERROR);
+        } catch (yii\base\InvalidCallException $e) {
+          $transaction->rollBack();
+          throw new \Exception('Se produjo un error al eliminar una o mas relaciones de canal. Detalle del error: '. $e->getMessage(), 1);
+        }
+      }
     }
 }

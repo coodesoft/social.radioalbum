@@ -14,9 +14,12 @@ use common\util\Response;
 use common\util\Flags;
 
 use common\services\DataService;
+use backend\models\Profile;
 use common\models\User;
+use common\models\Gender;
+use common\models\Visibility;
 use admin\models\Artist;
-
+use admin\models\ArtistForm;
 
 class ArtistController extends RaBaseController{
 
@@ -87,26 +90,32 @@ class ArtistController extends RaBaseController{
     if ( !intval($id) )
       return;
 
-    $model = new ChannelForm();
+    $model = new ArtistForm();
     if (Yii::$app->request->isPost) {
-      $model->load(Yii::$app->request->post());
       $model->art = UploadedFile::getInstance($model, 'art');
-      $result = $model->edit();
+      $result = $model->edit(Yii::$app->request->post());
+
       if ($result->getResponse() == Flags::ALL_OK)
         return Response::getInstance(true, Flags::UPDATE_SUCCESS)->jsonEncode();
-      elseif ($result->getResponse() == Flags::FORM_VALIDATION)
-        $response = ['text' => 'El formulario tiene errores: '.$result->getResponse(), 'type' => 'danger'];
-      else
-        $response = ['text' => 'Se produjo un error al editar el canal: '.$result->getResponse(), 'type' => 'danger'];
+
+      if ( $result->getResponse() == Flags::DELETE_ERROR ||
+           $result->getResponse() == Flags::SAVE_ERROR   ||
+           $result->getResponse() == Flags::UPDATE_ERROR  )
+        $response = ['text' => 'Se produjeron uno o mas errores al guardar el perfil: '.$result->getResponse(), 'type' => 'danger'];
 
       return Response::getInstance($response, Flags::SAVE_ERROR)->jsonEncode();
     } else{
-      $channel = Channel::findOne($id);
-      $model->id = $channel->id;
-      $model->name = $channel->name;
-      $model->description = $channel->description;
-      $model->art_name = $channel->art;
-      return $this->renderSection('edit', ['model' => $model]);
+      $artist = Artist::find()->with(['profile', 'albums'])->where(['id' => $id])->one();
+      $genders = Gender::getAsArray(true);
+      $visibilities = Visibility::getAsArray(true);
+      $arrListed = [ Yii::t('app', 'profileNoListed'), Yii::t('app', 'profileListed') ];
+      return $this->renderSection('edit', [ 'artist' => $artist,
+                                            'profile' => $artist->profile,
+                                            'title' => Yii::t('app', 'editArtistArea'),
+                                            'genders' => $genders,
+                                            'model' => $model,
+                                            'visibilities' => $visibilities,
+                                            'arrListed' => $arrListed ]);
     }
   }
 
@@ -117,13 +126,13 @@ class ArtistController extends RaBaseController{
       return;
 
     try {
-      $result = Channel::deleteOne($id);
+      $result = Artist::deleteOne($id);
       if ( $result->getFlag() == Flags::DELETE_SUCCESS )
         return $result->jsonEncode();
 
-      return Response::getInstance(['text' => 'Se produjo un error al eliminar el canal: '. $result->getResponse(), 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
+      return Response::getInstance(['text' => 'Se produjo un error al eliminar el artista: '. $result->getResponse(), 'type' => 'danger'], $result->getFlag())->jsonEncode();
     } catch (\Exception $e) {
-      return Response::getInstance(['text' => 'Se produjo un error al eliminar el canal: '. $e->getMessage(), 'type' => 'danger'], Flags::DELETE_ERROR)->jsonEncode();
+      return Response::getInstance(['text' => 'Se produjo un error al eliminar el artista: '. $e->getMessage(), 'type' => 'danger'], $result->getFlag())->jsonEncode();
     }
 
 
